@@ -23,6 +23,8 @@ public class User implements UserDetails {
 
 
     private Date dateOfRegistration = new Date();
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
+    private List<Product>products;
 
     public User() {
     }
