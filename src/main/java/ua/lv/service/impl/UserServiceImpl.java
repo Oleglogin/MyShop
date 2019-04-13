@@ -15,12 +15,16 @@ import java.util.List;
 
 @Service
 @Transactional
-public class UserServiceImpl implements UserService{
-
+public class UserServiceImpl implements UserService, UserDetailsService{
     @Autowired
     UserDAO userDAO;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
+
     public void save(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userDAO.save(user);
     }
 
@@ -39,6 +43,12 @@ public class UserServiceImpl implements UserService{
     public User findByUserName(String username) {
         return userDAO.findByUserName(username);
     }
+
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return findByUserName(username);
+    }
+
+
 
 
 }

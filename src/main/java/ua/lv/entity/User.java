@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-public class User  {
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -32,9 +32,18 @@ public class User  {
         this.password = password;
     }
     @Enumerated(EnumType.STRING)
-    private Authority authority = Authority.ROLE_USER;
+    private Authority authority =Authority.ROLE_USER;
 
+    private boolean accountNonExpired = true;
+    private boolean accountNonLocked = true;
+    private boolean credentialsNonExpired = true;
+    private boolean enabled = true;
 
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        ArrayList<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
+        authorities.add(new SimpleGrantedAuthority(authority.name().toString()));
+        return authorities;
+    }
 
     public String getPassword() {
         return password;
@@ -42,6 +51,22 @@ public class User  {
 
     public String getUsername() {
         return username;
+    }
+
+    public boolean isAccountNonExpired() {
+        return accountNonExpired;
+    }
+
+    public boolean isAccountNonLocked() {
+        return accountNonLocked;
+    }
+
+    public boolean isCredentialsNonExpired() {
+        return credentialsNonExpired;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
     }
 
     public int getId() {
@@ -76,6 +101,25 @@ public class User  {
         this.authority = authority;
     }
 
+    public boolean isAccounteNonExpired() {
+        return accountNonExpired;
+    }
+
+    public void setAccounteNonExpired(boolean accounteNonExpired) {
+        this.accountNonExpired = accounteNonExpired;
+    }
+
+    public void setAccountNonLocked(boolean accountNonLocked) {
+        this.accountNonLocked = accountNonLocked;
+    }
+
+    public void setCredentialsNonExpired(boolean credentialsNonExpired) {
+        this.credentialsNonExpired = credentialsNonExpired;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
 
     public String getEmail() {
         return email;
@@ -94,6 +138,13 @@ public class User  {
         this.dateOfRegistration = dateOfRegistration;
     }
 
+
+
+    public void setAccountNonExpired(boolean accountNonExpired) {
+        this.accountNonExpired = accountNonExpired;
+    }
+
+
     @Override
     public String toString() {
         return "User{" +
@@ -102,6 +153,10 @@ public class User  {
                 ", password='" + password + '\'' +
                 ", confirmPassword='" + confirmPassword + '\'' +
                 ", authority=" + authority +
+                ", accountNonExpired=" + accountNonExpired +
+                ", accountNonLocked=" + accountNonLocked +
+                ", credentialsNonExpired=" + credentialsNonExpired +
+                ", enabled=" + enabled +
                 '}';
     }
 }

@@ -20,6 +20,8 @@ public class WebInit implements WebApplicationInitializer {
         context.register(WebConfig.class);
 
         DispatcherServlet dispatcherServlet = new DispatcherServlet(context);
+        DelegatingFilterProxy delegatingFilterProxy = new DelegatingFilterProxy();
+        servletContext.addFilter("springSecurityFilterChain",delegatingFilterProxy).addMappingForUrlPatterns(null,false,"/*");
 
         ServletRegistration.Dynamic registration = servletContext.addServlet("dispatcherServlet", dispatcherServlet);
         registration.setMultipartConfig(new MultipartConfigElement("",10000000,10000000,10000000));
