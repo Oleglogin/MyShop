@@ -77,65 +77,93 @@
 <!-- Header section end -->
 
 
-
-<section class="sec-product-detail bg0 p-t-65 p-b-60">
+<!-- admin section end -->
+<section class="cart-section spad">
     <div class="container">
         <div class="row">
+            <div class="col-lg-8">
+                <div class="cart-table">
+                    <h3>Your Cart</h3>
+                    <div class="cart-table-warp">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="product-th">Product</th>
+                                    <th class="size-th">Category</th>
+                                    <th class="size-th">subCategory</th>
+                                    <th class="total-th">Edit</th>
+                                    <th class="total-th">Delete</th>
+                                </tr>
+                            </thead>
+                            <c:forEach items="${productList}" var="product">
+                                <tbody>
+                                    <tr>
+                                        <td class="product-col">
+                                            <img src="${product.productImg}" alt="Product">
+                                            <div class="pc-title">
+                                                <h4>${product.productTitle}</h4>
+                                                <p>$ ${product.price}</p>
+                                            </div>
+                                        </td>
 
-            <div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">
-                <div class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm">
-
-                    <h4 class="mtext-109 cl2 p-b-30">Add Product</h4>
-
-                    <div class="flex-w flex-t bor12 p-t-15 p-b-30">
-
-                        <div class="size-209 p-r-18 p-r-0-sm w-full-ssm">
-                            <div class="p-t-15">
-                                <c:url value="/product/add" var="addProduct"/>
-                                <form:form action="${addProduct}" modelAttribute="emptyProduct" enctype="multipart/form-data">
-                                    <div class="rs1-select2 rs2-select2 bor8 bg0 m-b-12 m-t-9">
-                                        <form:select class="js-select2" name="time" path="category">
-                                            <option>men</option>
-                                            <option>women</option>
-                                            <option>shoe</option>
-                                        </form:select>
-                                        <div class="dropDownSelect2"></div>
-                                    </div>
-
-                                    <div class="bor8 bg0 m-b-12">
-                                        <form:input  path="productTitle" class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="state" placeholder="Name"/>
-                                    </div>
-
-                                    <div class="bor8 bg0 m-b-22">
-                                        <form:input path="description" class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="postcode" placeholder="description"/>
-                                    </div>
-
-                                    <div class="bor8 bg0 m-b-22">
-                                        <form:input path="price" class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="postcode" placeholder="price"/>
-                                    </div>
-
-                                    <div class="bor8 bg0 m-b-22">
-                                        <form:input path="rate" class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="postcode" placeholder="rate"/>
-                                    </div>
-
-                                    <div class="form-group col-md-6">
-                                        <input type="file" name="productImg" class="form-control-file" formenctype="multipart/form-data" id="exampleformControlFile1">
-                                    </div>
-                                    <form:input type="hidden" path="id" readonly="true"/>
-
-                                    <input type="submit" value="add product" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
-                                </form:form>
-
-                            </div>
-                        </div>
+                                        <td class="size-col"><h4>${product.category}</h4></td>
+                                        <td class="total-col"><h4>${product.subCategory}</h4></td>
+                                        <td class="column-6"><a href="<c:url value='/productEdit/${product.id}'/> ">Edit</a></td>
+                                        <td class="column-7"><a href="<c:url value='/productRemove/${product.id}'/> ">Delete</a></td>
+                                    </tr>
+                                </tbody>
+                            </c:forEach>
+                        </table>
+                    </div>
+                    <div class="total-cost">
+                        <h6>Total <span>$99.90</span></h6>
                     </div>
                 </div>
             </div>
+            <div class="col-lg-4 card-right">
+                <c:url value="/product/add" var="addProduct"/>
+                <form:form action="${addProduct}" modelAttribute="emptyProduct" enctype="multipart/form-data">
+                    <div class="promo-code-form">
+                        <form:input  path="productTitle" class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="state" placeholder="Name"/>
+                    </div>
+                    <div class="promo-code-form">
+                        <form:input path="description" class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="postcode" placeholder="description"/>
+                    </div>
+                    <div class="promo-code-form">
+                        <form:input path="price" class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="postcode" placeholder="price"/>
+                    </div>
+                    <div class="promo-code-form">
+                        <form:input path="rate" class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="postcode" placeholder="rate"/>
+                    </div>
+                    <div class="promo-code-form">
+                        <form:input path="size" class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="postcode" placeholder="size"/>
+                    </div>
+                    <div class="promo-code-form">
+                        <input type="file" name="productImg" class="promo-code-form" formenctype="multipart/form-data" id="exampleformControlFile1">
+                    </div>
+                    <div class="promo-code-form">
+                        <form:select class="js-select2" name="time" path="category">
+                            <option>men</option>
+                            <option>women</option>
+                            <option>shoe</option>
+                        </form:select>
 
+                        <form:select class="js-select2" name="time" path="subCategory">
+                            <option>tops</option>
+                            <option>jeans</option>
+                            <option>coats</option>
+                            <option>dresses</option>
+                        </form:select>
+                    </div>
+
+                    <form:input type="hidden" path="id" readonly="true"/>
+                    <input type="submit" value="add product" class="site-btn">
+                </form:form>
+            </div>
         </div>
     </div>
 </section>
-
+<!-- admin section end -->
 
 
 

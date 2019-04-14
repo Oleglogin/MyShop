@@ -1,7 +1,12 @@
 package ua.lv.entity;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.persistence.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by User on 13.04.2019.
@@ -13,6 +18,8 @@ public class Product {
     private int id;
     private String productTitle;
     private String category;
+    private String subCategory;
+    private String productImg;
     private int price;
     private boolean available;
     private int rate;
@@ -24,6 +31,8 @@ public class Product {
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private User user;
 
+    @OneToMany (cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "product")
+    private List<Purchase> purchases;
     public Product() {
     }
 
@@ -117,6 +126,28 @@ public class Product {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getSubCategory() {
+        return subCategory;
+    }
+
+    public void setSubCategory(String subCategory) {
+        this.subCategory = subCategory;
+    }
+
+    public String getProductImg() {
+        return productImg;
+    }
+
+    public void setProductImg(MultipartFile multipartFile) {
+        String path = System.getProperty("user.home") + File.separator + "Pictures\\";
+        try {
+            multipartFile.transferTo(new File(path + multipartFile.getOriginalFilename()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        this.productImg = "\\workImg\\" + multipartFile.getOriginalFilename();
     }
 
     @Override

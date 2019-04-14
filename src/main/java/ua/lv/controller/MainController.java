@@ -23,12 +23,14 @@ public class MainController {
     @GetMapping("/")
     public String toMainPage(Model model){
         model.addAttribute("emptyProduct", productService.productList());
+        model.addAttribute("productList",productService.productList());
         return "welcome";
     }
 
     @GetMapping("/welcome")
     public String toWelcomePage(Model model){
         model.addAttribute("emptyProduct", productService.productList());
+        model.addAttribute("productList", productService.productList());
         return "welcome";
     }
 

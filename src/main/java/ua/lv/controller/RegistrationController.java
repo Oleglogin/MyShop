@@ -27,9 +27,7 @@ public class RegistrationController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/saveUserSpringForm")
     public String saveUser(@ModelAttribute ("emptyUser")User user){
-
         userService.save(user);
-
         return "redirect:/login";
     }
 
