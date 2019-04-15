@@ -63,4 +63,14 @@ public class ProductController {
         model.addAttribute("product", productService.findProductById(id));
         return "product";
     }
+    @RequestMapping(value = "sortByCategory/{category}", method = RequestMethod.GET)
+    public String sortCategory(Model model, Principal principal,
+                               @PathVariable("category")String category){
+        String principalName = principal.getName();
+        User byUserNAme = userService.findByUserName(principalName);
+        model.addAttribute("currentUser", byUserNAme);
+
+        model.addAttribute("productList",productService.sortByCategory(category));
+        return "welcome";
+    }
 }

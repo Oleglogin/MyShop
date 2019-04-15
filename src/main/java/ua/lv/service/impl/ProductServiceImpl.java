@@ -37,4 +37,9 @@ public class ProductServiceImpl implements ProductService {
     public Product findProductById(int id) {
         return productDAO.findOne(id);
     }
+
+    @Override
+    public List<Product> sortByCategory(String category) {
+        return productDAO.sortByCategory(category);
+    }
 }

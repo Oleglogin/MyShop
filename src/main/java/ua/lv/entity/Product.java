@@ -33,6 +33,10 @@ public class Product {
 
     @OneToMany (cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "product")
     private List<Purchase> purchases;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "product")
+    private List<Preview> previews;
+
     public Product() {
     }
 

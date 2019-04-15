@@ -12,7 +12,7 @@
             <div class="row">
                 <div class="col-lg-2 text-center text-lg-left">
                     <!-- logo -->
-                    <a href="welcome" class="site-logo">
+                    <a href="/welcome" class="site-logo">
                         <img src="../../resources/img/logo.png" alt="">
                     </a>
                 </div>
@@ -131,7 +131,8 @@
                     </div>
                     <div class="quantity">
                         <p>Quantity</p>
-                        <div class="pro-qty"><input type="text" value="1"></div>
+                        <div class="pro-qty"><form:input path="count"  type="text" value="1"/></div>
+                        <%--<div class="pro-qty"><input type="text" value="1"></div>--%>
                     </div>
                     <input type="submit" value="add in curt" class="site-btn">
                 </form:form>

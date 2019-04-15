@@ -83,7 +83,7 @@
         <div class="row">
             <div class="col-lg-8">
                 <div class="cart-table">
-                    <h3>Your Cart</h3>
+                    <h3>Your Product</h3>
                     <div class="cart-table-warp">
                         <table>
                             <thead>
@@ -143,6 +143,7 @@
                     </div>
                     <div class="promo-code-form">
                         <form:select class="js-select2" name="time" path="category">
+                            <option>preview</option>
                             <option>men</option>
                             <option>women</option>
                             <option>shoe</option>
@@ -158,6 +159,77 @@
 
                     <form:input type="hidden" path="id" readonly="true"/>
                     <input type="submit" value="add product" class="site-btn">
+                </form:form>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- admin section end -->
+
+<!-- admin section end -->
+<section class="cart-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="cart-table">
+                    <h3>Your Preview</h3>
+                    <div class="cart-table-warp">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th class="product-th">Img</th>
+                                <th class="size-th">Category</th>
+                                <th class="total-th">Edit</th>
+                                <th class="total-th">Delete</th>
+                            </tr>
+                            </thead>
+                            <c:forEach items="${previewList}" var="preview">
+                                <tbody>
+                                <tr>
+                                    <td class="product-col">
+                                        <img src="${preview.previewImg}" alt="Product">
+                                        <div class="pc-title">
+                                            <h4>${preview.previewTitle}</h4>
+                                            <p>$ ${preview.previewPrice}</p>
+                                        </div>
+                                    </td>
+
+                                    <td class="size-col"><h4>${preview.previewCategory}</h4></td>
+                                    <td class="column-6"><a href="<c:url value='/productEdit/${product.id}'/> ">Edit</a></td>
+                                    <td class="column-7"><a href="<c:url value='/previewRemove/${preview.id}'/> ">Delete</a></td>
+                                </tr>
+                                </tbody>
+                            </c:forEach>
+                        </table>
+                    </div>
+                    <div class="total-cost">
+                        <h6>Total <span>$99.90</span></h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 card-right">
+                <c:url value="/add/preview" var="addPreview"/>
+                <form:form action="${addPreview}" modelAttribute="emptyPreview" enctype="multipart/form-data">
+                    <div class="promo-code-form">
+                        <form:input  path="previewTitle" class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="state" placeholder="Name"/>
+                    </div>
+
+                    <div class="promo-code-form">
+                        <form:input path="previewPrice" class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="postcode" placeholder="price"/>
+                    </div>
+
+
+                    <div class="promo-code-form">
+                        <input type="file" name="previewImg" class="promo-code-form" formenctype="multipart/form-data" id="exampleformControlFile1">
+                    </div>
+                    <div class="promo-code-form">
+                        <form:select class="js-select2" name="time" path="previewCategory">
+                            <option>main</option>
+                            <option>subMain</option>
+                        </form:select>
+                    </div>
+
+                    <input type="submit" value="add preview" class="site-btn">
                 </form:form>
             </div>
         </div>

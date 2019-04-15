@@ -18,4 +18,7 @@ public interface PurchaseDAO extends JpaRepository<Purchase, Integer>{
 
     @Query("select sum (purchase.amount) from Purchase purchase where purchase.user.id=:id")
     int amountInCart(@Param("id")int id);
+
+    @Query("select count (product.id) from Purchase purchase where purchase.user.id=:id")
+    int countProductInBasket(@Param("id")int id);
 }

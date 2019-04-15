@@ -26,16 +26,19 @@
                     <div class="user-panel">
                         <div class="up-item">
                             <i class="flaticon-profile"></i>
-                            <a href="login">Sign</a> In
+                            <a href="login">Sign In</a>
                         </div>
                         <div class="up-item">
                             <i class="flaticon-profile"></i>
-                            <a href="#">Create</a> Acc <a href="registration"></a>
+                            <a href="registration">Create Acc</a>
                         </div>
                         <div class="up-item">
                             <div class="shopping-card">
                                 <i class="flaticon-bag"></i>
-                                <span>countProductInBasket</span>
+                                <c:if test="${countProductInBasket != 0}">
+                                    <span>${countProductInBasket}</span>
+                                </c:if>
+
                             </div>
                             <a href="cart">Shopping Cart</a>
                         </div>
@@ -49,12 +52,12 @@
             <!-- menu -->
             <ul class="main-menu">
                 <li><a href="#">Home</a></li>
-                <li><a href="#">Women</a></li>
-                <li><a href="#">Men</a></li>
-                <li><a href="#">Jewelry
+                <li><a href="sortByCategory/women">Women</a></li>
+                <li><a href="sortByCategory/men">Men</a></li>
+                <li><a href="sortByCategory/jewelry">Jewelry
                     <span class="new">New</span>
                 </a></li>
-                <li><a href="#">Shoes</a>
+                <li><a href="sortByCategory/shoes">Shoes</a>
                     <ul class="sub-menu">
                         <li><a href="#">Sneakers</a></li>
                         <li><a href="#">Sandals</a></li>
@@ -79,55 +82,38 @@
 </header>
 <!-- Header section end -->
 
-
-
 <!-- Hero section -->
 <section class="hero-section">
     <div class="hero-slider owl-carousel">
-        <div class="hs-item set-bg" data-setbg="img/bg.jpg">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-6 col-lg-7 text-white">
-                        <span>New Arrivals</span>
-                        <h2>denim jackets</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum sus-pendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. </p>
-                        <a href="#" class="site-btn sb-line">DISCOVER</a>
-                        <a href="#" class="site-btn sb-white">ADD TO CART</a>
+        <c:forEach items="${previewList}" var="preview">
+            <%--<c:if test="${preview.previewCategory == main}">--%>
+            <div class="hs-item set-bg" data-setbg="../../resources/img/bg.jpg">
+            <%--<div class="hs-item set-bg" data-setbg="${preview.previewImg}">--%>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xl-6 col-lg-7 text-white">
+                                <span>New Arrivals</span>
+                                <h2>${preview.previewTitle}</h2>
+                                <a href="#" class="site-btn sb-line">DISCOVER</a>
+                                <p>${preview.previewDescription}</p>
+                                <a href="#" class="site-btn sb-white">ADD TO CART</a>
+                            </div>
+                        </div>
+                        <div class="offer-card text-white">
+                            <span>from</span>
+                            <h2>$${preview.previewPrice}</h2>
+                            <p>SHOP NOW</p>
+                        </div>
                     </div>
                 </div>
-                <div class="offer-card text-white">
-                    <span>from</span>
-                    <h2>$29</h2>
-                    <p>SHOP NOW</p>
-                </div>
-            </div>
-        </div>
-        <div class="hs-item set-bg" data-setbg="img/bg-2.jpg">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-6 col-lg-7 text-white">
-                        <span>New Arrivals</span>
-                        <h2>denim jackets</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum sus-pendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. </p>
-                        <a href="#" class="site-btn sb-line">DISCOVER</a>
-                        <a href="#" class="site-btn sb-white">ADD TO CART</a>
-                    </div>
-                </div>
-                <div class="offer-card text-white">
-                    <span>from</span>
-                    <h2>$29</h2>
-                    <p>SHOP NOW</p>
-                </div>
-            </div>
-        </div>
+            <%--</c:if>--%>
+        </c:forEach>
     </div>
     <div class="container">
         <div class="slide-num-holder" id="snh-1"></div>
     </div>
 </section>
 <!-- Hero section end -->
-
-
 
 <!-- Features section -->
 <section class="features-section">
@@ -136,7 +122,7 @@
             <div class="col-md-4 p-0 feature">
                 <div class="feature-inner">
                     <div class="feature-icon">
-                        <img src="img/icons/1.png" alt="#">
+                        <img src="../../resources/img/icons/1.png" alt="#">
                     </div>
                     <h2>Fast Secure Payments</h2>
                 </div>
@@ -144,7 +130,7 @@
             <div class="col-md-4 p-0 feature">
                 <div class="feature-inner">
                     <div class="feature-icon">
-                        <img src="img/icons/2.png" alt="#">
+                        <img src="../../resources/img/icons/2.png" alt="#">
                     </div>
                     <h2>Premium Products</h2>
                 </div>
@@ -152,7 +138,7 @@
             <div class="col-md-4 p-0 feature">
                 <div class="feature-inner">
                     <div class="feature-icon">
-                        <img src="img/icons/3.png" alt="#">
+                        <img src="../../resources/img/icons/3.png" alt="#">
                     </div>
                     <h2>Free & fast Delivery</h2>
                 </div>
@@ -170,72 +156,23 @@
             <h2>LATEST PRODUCTS</h2>
         </div>
         <div class="product-slider owl-carousel">
-            <div class="product-item">
-                <div class="pi-pic">
-                    <img src="./img/product/1.jpg" alt="">
-                    <div class="pi-links">
-                        <a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-                        <a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+            <c:forEach items="${productList}" var="product">
+                <c:if test="${product.category == 'preview'}">
+                    <div class="product-item">
+                        <div class="pi-pic">
+                            <img src="${product.productImg}" alt="">
+                            <div class="pi-links">
+                                <a href="productData/${product.id}" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+                                <a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+                            </div>
+                        </div>
+                        <div class="pi-text">
+                            <h6>$${product.price}</h6>
+                            <p>${product.productTitle}</p>
+                        </div>
                     </div>
-                </div>
-                <div class="pi-text">
-                    <h6>$35,00</h6>
-                    <p>Flamboyant Pink Top </p>
-                </div>
-            </div>
-            <div class="product-item">
-                <div class="pi-pic">
-                    <div class="tag-new">New</div>
-                    <img src="./img/product/2.jpg" alt="">
-                    <div class="pi-links">
-                        <a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-                        <a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
-                    </div>
-                </div>
-                <div class="pi-text">
-                    <h6>$35,00</h6>
-                    <p>Black and White Stripes Dress</p>
-                </div>
-            </div>
-            <div class="product-item">
-                <div class="pi-pic">
-                    <img src="./img/product/3.jpg" alt="">
-                    <div class="pi-links">
-                        <a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-                        <a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
-                    </div>
-                </div>
-                <div class="pi-text">
-                    <h6>$35,00</h6>
-                    <p>Flamboyant Pink Top </p>
-                </div>
-            </div>
-            <div class="product-item">
-                <div class="pi-pic">
-                    <img src="./img/product/4.jpg" alt="">
-                    <div class="pi-links">
-                        <a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-                        <a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
-                    </div>
-                </div>
-                <div class="pi-text">
-                    <h6>$35,00</h6>
-                    <p>Flamboyant Pink Top </p>
-                </div>
-            </div>
-            <div class="product-item">
-                <div class="pi-pic">
-                    <img src="./img/product/6.jpg" alt="">
-                    <div class="pi-links">
-                        <a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-                        <a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
-                    </div>
-                </div>
-                <div class="pi-text">
-                    <h6>$35,00</h6>
-                    <p>Flamboyant Pink Top </p>
-                </div>
-            </div>
+                </c:if>
+            </c:forEach>
         </div>
     </div>
 </section>
@@ -304,7 +241,7 @@
 <section class="footer-section">
     <div class="container">
         <div class="footer-logo text-center">
-            <a href="index.html"><img src="./img/logo-light.png" alt=""></a>
+            <a href="index.html"><img src="../../resources/img/logo-light.png" alt=""></a>
         </div>
         <div class="row">
             <div class="col-lg-3 col-sm-6">

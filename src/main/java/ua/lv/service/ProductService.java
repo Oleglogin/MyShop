@@ -12,4 +12,5 @@ public interface ProductService {
     void delete(int id);
     List<Product> productList();
     Product findProductById(int id);
+    List<Product> sortByCategory(String category);
 }

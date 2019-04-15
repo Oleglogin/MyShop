@@ -46,4 +46,9 @@ public class PurchaseServiceImpl implements PurchaseService {
     public int amountInCart(int id) {
         return purchaseDAO.amountInCart(id);
     }
+
+    @Override
+    public int countProductInBasket(int id) {
+        return purchaseDAO.countProductInBasket(id);
+    }
 }
