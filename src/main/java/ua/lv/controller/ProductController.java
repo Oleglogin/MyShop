@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import ua.lv.entity.Product;
 import ua.lv.entity.Purchase;
 import ua.lv.entity.User;
+import ua.lv.service.PreviewService;
 import ua.lv.service.ProductService;
+import ua.lv.service.PurchaseService;
 import ua.lv.service.UserService;
 
 import java.security.Principal;
@@ -24,6 +26,10 @@ public class ProductController {
     UserService userService;
     @Autowired
     ProductService productService;
+    @Autowired
+    PurchaseService purchaseService;
+    @Autowired
+    PreviewService previewService;
 
     @RequestMapping(value = "/product/add",method = RequestMethod.POST)
     public String saveProduct(@ModelAttribute("emptyProduct")Product product,
@@ -43,7 +49,7 @@ public class ProductController {
 
     @RequestMapping(value = "productEdit/{id}", method = RequestMethod.GET)
     public String productEdit(@PathVariable("id") int id, Model model,
-                              Principal principal){
+                              Principal principal) {
         String principalName = principal.getName();
         User byUserName = userService.findByUserName(principalName);
         model.addAttribute("currentUser",byUserName);
@@ -57,20 +63,39 @@ public class ProductController {
     public String toProductData(Model model,Principal principal,
                                 @PathVariable("id")int id){
         String principalName = principal.getName();
-        User byUserNAme = userService.findByUserName(principalName);
-        model.addAttribute("currentUser", byUserNAme);
+        User byUserName = userService.findByUserName(principalName);
+        model.addAttribute("currentUser", byUserName);
         model.addAttribute("emptyPurchase", new Purchase());
+        model.addAttribute("countProductInBasket",purchaseService.countProductInBasket(byUserName.getId()));
+
         model.addAttribute("product", productService.findProductById(id));
+        model.addAttribute("previewList", previewService.prewievList());
+        model.addAttribute("elsePhoto",previewService.elsePhoto(id));
+
         return "product";
     }
     @RequestMapping(value = "sortByCategory/{category}", method = RequestMethod.GET)
     public String sortCategory(Model model, Principal principal,
                                @PathVariable("category")String category){
         String principalName = principal.getName();
-        User byUserNAme = userService.findByUserName(principalName);
-        model.addAttribute("currentUser", byUserNAme);
+        User byUserName = userService.findByUserName(principalName);
+        model.addAttribute("currentUser", byUserName);
+
+        model.addAttribute("countProductInBasket",purchaseService.countProductInBasket(byUserName.getId()));
 
         model.addAttribute("productList",productService.sortByCategory(category));
+        return "welcome";
+    }
+
+    @RequestMapping(value = "sortBySubCategory/{category}", method = RequestMethod.GET)
+    public String sortSubCategory(Model model, Principal principal,
+                               @PathVariable("category")String category){
+        String principalName = principal.getName();
+        User byUserName = userService.findByUserName(principalName);
+        model.addAttribute("currentUser", byUserName);
+        model.addAttribute("countProductInBasket",purchaseService.countProductInBasket(byUserName.getId()));
+
+        model.addAttribute("productList",productService.sortBySubCategory(category));
         return "welcome";
     }
 }

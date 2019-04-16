@@ -1,9 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="tmp/header.jsp"%>
-<!-- Page Preloder -->
-<div id="preloder">
-    <div class="loader"></div>
-</div>
+<%--<!-- Page Preloder -->--%>
 
 <!-- Header section -->
 <header class="header-section">
@@ -12,35 +9,38 @@
             <div class="row">
                 <div class="col-lg-2 text-center text-lg-left">
                     <!-- logo -->
-                    <a href="welcome" class="site-logo">
+                    <a href="/welcome" class="site-logo">
                         <img src="../../resources/img/logo.png" alt="">
                     </a>
                 </div>
-                <div class="col-xl-6 col-lg-5">
+                <div class="col-xl-4 col-lg-4">
                     <form class="header-search-form">
                         <input type="text" placeholder="Search on divisima ....">
                         <button><i class="flaticon-search"></i></button>
                     </form>
                 </div>
-                <div class="col-xl-4 col-lg-5">
+                <div class="col-xl-6 col-lg-5">
                     <div class="user-panel">
-                        <div class="up-item">
-                            <i class="flaticon-profile"></i>
-                            <a href="login">Sign In</a>
-                        </div>
-                        <div class="up-item">
-                            <i class="flaticon-profile"></i>
-                            <a href="registration">Create Acc</a>
-                        </div>
                         <div class="up-item">
                             <div class="shopping-card">
                                 <i class="flaticon-bag"></i>
-                                <c:if test="${countProductInBasket != 0}">
-                                    <span>${countProductInBasket}</span>
-                                </c:if>
-
+                                <%--<c:if test="${countProductInBasket != 0}">--%>
+                                <span>${countProductInBasket}</span>
+                                <%--</c:if>--%>
                             </div>
-                            <a href="cart">Shopping Cart</a>
+                            <a href="/cart">Shopping Cart</a>
+                        </div>
+                        <div class="up-item">
+                            <i class="flaticon-profile"></i>
+                            <a href="/registration">Create Acc</a>
+                        </div>
+                        <div class="up-item">
+                            <i class="flaticon-profile"></i>
+                            <a href="/login">Sign In</a>
+                        </div>
+                        <div class="up-item">
+                            <i class="flaticon-profile"></i>
+                            <a href="/logout">Exit</a>
                         </div>
                     </div>
                 </div>
@@ -51,13 +51,13 @@
         <div class="container">
             <!-- menu -->
             <ul class="main-menu">
-                <li><a href="#">Home</a></li>
-                <li><a href="sortByCategory/women">Women</a></li>
-                <li><a href="sortByCategory/men">Men</a></li>
-                <li><a href="sortByCategory/jewelry">Jewelry
+                <li><a href="/welcome">Home</a></li>
+                <li><a href="/sortByCategory/women">Women</a></li>
+                <li><a href="/sortByCategory/men">Men</a></li>
+                <li><a href="/sortByCategory/jewelry">Jewelry
                     <span class="new">New</span>
                 </a></li>
-                <li><a href="sortByCategory/shoes">Shoes</a>
+                <li><a href="/sortByCategory/shoes">Shoes</a>
                     <ul class="sub-menu">
                         <li><a href="#">Sneakers</a></li>
                         <li><a href="#">Sandals</a></li>
@@ -68,14 +68,11 @@
                 </li>
                 <li><a href="#">Pages</a>
                     <ul class="sub-menu">
-                        <li><a href="./product.html">Product Page</a></li>
-                        <li><a href="./category.html">Category Page</a></li>
-                        <li><a href="./cart.html">Cart Page</a></li>
-                        <li><a href="./checkout.html">Checkout Page</a></li>
-                        <li><a href="./contact.html">Contact Page</a></li>
+                        <li><a href="/cart">Cart Page</a></li>
+                        <li><a href="/contact">Contact Page</a></li>
                     </ul>
                 </li>
-                <li><a href="#">Blog</a></li>
+                <li><a href="/blog">Blog</a></li>
             </ul>
         </div>
     </nav>
@@ -86,7 +83,7 @@
 <section class="hero-section">
     <div class="hero-slider owl-carousel">
         <c:forEach items="${previewList}" var="preview">
-            <%--<c:if test="${preview.previewCategory == main}">--%>
+            <c:if test="${preview.previewCategory == 'main'}">
             <div class="hs-item set-bg" data-setbg="../../resources/img/bg.jpg">
             <%--<div class="hs-item set-bg" data-setbg="${preview.previewImg}">--%>
                     <div class="container">
@@ -94,9 +91,7 @@
                             <div class="col-xl-6 col-lg-7 text-white">
                                 <span>New Arrivals</span>
                                 <h2>${preview.previewTitle}</h2>
-                                <a href="#" class="site-btn sb-line">DISCOVER</a>
                                 <p>${preview.previewDescription}</p>
-                                <a href="#" class="site-btn sb-white">ADD TO CART</a>
                             </div>
                         </div>
                         <div class="offer-card text-white">
@@ -106,7 +101,7 @@
                         </div>
                     </div>
                 </div>
-            <%--</c:if>--%>
+            </c:if>
         </c:forEach>
     </div>
     <div class="container">
@@ -152,17 +147,18 @@
 <!-- letest product section -->
 <section class="top-letest-product-section">
     <div class="container">
+
         <div class="section-title">
             <h2>LATEST PRODUCTS</h2>
         </div>
         <div class="product-slider owl-carousel">
-            <c:forEach items="${productList}" var="product">
-                <c:if test="${product.category == 'preview'}">
+            <c:forEach items="${productSortList}" var="product">
+                <%--<c:if test="${product.category == 'preview'}">--%>
                     <div class="product-item">
                         <div class="pi-pic">
-                            <img src="${product.productImg}" alt="">
+                            <a href="productData/${product.id}"><img src="${product.productImg}" alt=""></a>
                             <div class="pi-links">
-                                <a href="productData/${product.id}" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+                                <a href="" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
                                 <a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
                             </div>
                         </div>
@@ -171,7 +167,7 @@
                             <p>${product.productTitle}</p>
                         </div>
                     </div>
-                </c:if>
+                <%--</c:if>--%>
             </c:forEach>
         </div>
     </div>
@@ -187,21 +183,19 @@
             <h2>BROWSE TOP SELLING PRODUCTS</h2>
         </div>
         <ul class="product-filter-menu">
-            <li><a href="#">TOPS</a></li>
-            <li><a href="#">JUMPSUITS</a></li>
-            <li><a href="#">LINGERIE</a></li>
-            <li><a href="#">JEANS</a></li>
-            <li><a href="#">DRESSES</a></li>
-            <li><a href="#">COATS</a></li>
-            <li><a href="#">JUMPERS</a></li>
-            <li><a href="#">LEGGINGS</a></li>
+            <li><a href="/sortBySubCategory/tops">TOPS</a></li>
+            <li><a href="/sortBySubCategory/jeans">JEANS</a></li>
+            <li><a href="/sortBySubCategory/dresses">DRESSES</a></li>
+            <li><a href="/sortBySubCategory/coats">COATS</a></li>
+            <li><a href="/sortBySubCategory/jumpers">JUMPERS</a></li>
+            <li><a href="/sortBySubCategory/leggings">LEGGINGS</a></li>
         </ul>
         <div class="row">
             <c:forEach items="${productList}" var="product">
                 <div class="col-lg-3 col-sm-6">
                     <div class="product-item">
                         <div class="pi-pic">
-                            <a href="productData/${product.id}"><img src="${product.productImg}" alt=""></a>
+                            <a href="/productData/${product.id}"><img src="${product.productImg}" alt=""></a>
                             <div class="pi-links">
                                 <a href="" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
                                 <a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>

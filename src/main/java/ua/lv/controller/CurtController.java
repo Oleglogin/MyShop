@@ -30,6 +30,7 @@ public class CurtController {
 
         model.addAttribute("productListInCurt", purchaseService.productListInCurt(byUserName.getId()));
         model.addAttribute("amountPrice", purchaseService.amountInCart(byUserName.getId()));
+        model.addAttribute("countProductInBasket",purchaseService.countProductInBasket(byUserName.getId()));
         return "cart";
     }
 }

@@ -42,4 +42,10 @@ public class PurchaseController {
         purchaseService.addPurchase(purchase);
         return "redirect:/cart";
     }
+
+    @RequestMapping(value = "/purchaseRemove/{id}", method = RequestMethod.GET)
+    public String purchaseRemove(@PathVariable("id")int id){
+        purchaseService.deletePurchase(id);
+        return "redirect:/cart";
+    }
 }

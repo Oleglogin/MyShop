@@ -1,4 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="tmp/header.jsp" %>
 <!-- Page Preloder -->
 <div id="preloder">
@@ -99,10 +100,10 @@
                 </div>
                 <div class="product-thumbs" tabindex="1" style="overflow: hidden; outline: none;">
                     <div class="product-thumbs-track">
-                        <div class="pt active" data-imgbigurl="img/single-product/1.jpg"><img src="img/single-product/thumb-1.jpg" alt=""></div>
-                        <div class="pt" data-imgbigurl="img/single-product/2.jpg"><img src="img/single-product/thumb-2.jpg" alt=""></div>
-                        <div class="pt" data-imgbigurl="img/single-product/3.jpg"><img src="img/single-product/thumb-3.jpg" alt=""></div>
-                        <div class="pt" data-imgbigurl="img/single-product/4.jpg"><img src="img/single-product/thumb-4.jpg" alt=""></div>
+                        <div class="pt active" data-imgbigurl="${product.productImg}"><img src="${product.productImg}"alt=""></div>
+                        <c:forEach items="${elsePhoto}" var="preview">
+                            <div class="pt active" data-imgbigurl="${preview.previewImg}"><img src="${preview.previewImg}"alt=""></div>
+                        </c:forEach>
                     </div>
                 </div>
             </div>
@@ -123,11 +124,15 @@
                     </div>
                     <div class="fw-size-choose">
                         <p>Size</p>
-                        <div class="sc-item">
-                            <input type="radio" name="sc" id="xs-size">
-                            <label for="xs-size">${product.size}</label>
+                        <div class="promo-code-form">
+                            <form:select class="js-select2" name="time" path="clotheSize">
+                                <option>xs</option>
+                                <option>s</option>
+                                <option>m</option>
+                                <option>l</option>
+                                <option>xl</option>
+                            </form:select>
                         </div>
-
                     </div>
                     <div class="quantity">
                         <p>Quantity</p>

@@ -37,4 +37,9 @@ public class PreviewServiceImpl implements PreviewService {
     public Preview getPrewievById(int id) {
         return previewDAO.findOne(id);
     }
+
+    @Override
+    public List<Preview> elsePhoto(int id) {
+        return previewDAO.elsePhoto(id);
+    }
 }

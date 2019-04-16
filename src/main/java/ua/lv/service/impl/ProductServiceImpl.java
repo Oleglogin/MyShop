@@ -1,12 +1,17 @@
 package ua.lv.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.lv.dao.ProductDAO;
 import ua.lv.entity.Product;
 import ua.lv.service.ProductService;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -29,7 +34,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> productList() {
+    public List<Product> productList(){
         return productDAO.findAll();
     }
 
@@ -41,5 +46,30 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> sortByCategory(String category) {
         return productDAO.sortByCategory(category);
+    }
+
+    @Override
+    public List<Product> sortBySubCategory(String category) {
+        return productDAO.sortBySubCategory(category);
+    }
+
+    @Override
+    public List<Product> productSortList(){
+        LinkedList<Product> sortList = new LinkedList<>();
+        sortList.addAll(productDAO.findAll());
+
+//        Iterator<Product> iterator = sortList.descendingIterator();
+//        while (iterator.hasNext()){
+//            iterator.next();
+//        }
+
+        sortList.sort((o1, o2) -> {
+            if (o1.getId() == o2.getId()) {
+                return 0;
+            } else if (o1.getId() < o2.getId()) {
+                return 1;
+            } else return -1;
+        });
+        return sortList;
     }
 }

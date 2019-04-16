@@ -3,13 +3,14 @@ package ua.lv.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.*;
 import ua.lv.entity.Preview;
 import ua.lv.entity.Product;
+import ua.lv.entity.Purchase;
 import ua.lv.entity.User;
 import ua.lv.service.PreviewService;
 import ua.lv.service.ProductService;
+import ua.lv.service.PurchaseService;
 import ua.lv.service.UserService;
 
 import java.security.Principal;
@@ -25,6 +26,8 @@ public class AdminController {
     ProductService productService;
     @Autowired
     PreviewService previewService;
+    @Autowired
+    PurchaseService purchaseService;
 
     @GetMapping("/admin")
     public String toAdminPAge(Model model,
@@ -36,6 +39,22 @@ public class AdminController {
         model.addAttribute("currentUser",byUserName);
         model.addAttribute("productList", productService.productList());
         model.addAttribute("previewList", previewService.prewievList());
+        model.addAttribute("countProductInBasket",purchaseService.countProductInBasket(byUserName.getId()));
         return "admin";
     }
+    @RequestMapping(value = "/admin2/{id}", method = RequestMethod.GET)
+    public String toAdmin2(Model model, Principal principal,
+                           @ModelAttribute("emptyPreview")Preview preview,
+                           @PathVariable("id")int id){
+        String principalName = principal.getName();
+        User byUserName = userService.findByUserName(principalName);
+        model.addAttribute("currentUser", byUserName);
+        model.addAttribute("emptyPurchase", new Purchase());
+        model.addAttribute("countProductInBasket",purchaseService.countProductInBasket(byUserName.getId()));
+        model.addAttribute("product", productService.findProductById(id));
+        model.addAttribute("elsePhoto",previewService.elsePhoto(id));
+        return "admin2";
+
+    }
+
 }

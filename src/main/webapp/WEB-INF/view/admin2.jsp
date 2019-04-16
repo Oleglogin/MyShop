@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="tmp/header.jsp" %>
 <!-- Page Preloder -->
@@ -16,34 +17,24 @@
                         <img src="../../resources/img/logo.png" alt="">
                     </a>
                 </div>
-                <div class="col-xl-4 col-lg-4">
+                <div class="col-xl-6 col-lg-5">
                     <form class="header-search-form">
                         <input type="text" placeholder="Search on divisima ....">
                         <button><i class="flaticon-search"></i></button>
                     </form>
                 </div>
-                <div class="col-xl-6 col-lg-5">
+                <div class="col-xl-4 col-lg-5">
                     <div class="user-panel">
+                        <div class="up-item">
+                            <i class="flaticon-profile"></i>
+                            <a href="#">Sign</a> In or <a href="#">Create Account</a>
+                        </div>
                         <div class="up-item">
                             <div class="shopping-card">
                                 <i class="flaticon-bag"></i>
-                                <%--<c:if test="${countProductInBasket != 0}">--%>
-                                <span>${countProductInBasket}</span>
-                                <%--</c:if>--%>
+                                <span>0</span>
                             </div>
-                            <a href="/cart">Shopping Cart</a>
-                        </div>
-                        <div class="up-item">
-                            <i class="flaticon-profile"></i>
-                            <a href="/registration">Create Acc</a>
-                        </div>
-                        <div class="up-item">
-                            <i class="flaticon-profile"></i>
-                            <a href="/login">Sign In</a>
-                        </div>
-                        <div class="up-item">
-                            <i class="flaticon-profile"></i>
-                            <a href="/logout">Exit</a>
+                            <a href="#">Shopping Cart</a>
                         </div>
                     </div>
                 </div>
@@ -54,13 +45,13 @@
         <div class="container">
             <!-- menu -->
             <ul class="main-menu">
-                <li><a href="/welcome">Home</a></li>
-                <li><a href="/sortByCategory/women">Women</a></li>
-                <li><a href="/sortByCategory/men">Men</a></li>
-                <li><a href="/sortByCategory/jewelry">Jewelry
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Women</a></li>
+                <li><a href="#">Men</a></li>
+                <li><a href="#">Jewelry
                     <span class="new">New</span>
                 </a></li>
-                <li><a href="/sortByCategory/shoes">Shoes</a>
+                <li><a href="#">Shoes</a>
                     <ul class="sub-menu">
                         <li><a href="#">Sneakers</a></li>
                         <li><a href="#">Sandals</a></li>
@@ -71,11 +62,14 @@
                 </li>
                 <li><a href="#">Pages</a>
                     <ul class="sub-menu">
-                        <li><a href="/cart">Cart Page</a></li>
-                        <li><a href="/contact">Contact Page</a></li>
+                        <li><a href="./product.html">Product Page</a></li>
+                        <li><a href="./category.html">Category Page</a></li>
+                        <li><a href="./cart.html">Cart Page</a></li>
+                        <li><a href="./checkout.html">Checkout Page</a></li>
+                        <li><a href="./contact.html">Contact Page</a></li>
                     </ul>
                 </li>
-                <li><a href="/blog">Blog</a></li>
+                <li><a href="#">Blog</a></li>
             </ul>
         </div>
     </nav>
@@ -83,152 +77,114 @@
 <!-- Header section end -->
 
 
-
 <!-- Page info -->
 <div class="page-top-info">
     <div class="container">
-        <h4>Your cart</h4>
+        <h4>Category PAge</h4>
         <div class="site-pagination">
             <a href="">Home</a> /
-            <a href="">Your cart</a>
+            <a href="">Shop</a>
         </div>
     </div>
 </div>
 <!-- Page info end -->
 
 
-<!-- cart section end -->
-<section class="cart-section spad">
+<!-- product section -->
+<section class="product-section">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8">
-                <div class="cart-table">
-                    <h3>Your Cart</h3>
-                    <div class="cart-table-warp">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th class="product-th">Product</th>
-                                    <th class="quy-th">Quantity</th>
-                                    <th class="size-th">SizeSize</th>
-                                    <th class="total-th">Price</th>
-                                    <th class="total-th">Delete</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            <c:if test="${countProductInBasket != 0}">
-                                <c:forEach items="${productListInCurt}" var="purchase">
-                                    <tr>
-                                        <td class="product-col">
-                                            <img src="${purchase.product.productImg}" alt="">
-                                            <div class="pc-title">
-                                                <h4>${purchase.product.productTitle}</h4>
-                                                <p>$${purchase.product.price}</p>
-                                            </div>
-                                        </td>
-                                        <td class="size-col"><h4>${purchase.count}</h4></td>
-                                        <td class="size-col"><h4>${purchase.clotheSize}</h4></td>
-                                        <td class="total-col"><h4>$${purchase.amount}</h4></td>
-                                            <%--<td class="total-col"><h4>$${purchase.product.price}</h4></td>--%>
-                                        <td class="total-col"><h4><a href="<c:url value='/purchaseRemove/${purchase.id}'/> ">Delete</a></h4></td>
-                                    </tr>
-                                </c:forEach>
-                            </c:if>
+            <div class="col-lg-6">
+                <div class="product-pic-zoom">
+                    <img class="product-big-img" src="${product.productImg}" alt="">
+                </div>
+                <div class="product-thumbs" tabindex="1" style="overflow: hidden; outline: none;">
+                    <div class="product-thumbs-track">
+                        <div class="pt active" data-imgbigurl="${product.productImg}"><img src="${product.productImg}"alt=""></div>
+                        <c:forEach items="${elsePhoto}" var="preview">
+                            <div class="pt active" data-imgbigurl="${preview.previewImg}"><img src="${preview.previewImg}"alt=""></div>
+                        </c:forEach>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 product-details">
+                <h2 class="p-title">${product.productTitle}</h2>
+                <h3 class="p-price">$${product.price}</h3>
+                <h4 class="p-stock">Available: <span>In Stock</span></h4>
+                <div class="p-rating">
+                    <i class="fa fa-star-o"></i>
+                    <i class="fa fa-star-o"></i>
+                    <i class="fa fa-star-o"></i>
+                    <i class="fa fa-star-o"></i>
+                    <i class="fa fa-star-o fa-fade"></i>
+                </div>
+                <%--<c:url value="add/else/{}" var="addPreview"/>--%>
+                <form:form action="/add/else/${product.id}" modelAttribute="emptyPreview" enctype="multipart/form-data">
+                    <div class="promo-code-form">
+                        <input type="file" name="previewImg" class="promo-code-form" formenctype="multipart/form-data" id="exampleformControlFile1">
+                    </div>
+                    <div class="promo-code-form">
+                        <form:select class="js-select2" name="time" path="previewCategory">
+                            <%--<option>main</option>--%>
+                            <option>subMain</option>
+                        </form:select>
+                    </div>
+                    <form:input type="hidden" path="id" readonly="true"/>
+                    <input type="submit" value="add preview" class="site-btn">
+                </form:form>
 
-
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="total-cost">
-                        <h6>Total <span>$ ${amountPrice}</span></h6>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 card-right">
-                <form class="promo-code-form">
-                    <input type="text" placeholder="Enter promo code">
-                    <button>Submit</button>
-                </form>
-                <a href="" class="site-btn">Proceed to checkout</a>
-                <a href="" class="site-btn sb-dark">Continue shopping</a>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- cart section end -->
-
-<!-- Related product section -->
-<section class="related-product-section">
-    <div class="container">
-        <div class="section-title text-uppercase">
-            <h2>Continue Shopping</h2>
-        </div>
-        <div class="row">
-            <div class="col-lg-3 col-sm-6">
-                <div class="product-item">
-                    <div class="pi-pic">
-                        <div class="tag-new">New</div>
-                        <img src="./img/product/2.jpg" alt="">
-                        <div class="pi-links">
-                            <a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-                            <a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+                <div id="accordion" class="accordion-area">
+                    <div class="panel">
+                        <div class="panel-header" id="headingOne">
+                            <button class="panel-link active" data-toggle="collapse" data-target="#collapse1" aria-expanded="true" aria-controls="collapse1">information</button>
+                        </div>
+                        <div id="collapse1" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                            <div class="panel-body">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra tempor so dales. Phasellus sagittis auctor gravida. Integer bibendum sodales arcu id te mpus. Ut consectetur lacus leo, non scelerisque nulla euismod nec.</p>
+                                <p>Approx length 66cm/26" (Based on a UK size 8 sample)</p>
+                                <p>Mixed fibres</p>
+                                <p>The Model wears a UK size 8/ EU size 36/ US size 4 and her height is 5'8"</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="pi-text">
-                        <h6>$35,00</h6>
-                        <p>Black and White Stripes Dress</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="product-item">
-                    <div class="pi-pic">
-                        <img src="./img/product/5.jpg" alt="">
-                        <div class="pi-links">
-                            <a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-                            <a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+                    <div class="panel">
+                        <div class="panel-header" id="headingTwo">
+                            <button class="panel-link" data-toggle="collapse" data-target="#collapse2" aria-expanded="false" aria-controls="collapse2">care details </button>
+                        </div>
+                        <div id="collapse2" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                            <div class="panel-body">
+                                <img src="./img/cards.png" alt="">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra tempor so dales. Phasellus sagittis auctor gravida. Integer bibendum sodales arcu id te mpus. Ut consectetur lacus leo, non scelerisque nulla euismod nec.</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="pi-text">
-                        <h6>$35,00</h6>
-                        <p>Flamboyant Pink Top </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="product-item">
-                    <div class="pi-pic">
-                        <img src="./img/product/9.jpg" alt="">
-                        <div class="pi-links">
-                            <a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-                            <a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+                    <div class="panel">
+                        <div class="panel-header" id="headingThree">
+                            <button class="panel-link" data-toggle="collapse" data-target="#collapse3" aria-expanded="false" aria-controls="collapse3">shipping & Returns</button>
+                        </div>
+                        <div id="collapse3" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                            <div class="panel-body">
+                                <h4>7 Days Returns</h4>
+                                <p>Cash on Delivery Available<br>Home Delivery <span>3 - 4 days</span></p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra tempor so dales. Phasellus sagittis auctor gravida. Integer bibendum sodales arcu id te mpus. Ut consectetur lacus leo, non scelerisque nulla euismod nec.</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="pi-text">
-                        <h6>$35,00</h6>
-                        <p>Flamboyant Pink Top </p>
-                    </div>
                 </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="product-item">
-                    <div class="pi-pic">
-                        <img src="./img/product/1.jpg" alt="">
-                        <div class="pi-links">
-                            <a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-                            <a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
-                        </div>
-                    </div>
-                    <div class="pi-text">
-                        <h6>$35,00</h6>
-                        <p>Flamboyant Pink Top </p>
-                    </div>
+                <div class="social-sharing">
+                    <a href=""><i class="fa fa-google-plus"></i></a>
+                    <a href=""><i class="fa fa-pinterest"></i></a>
+                    <a href=""><i class="fa fa-facebook"></i></a>
+                    <a href=""><i class="fa fa-twitter"></i></a>
+                    <a href=""><i class="fa fa-youtube"></i></a>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<!-- Related product section end -->
+<!-- product section end -->
+
+
 
 
 

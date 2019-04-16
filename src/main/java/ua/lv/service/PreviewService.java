@@ -12,4 +12,5 @@ public interface PreviewService {
     void deletePrewiev(int id);
     List<Preview> prewievList();
     Preview getPrewievById(int id);
+    List<Preview>elsePhoto(int id);
 }

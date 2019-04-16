@@ -34,6 +34,7 @@ public class MainController {
         model.addAttribute("emptyProduct", productService.productList());
         model.addAttribute("productList",productService.productList());
         model.addAttribute("previewList",previewService.prewievList() );
+        model.addAttribute("productSortList",productService.productSortList());
         return "welcome";
     }
 

@@ -99,7 +99,7 @@
                                 <tbody>
                                     <tr>
                                         <td class="product-col">
-                                            <img src="${product.productImg}" alt="Product">
+                                            <a href="admin2/${product.id}"><img src="${product.productImg}" alt="Product"></a>
                                             <div class="pc-title">
                                                 <h4>${product.productTitle}</h4>
                                                 <p>$ ${product.price}</p>
@@ -136,9 +136,6 @@
                         <form:input path="rate" class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="postcode" placeholder="rate"/>
                     </div>
                     <div class="promo-code-form">
-                        <form:input path="size" class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="postcode" placeholder="size"/>
-                    </div>
-                    <div class="promo-code-form">
                         <input type="file" name="productImg" class="promo-code-form" formenctype="multipart/form-data" id="exampleformControlFile1">
                     </div>
                     <div class="promo-code-form">
@@ -146,7 +143,8 @@
                             <option>preview</option>
                             <option>men</option>
                             <option>women</option>
-                            <option>shoe</option>
+                            <option>shoes</option>
+                            <option>jewelry</option>
                         </form:select>
 
                         <form:select class="js-select2" name="time" path="subCategory">
@@ -154,6 +152,8 @@
                             <option>jeans</option>
                             <option>coats</option>
                             <option>dresses</option>
+                            <option>jumpers</option>
+                            <option>leggings</option>
                         </form:select>
                     </div>
 

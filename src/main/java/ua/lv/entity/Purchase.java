@@ -14,6 +14,7 @@ public class Purchase {
     private int amount;
     private boolean success;
     private int size;
+    private String clotheSize;
 
 
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
@@ -86,6 +87,14 @@ public class Purchase {
 
     public void setSize(int size) {
         this.size = size;
+    }
+
+    public String getClotheSize() {
+        return clotheSize;
+    }
+
+    public void setClotheSize(String clotheSize) {
+        this.clotheSize = clotheSize;
     }
 
     @Override

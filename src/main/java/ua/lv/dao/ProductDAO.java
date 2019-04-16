@@ -14,4 +14,7 @@ public interface ProductDAO extends JpaRepository<Product, Integer> {
 
     @Query("from Product product where product.category=:category")
     List<Product> sortByCategory(@Param("category")String category);
+
+    @Query("from Product product where product.subCategory=:category")
+    List<Product> sortBySubCategory(@Param("category")String category);
 }
