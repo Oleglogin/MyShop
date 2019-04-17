@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import ua.lv.entity.Likes;
 import ua.lv.entity.User;
 import ua.lv.service.PreviewService;
 import ua.lv.service.ProductService;
@@ -47,6 +48,8 @@ public class MainController {
         model.addAttribute("productList", productService.productList());
         model.addAttribute("previewList",previewService.prewievList() );
         model.addAttribute("countProductInBasket", purchaseService.countProductInBasket(byUserName.getId()));
+
+        model.addAttribute("emptyLike", new Likes());
         return "/welcome";
     }
 

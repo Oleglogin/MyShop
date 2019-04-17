@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@include file="tmp/header.jsp"%>
 <%--<!-- Page Preloder -->--%>
 
@@ -97,8 +98,7 @@
                         <div class="pi-pic">
                             <a href="productData/${product.id}"><img src="${product.productImg}" alt=""></a>
                             <div class="pi-links">
-                                <a href="" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-                                <a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+
                             </div>
                         </div>
                         <div class="pi-text">
@@ -135,8 +135,16 @@
                         <div class="pi-pic">
                             <a href="/productData/${product.id}"><img src="${product.productImg}" alt=""></a>
                             <div class="pi-links">
-                                <a href="" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-                                <a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+                                <div>
+                                    <c:if test="${currentUser != null && product.user.id != currentUser.id}">
+                                        <a href="<c:url value='/addLike/${currentUser.id}/${product.id}"'/>" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+                                    </c:if>
+
+                                    <c:if test="${currentUser != null && product.user.id != currentUser.id}">
+                                        <a href="<c:url value='/addDisLike/${currentUser.id}/${product.id}'/>" class="wishlist-btn"><i class="flaticon-dislike"></i></a>
+                                    </c:if>
+                                </div>
+
                             </div>
                         </div>
                         <div class="pi-text">
