@@ -17,24 +17,34 @@
                         <img src="../../resources/img/logo.png" alt="">
                     </a>
                 </div>
-                <div class="col-xl-6 col-lg-5">
+                <div class="col-xl-4 col-lg-4">
                     <form class="header-search-form">
                         <input type="text" placeholder="Search on divisima ....">
                         <button><i class="flaticon-search"></i></button>
                     </form>
                 </div>
-                <div class="col-xl-4 col-lg-5">
+                <div class="col-xl-6 col-lg-5">
                     <div class="user-panel">
-                        <div class="up-item">
-                            <i class="flaticon-profile"></i>
-                            <a href="#">Sign</a> In or <a href="#">Create Account</a>
-                        </div>
                         <div class="up-item">
                             <div class="shopping-card">
                                 <i class="flaticon-bag"></i>
-                                <span>0</span>
+                                <%--<c:if test="${countProductInBasket != 0}">--%>
+                                <span>${countProductInBasket}</span>
+                                <%--</c:if>--%>
                             </div>
-                            <a href="#">Shopping Cart</a>
+                            <a href="/cart">Shopping Cart</a>
+                        </div>
+                        <div class="up-item">
+                            <i class="flaticon-profile"></i>
+                            <a href="/registration">Create Acc</a>
+                        </div>
+                        <div class="up-item">
+                            <i class="flaticon-profile"></i>
+                            <a href="/login">Sign In</a>
+                        </div>
+                        <div class="up-item">
+                            <i class="flaticon-profile"></i>
+                            <a href="/logout">${currentUser.username}Exit</a>
                         </div>
                     </div>
                 </div>
@@ -45,31 +55,21 @@
         <div class="container">
             <!-- menu -->
             <ul class="main-menu">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Women</a></li>
-                <li><a href="#">Men</a></li>
-                <li><a href="#">Jewelry
+                <li><a href="/welcome">Home</a></li>
+                <li><a href="/sortByCategory/women">Women</a></li>
+                <li><a href="/sortByCategory/men">Men</a></li>
+                <li><a href="/sortByCategory/jewelry">Jewelry
                     <span class="new">New</span>
                 </a></li>
-                <li><a href="#">Shoes</a>
-                    <ul class="sub-menu">
-                        <li><a href="#">Sneakers</a></li>
-                        <li><a href="#">Sandals</a></li>
-                        <li><a href="#">Formal Shoes</a></li>
-                        <li><a href="#">Boots</a></li>
-                        <li><a href="#">Flip Flops</a></li>
-                    </ul>
+                <li><a href="/sortByCategory/shoes">Shoes</a>
                 </li>
                 <li><a href="#">Pages</a>
                     <ul class="sub-menu">
-                        <li><a href="./product.html">Product Page</a></li>
-                        <li><a href="./category.html">Category Page</a></li>
-                        <li><a href="./cart.html">Cart Page</a></li>
-                        <li><a href="./checkout.html">Checkout Page</a></li>
-                        <li><a href="./contact.html">Contact Page</a></li>
+                        <li><a href="/cart">Cart Page</a></li>
+                        <li><a href="/contact">Contact Page</a></li>
                     </ul>
                 </li>
-                <li><a href="#">Blog</a></li>
+                <li><a href="/blog">Blog</a></li>
             </ul>
         </div>
     </nav>
@@ -201,72 +201,23 @@
             <h2>RELATED PRODUCTS</h2>
         </div>
         <div class="product-slider owl-carousel">
-            <div class="product-item">
-                <div class="pi-pic">
-                    <img src="./img/product/1.jpg" alt="">
-                    <div class="pi-links">
-                        <a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-                        <a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+            <c:forEach items="${productSortList}" var="product">
+                <%--<c:if test="${product.category == 'preview'}">--%>
+                <div class="product-item">
+                    <div class="pi-pic">
+                        <a href="productData/${product.id}"><img src="${product.productImg}" alt=""></a>
+                        <div class="pi-links">
+                            <a href="" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+                            <a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+                        </div>
+                    </div>
+                    <div class="pi-text">
+                        <h6>$${product.price}</h6>
+                        <p>${product.productTitle}</p>
                     </div>
                 </div>
-                <div class="pi-text">
-                    <h6>$35,00</h6>
-                    <p>Flamboyant Pink Top </p>
-                </div>
-            </div>
-            <div class="product-item">
-                <div class="pi-pic">
-                    <div class="tag-new">New</div>
-                    <img src="./img/product/2.jpg" alt="">
-                    <div class="pi-links">
-                        <a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-                        <a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
-                    </div>
-                </div>
-                <div class="pi-text">
-                    <h6>$35,00</h6>
-                    <p>Black and White Stripes Dress</p>
-                </div>
-            </div>
-            <div class="product-item">
-                <div class="pi-pic">
-                    <img src="./img/product/3.jpg" alt="">
-                    <div class="pi-links">
-                        <a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-                        <a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
-                    </div>
-                </div>
-                <div class="pi-text">
-                    <h6>$35,00</h6>
-                    <p>Flamboyant Pink Top </p>
-                </div>
-            </div>
-            <div class="product-item">
-                <div class="pi-pic">
-                    <img src="./img/product/4.jpg" alt="">
-                    <div class="pi-links">
-                        <a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-                        <a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
-                    </div>
-                </div>
-                <div class="pi-text">
-                    <h6>$35,00</h6>
-                    <p>Flamboyant Pink Top </p>
-                </div>
-            </div>
-            <div class="product-item">
-                <div class="pi-pic">
-                    <img src="./img/product/6.jpg" alt="">
-                    <div class="pi-links">
-                        <a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-                        <a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
-                    </div>
-                </div>
-                <div class="pi-text">
-                    <h6>$35,00</h6>
-                    <p>Flamboyant Pink Top </p>
-                </div>
-            </div>
+                <%--</c:if>--%>
+            </c:forEach>
         </div>
     </div>
 </section>

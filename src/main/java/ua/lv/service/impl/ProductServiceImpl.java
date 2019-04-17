@@ -58,11 +58,6 @@ public class ProductServiceImpl implements ProductService {
         LinkedList<Product> sortList = new LinkedList<>();
         sortList.addAll(productDAO.findAll());
 
-//        Iterator<Product> iterator = sortList.descendingIterator();
-//        while (iterator.hasNext()){
-//            iterator.next();
-//        }
-
         sortList.sort((o1, o2) -> {
             if (o1.getId() == o2.getId()) {
                 return 0;

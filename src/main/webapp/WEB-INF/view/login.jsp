@@ -1,45 +1,85 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="tmp/header.jsp" %>
-<header header-v4>
-    <!-- Header desktop -->
-    <div class="container-menu-desktop">
-        <%--<div class="wrap-menu-desktop how-shadow1">--%>
-        <nav class="limiter-menu-desktop container">
-
-            <!-- Logo desktop -->
-            <a href="#" class="logo">
-                <img src="../../resources/images/icons/logo-01.png" alt="IMG-LOGO">
-            </a>
-
-            <!-- Menu desktop -->
-            <div class="menu-desktop">
-                <ul class="main-menu">
-                    <li>
-                        <a href="/welcome">Main page</a>
-                    </li>
-                </ul>
-            </div>
-
-            <!-- Icon header -->
-            <div class="wrap-icon-header flex-w flex-r-m">
-                <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
-                    <i class="zmdi zmdi-search"></i>
+<!-- Header section -->
+<header class="header-section">
+    <div class="header-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-2 text-center text-lg-left">
+                    <!-- logo -->
+                    <a href="/welcome" class="site-logo">
+                        <img src="../../resources/img/logo.png" alt="">
+                    </a>
                 </div>
-
-                <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="${countProductInBascet}">
-                    <i class="zmdi zmdi-shopping-cart"></i>
+                <div class="col-xl-4 col-lg-4">
+                    <form class="header-search-form">
+                        <input type="text" placeholder="Search on divisima ....">
+                        <button><i class="flaticon-search"></i></button>
+                    </form>
                 </div>
-
-                <a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
-                    <i class="zmdi zmdi-favorite-outline"></i>
-                </a>
+                <div class="col-xl-6 col-lg-5">
+                    <div class="user-panel">
+                        <div class="up-item">
+                            <div class="shopping-card">
+                                <i class="flaticon-bag"></i>
+                                <%--<c:if test="${countProductInBasket != 0}">--%>
+                                <span>${countProductInBasket}</span>
+                                <%--</c:if>--%>
+                            </div>
+                            <a href="/cart">Shopping Cart</a>
+                        </div>
+                        <div class="up-item">
+                            <i class="flaticon-profile"></i>
+                            <a href="/registration">Create Acc</a>
+                        </div>
+                        <div class="up-item">
+                            <i class="flaticon-profile"></i>
+                            <a href="/login">Sign In</a>
+                        </div>
+                        <div class="up-item">
+                            <i class="flaticon-profile"></i>
+                            <a href="/logout">${currentUser.username} Exit</a>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-        </nav>
-        <%--</div>--%>
+        </div>
     </div>
+    <nav class="main-navbar">
+        <div class="container">
+            <!-- menu -->
+            <ul class="main-menu">
+                <li><a href="/welcome">Home</a></li>
+                <li><a href="/sortByCategory/women">Women</a></li>
+                <li><a href="/sortByCategory/men">Men</a></li>
+                <li><a href="/sortByCategory/jewelry">Jewelry
+                    <span class="new">New</span>
+                </a></li>
+                <li><a href="/sortByCategory/shoes">Shoes</a>
+                </li>
+                <li><a href="#">Pages</a>
+                    <ul class="sub-menu">
+                        <li><a href="/cart">Cart Page</a></li>
+                        <li><a href="/contact">Contact Page</a></li>
+                    </ul>
+                </li>
+                <li><a href="/blog">Blog</a></li>
+            </ul>
+        </div>
+    </nav>
 </header>
+<!-- Header section end -->
 
+<!-- Page info -->
+<div class="page-top-info">
+    <div class="container">
+        <h4>Sign-In</h4>
+        <div class="site-pagination">
+            <a href="/welcome">Home</a>
+        </div>
+    </div>
+</div>
+<!-- Page info end -->
 <div class="container-fluid">
 
     <div class="bg0 p-t-23 p-b-140">

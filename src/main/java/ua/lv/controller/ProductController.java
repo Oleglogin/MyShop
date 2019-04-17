@@ -69,6 +69,7 @@ public class ProductController {
         model.addAttribute("countProductInBasket",purchaseService.countProductInBasket(byUserName.getId()));
 
         model.addAttribute("product", productService.findProductById(id));
+        model.addAttribute("productSortList",productService.productSortList());
         model.addAttribute("previewList", previewService.prewievList());
         model.addAttribute("elsePhoto",previewService.elsePhoto(id));
 

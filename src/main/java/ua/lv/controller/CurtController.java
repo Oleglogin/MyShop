@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import ua.lv.entity.User;
+import ua.lv.service.ProductService;
 import ua.lv.service.PurchaseService;
 import ua.lv.service.UserService;
 
@@ -21,6 +22,8 @@ public class CurtController {
     UserService userService;
     @Autowired
     PurchaseService purchaseService;
+    @Autowired
+    ProductService productService;
 
     @RequestMapping(value = "/cart", method = RequestMethod.GET)
     public String toCart(Model model, Principal principal){
@@ -31,6 +34,8 @@ public class CurtController {
         model.addAttribute("productListInCurt", purchaseService.productListInCurt(byUserName.getId()));
         model.addAttribute("amountPrice", purchaseService.amountInCart(byUserName.getId()));
         model.addAttribute("countProductInBasket",purchaseService.countProductInBasket(byUserName.getId()));
+        model.addAttribute("productSortList",productService.productSortList());
+
         return "cart";
     }
 }

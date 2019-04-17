@@ -21,15 +21,15 @@
                 </div>
                 <div class="col-xl-6 col-lg-5">
                     <div class="user-panel">
-                        <div class="up-item">
-                            <div class="shopping-card">
-                                <i class="flaticon-bag"></i>
-                                <%--<c:if test="${countProductInBasket != 0}">--%>
-                                <span>${countProductInBasket}</span>
-                                <%--</c:if>--%>
+                        <c:if test="${countProductInBasket != 0}">
+                            <div class="up-item">
+                                <div class="shopping-card">
+                                    <i class="flaticon-bag"></i>
+                                    <span>${countProductInBasket}</span>
+                                </div>
+                                <a href="/cart">Shopping Cart</a>
                             </div>
-                            <a href="/cart">Shopping Cart</a>
-                        </div>
+                        </c:if>
                         <div class="up-item">
                             <i class="flaticon-profile"></i>
                             <a href="/registration">Create Acc</a>
@@ -40,7 +40,7 @@
                         </div>
                         <div class="up-item">
                             <i class="flaticon-profile"></i>
-                            <a href="/logout">Exit</a>
+                            <a href="/logout">${currentUser.username} Exit</a>
                         </div>
                     </div>
                 </div>
@@ -58,13 +58,6 @@
                     <span class="new">New</span>
                 </a></li>
                 <li><a href="/sortByCategory/shoes">Shoes</a>
-                    <ul class="sub-menu">
-                        <li><a href="#">Sneakers</a></li>
-                        <li><a href="#">Sandals</a></li>
-                        <li><a href="#">Formal Shoes</a></li>
-                        <li><a href="#">Boots</a></li>
-                        <li><a href="#">Flip Flops</a></li>
-                    </ul>
                 </li>
                 <li><a href="#">Pages</a>
                     <ul class="sub-menu">
@@ -79,70 +72,17 @@
 </header>
 <!-- Header section end -->
 
-<!-- Hero section -->
-<section class="hero-section">
-    <div class="hero-slider owl-carousel">
-        <c:forEach items="${previewList}" var="preview">
-            <c:if test="${preview.previewCategory == 'main'}">
-            <div class="hs-item set-bg" data-setbg="../../resources/img/bg.jpg">
-            <%--<div class="hs-item set-bg" data-setbg="${preview.previewImg}">--%>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-xl-6 col-lg-7 text-white">
-                                <span>New Arrivals</span>
-                                <h2>${preview.previewTitle}</h2>
-                                <p>${preview.previewDescription}</p>
-                            </div>
-                        </div>
-                        <div class="offer-card text-white">
-                            <span>from</span>
-                            <h2>$${preview.previewPrice}</h2>
-                            <p>SHOP NOW</p>
-                        </div>
-                    </div>
-                </div>
-            </c:if>
-        </c:forEach>
-    </div>
+<!-- Page info -->
+<div class="page-top-info">
     <div class="container">
-        <div class="slide-num-holder" id="snh-1"></div>
-    </div>
-</section>
-<!-- Hero section end -->
-
-<!-- Features section -->
-<section class="features-section">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-4 p-0 feature">
-                <div class="feature-inner">
-                    <div class="feature-icon">
-                        <img src="../../resources/img/icons/1.png" alt="#">
-                    </div>
-                    <h2>Fast Secure Payments</h2>
-                </div>
-            </div>
-            <div class="col-md-4 p-0 feature">
-                <div class="feature-inner">
-                    <div class="feature-icon">
-                        <img src="../../resources/img/icons/2.png" alt="#">
-                    </div>
-                    <h2>Premium Products</h2>
-                </div>
-            </div>
-            <div class="col-md-4 p-0 feature">
-                <div class="feature-inner">
-                    <div class="feature-icon">
-                        <img src="../../resources/img/icons/3.png" alt="#">
-                    </div>
-                    <h2>Free & fast Delivery</h2>
-                </div>
-            </div>
+        <h4>Welcome</h4>
+        <div class="site-pagination">
+            <a href="">Home</a> /
+            <a href="">Shop</a>
         </div>
     </div>
-</section>
-<!-- Features section end -->
-
+</div>
+<!-- Page info end -->
 
 <!-- letest product section -->
 <section class="top-letest-product-section">
@@ -153,7 +93,6 @@
         </div>
         <div class="product-slider owl-carousel">
             <c:forEach items="${productSortList}" var="product">
-                <%--<c:if test="${product.category == 'preview'}">--%>
                     <div class="product-item">
                         <div class="pi-pic">
                             <a href="productData/${product.id}"><img src="${product.productImg}" alt=""></a>
@@ -167,7 +106,6 @@
                             <p>${product.productTitle}</p>
                         </div>
                     </div>
-                <%--</c:if>--%>
             </c:forEach>
         </div>
     </div>

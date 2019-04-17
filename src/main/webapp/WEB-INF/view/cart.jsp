@@ -166,18 +166,21 @@
         <div class="row">
             <div class="col-lg-3 col-sm-6">
                 <div class="product-item">
-                    <div class="pi-pic">
-                        <div class="tag-new">New</div>
-                        <img src="./img/product/2.jpg" alt="">
-                        <div class="pi-links">
-                            <a href="#" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
-                            <a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+                    <c:forEach items="${productSortList}" var="product">
+                        <div class="product-item">
+                            <div class="pi-pic">
+                                <a href="productData/${product.id}"><img src="${product.productImg}" alt=""></a>
+                                <div class="pi-links">
+                                    <a href="" class="add-card"><i class="flaticon-bag"></i><span>ADD TO CART</span></a>
+                                    <a href="#" class="wishlist-btn"><i class="flaticon-heart"></i></a>
+                                </div>
+                            </div>
+                            <div class="pi-text">
+                                <h6>$${product.price}</h6>
+                                <p>${product.productTitle}</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="pi-text">
-                        <h6>$35,00</h6>
-                        <p>Black and White Stripes Dress</p>
-                    </div>
+                    </c:forEach>
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6">

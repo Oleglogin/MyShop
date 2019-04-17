@@ -29,24 +29,25 @@ public class MainController {
 
 
 
-    @GetMapping("/")
-    public String toMainPage(Model model){
-        model.addAttribute("emptyProduct", productService.productList());
+    @GetMapping(value ="/")
+    public String toMainPage(Model model, Principal principal){
         model.addAttribute("productList",productService.productList());
         model.addAttribute("previewList",previewService.prewievList() );
         model.addAttribute("productSortList",productService.productSortList());
         return "welcome";
     }
 
-    @GetMapping("/welcome")
+    @GetMapping(value ="/welcome")
     public String toWelcomePage(Model model, Principal principal){
         String principalName = principal.getName();
         User byUserName = userService.findByUserName(principalName);
-        model.addAttribute("emptyProduct", productService.productList());
+        model.addAttribute("currentUser", byUserName);
+
+        model.addAttribute("productSortList",productService.productSortList());
         model.addAttribute("productList", productService.productList());
         model.addAttribute("previewList",previewService.prewievList() );
         model.addAttribute("countProductInBasket", purchaseService.countProductInBasket(byUserName.getId()));
-        return "welcome";
+        return "/welcome";
     }
 
 }
