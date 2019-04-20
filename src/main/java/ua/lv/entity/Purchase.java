@@ -12,15 +12,19 @@ public class Purchase {
     private int id;
     private int count;
     private int amount;
-    private boolean success;
+    private int success;
+    private int successOrder;
     private int size;
     private String clotheSize;
+
+
 
 
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private User user;
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private Product product;
+
 
 
     public Purchase() {
@@ -72,11 +76,11 @@ public class Purchase {
 
 
 
-    public boolean isSuccess() {
+    public int isSuccess() {
         return success;
     }
 
-    public void setSuccess(boolean success) {
+    public void setSuccess(int success) {
         this.success = success;
     }
 
@@ -95,6 +99,18 @@ public class Purchase {
 
     public void setClotheSize(String clotheSize) {
         this.clotheSize = clotheSize;
+    }
+
+    public int getSuccess() {
+        return success;
+    }
+
+    public int getSuccessOrder() {
+        return successOrder;
+    }
+
+    public void setSuccessOrder(int successOrder) {
+        this.successOrder = successOrder;
     }
 
     @Override

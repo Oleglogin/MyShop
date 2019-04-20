@@ -27,6 +27,8 @@ public class Product {
     @Column(columnDefinition = "text")
     private String description;
     private Date dateOfsave = new Date();
+    private int tulike;
+    private int disLike;
 
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private User user;
@@ -155,6 +157,22 @@ public class Product {
             e.printStackTrace();
         }
         this.productImg = "\\workImg\\" + multipartFile.getOriginalFilename();
+    }
+
+    public int getTulike() {
+        return tulike;
+    }
+
+    public void setTulike(int tulike) {
+        this.tulike = tulike;
+    }
+
+    public int getDisLike() {
+        return disLike;
+    }
+
+    public void setDisLike(int disLike) {
+        this.disLike = disLike;
     }
 
     @Override

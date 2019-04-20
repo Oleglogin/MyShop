@@ -41,9 +41,9 @@ public class LikesController {
         Product product = productService.findProductById(ProductId);
         likes.setUser(user);
         likes.setProduct(product);
-        likes.setLikeCount(1);
-        likeService.addLike(likes);
 
+        likes.setLikeCount(likes.getLikeCount() + 1);
+        likeService.addLike(likes);
         return "redirect:/welcome";
     }
     @RequestMapping(value ="/addDisLike/{currentUser.id}/{product.id}")
@@ -59,22 +59,9 @@ public class LikesController {
         Product product = productService.findProductById(ProductId);
         likes.setUser(user);
         likes.setProduct(product);
-        likes.setDisLikeCount(1);
+
+        likes.setDisLikeCount(likes.getDisLikeCount()+ 1);
         likeService.addLike(likes);
-
-        return "redirect:/welcome";
-    }
-
-
-    @RequestMapping(value = "/likesRemove/{currentUser.id}/{product.id}")
-    public String likeRemove(@PathVariable("currentUser.id")int userId,
-                             @PathVariable("product.id")int productId){
-
-
-//        List<Likes> likes = likeService.findLikesByProductId(userId,productId);
-//        for (Likes lik : likes){
-//            likeService.deleteLike(lik.getId());
-//        }
         return "redirect:/welcome";
     }
 }

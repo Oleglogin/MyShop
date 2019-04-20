@@ -12,9 +12,12 @@ import java.util.List;
  */
 public interface LikesDAO extends JpaRepository<Likes, Integer> {
 
-    @Query("delete from Likes likes where likes.product.id=:id")
-    void deleteLike(@Param("id")int id);
+    @Query("select sum (likes.likeCount) from Likes likes where likes.product.id=:id")
+    int countLike(@Param("id")int id);
 
-//    @Query("from Likes likes where likes.product.id=:productId and likes.user.id=:userId")
-//    List<Likes> findLikesByProductIdAndUserId(@Param("product.id")int productId, @Param("user.id")int userId);
+    @Query("select sum (likes.disLikeCount) from Likes likes where likes.product.id=:id")
+    int countDisLike(@Param("id")int id);
+
+
 }
+

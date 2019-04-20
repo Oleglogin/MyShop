@@ -51,4 +51,14 @@ public class PurchaseServiceImpl implements PurchaseService {
     public int countProductInBasket(int id) {
         return purchaseDAO.countProductInBasket(id);
     }
+
+    @Override
+    public void success(int id) {
+        purchaseDAO.success(id);
+    }
+
+    @Override
+    public void successorder(int id, int number) {
+        purchaseDAO.successOrder(id,number);
+    }
 }

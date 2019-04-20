@@ -12,6 +12,7 @@ public interface LikesService {
     void deleteLike(int id);
     List<Likes> likeList();
     Likes findLikeById(int id);
-    void deleteL(int id);
-//    List<Likes> findLikesByProductId(int userId, int productId);
+
+    int countLike(int id);
+    int disLikeCount(int id);
 }

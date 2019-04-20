@@ -110,18 +110,41 @@
             <div class="col-lg-6 product-details">
                 <h2 class="p-title">${product.productTitle}</h2>
                 <h3 class="p-price">$${product.price}</h3>
-                <h4 class="p-stock">Available: <span>In Stock</span></h4>
+                <h4 class="p-title">
+                        <c:if test="${currentUser != null && product.user.id != currentUser.id}">
+                            <a href="<c:url value='/addLike/${currentUser.id}/${product.id}"'/>" class="wishlist-btn">
+                                <div class="shopping-card">
+                                    <i class="flaticon-heart"></i>
+                                    <c:if test="${!empty countLike}">
+                                        <span>${countLike}</span>
+                                    </c:if>
+                                </div>
+                            </a>
+                        </c:if>
+                        <c:if test="${currentUser != null && product.user.id != currentUser.id}">
+                            <a href="<c:url value='/addDisLike/${currentUser.id}/${product.id}'/>" class="wishlist-btn">
+                                <div class="shopping-card">
+                                    <i class="flaticon-dislike"></i>
+                                    <c:if test="${!empty CountDisLike}">
+                                        <span>${CountDisLike}</span>
+                                    </c:if>
+                                </div>
+                            </a>
+                        </c:if>
+                </h4>
+
+                <h4 class="p-stock">Available: <span>${product.available}</span></h4>
                 <div class="p-rating">
                     <i class="fa fa-star-o"></i>
                     <i class="fa fa-star-o"></i>
                     <i class="fa fa-star-o"></i>
                     <i class="fa fa-star-o"></i>
-                    <i class="fa fa-star-o fa-fade"></i>
+                    <i class="fa fa-star-o"></i>
                 </div>
                 <form:form action="/purchaseAdd/${product.id}/${currentUser.id}" modelAttribute="emptyPurchase">
-                    <div class="p-review">
-                        <a href="">3 reviews</a>|<a href="">Add your review</a>
-                    </div>
+                    <%--<div class="p-review">--%>
+                        <%--<a href="">3 reviews</a>|<a href="">Add your review</a>--%>
+                    <%--</div>--%>
                     <div class="fw-size-choose">
                         <p>Size</p>
                         <div class="promo-code-form">
@@ -149,7 +172,7 @@
                         </div>
                         <div id="collapse1" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                             <div class="panel-body">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra tempor so dales. Phasellus sagittis auctor gravida. Integer bibendum sodales arcu id te mpus. Ut consectetur lacus leo, non scelerisque nulla euismod nec.</p>
+                                <p>${product.description}</p>
                                 <p>Approx length 66cm/26" (Based on a UK size 8 sample)</p>
                                 <p>Mixed fibres</p>
                                 <p>The Model wears a UK size 8/ EU size 36/ US size 4 and her height is 5'8"</p>

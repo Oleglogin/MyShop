@@ -82,6 +82,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .antMatchers("/welcome/**").hasAnyRole("USER","ADMIN","SELLER")
                 .antMatchers("/cart/**").hasAnyRole("USER","ADMIN","SELLER")
                 .antMatchers("/product/**").hasAnyRole("USER","ADMIN","SELLER")
+                .antMatchers("/productData/**").hasAnyRole("USER","ADMIN","SELLER")
 
                 .and()
                 .exceptionHandling().accessDeniedPage("/accessDenied").and()

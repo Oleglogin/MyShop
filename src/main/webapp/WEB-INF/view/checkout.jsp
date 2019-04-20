@@ -1,7 +1,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@include file="tmp/header.jsp"%>
-<%--<!-- Page Preloder -->--%>
+<%@include file="tmp/header.jsp" %>
+
+<!-- Page Preloder -->
+<div id="preloder">
+    <div class="loader"></div>
+</div>
 
 <!-- Header section -->
 <header class="header-section">
@@ -10,38 +14,28 @@
             <div class="row">
                 <div class="col-lg-2 text-center text-lg-left">
                     <!-- logo -->
-                    <a href="/welcome" class="site-logo">
-                        <img src="../../resources/img/logo.png" alt="">
+                    <a href="./index.html" class="site-logo">
+                        <img src="img/logo.png" alt="">
                     </a>
                 </div>
-                <div class="col-xl-4 col-lg-4">
+                <div class="col-xl-6 col-lg-5">
                     <form class="header-search-form">
                         <input type="text" placeholder="Search on divisima ....">
                         <button><i class="flaticon-search"></i></button>
                     </form>
                 </div>
-                <div class="col-xl-6 col-lg-5">
+                <div class="col-xl-4 col-lg-5">
                     <div class="user-panel">
-                        <c:if test="${countProductInBasket != 0}">
-                            <div class="up-item">
-                                <div class="shopping-card">
-                                    <i class="flaticon-bag"></i>
-                                    <span>${countProductInBasket}</span>
-                                </div>
-                                <a href="/cart">Shopping Cart</a>
+                        <div class="up-item">
+                            <i class="flaticon-profile"></i>
+                            <a href="#">Sign</a> In or <a href="#">Create Account</a>
+                        </div>
+                        <div class="up-item">
+                            <div class="shopping-card">
+                                <i class="flaticon-bag"></i>
+                                <span>0</span>
                             </div>
-                        </c:if>
-                        <div class="up-item">
-                            <i class="flaticon-profile"></i>
-                            <a href="/registration">Create Acc</a>
-                        </div>
-                        <div class="up-item">
-                            <i class="flaticon-profile"></i>
-                            <a href="/login">Sign In</a>
-                        </div>
-                        <div class="up-item">
-                            <i class="flaticon-profile"></i>
-                            <a href="/logout">${currentUser.username} Exit</a>
+                            <a href="#">Shopping Cart</a>
                         </div>
                     </div>
                 </div>
@@ -52,152 +46,130 @@
         <div class="container">
             <!-- menu -->
             <ul class="main-menu">
-                <li><a href="/welcome">Home</a></li>
-                <li><a href="/sortByCategory/women">Women</a></li>
-                <li><a href="/sortByCategory/men">Men</a></li>
-                <li><a href="/sortByCategory/jewelry">Jewelry
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Women</a></li>
+                <li><a href="#">Men</a></li>
+                <li><a href="#">Jewelry
                     <span class="new">New</span>
                 </a></li>
-                <li><a href="/sortByCategory/shoes">Shoes</a>
+                <li><a href="#">Shoes</a>
+                    <ul class="sub-menu">
+                        <li><a href="#">Sneakers</a></li>
+                        <li><a href="#">Sandals</a></li>
+                        <li><a href="#">Formal Shoes</a></li>
+                        <li><a href="#">Boots</a></li>
+                        <li><a href="#">Flip Flops</a></li>
+                    </ul>
                 </li>
                 <li><a href="#">Pages</a>
                     <ul class="sub-menu">
-                        <li><a href="/cart">Cart Page</a></li>
-                        <li><a href="/contact">Contact Page</a></li>
+                        <li><a href="./product.html">Product Page</a></li>
+                        <li><a href="./category.html">Category Page</a></li>
+                        <li><a href="./cart.html">Cart Page</a></li>
+                        <li><a href="./checkout.html">Checkout Page</a></li>
+                        <li><a href="./contact.html">Contact Page</a></li>
                     </ul>
                 </li>
-                <li><a href="/blog">Blog</a></li>
+                <li><a href="#">Blog</a></li>
             </ul>
         </div>
     </nav>
 </header>
 <!-- Header section end -->
 
+
 <!-- Page info -->
 <div class="page-top-info">
     <div class="container">
-        <h4>Welcome</h4>
+        <h4>Your cart</h4>
         <div class="site-pagination">
             <a href="">Home</a> /
-            <a href="">Shop</a>
+            <a href="">Your cart</a>
         </div>
     </div>
 </div>
 <!-- Page info end -->
 
-<!-- letest product section -->
-<section class="top-letest-product-section">
+
+<!-- checkout section  -->
+<section class="checkout-section spad">
     <div class="container">
-
-        <div class="section-title">
-            <h2>LATEST PRODUCTS</h2>
-        </div>
-        <div class="product-slider owl-carousel">
-            <c:forEach items="${productSortList}" var="product">
-                    <div class="product-item">
-                        <div class="pi-pic">
-                            <a href="productData/${product.id}"><img src="${product.productImg}" alt=""></a>
-                            <div class="pi-links">
-                                <div>
-                                    <c:if test="${currentUser != null && product.user.id != currentUser.id}">
-                                        <a href="<c:url value='/addLike/${currentUser.id}/${product.id}"'/>" class="wishlist-btn">
-                                            <i class="flaticon-heart"></i>
-                                            <span>${countLike}</span>
-                                        </a>
-                                    </c:if>
-
-                                    <c:if test="${currentUser != null && product.user.id != currentUser.id}">
-                                        <a href="<c:url value='/addDisLike/${currentUser.id}/${product.id}'/>" class="wishlist-btn">
-                                            <i class="flaticon-dislike"></i>
-                                        </a>
-                                    </c:if>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="pi-text">
-                            <h6>$${product.price}</h6>
-                            <p>${product.productTitle}</p>
-                        </div>
-                    </div>
-            </c:forEach>
-        </div>
-    </div>
-</section>
-<!-- letest product section end -->
-
-
-
-<!-- Product filter section -->
-<section class="product-filter-section">
-    <div class="container">
-        <div class="section-title">
-            <h2>BROWSE TOP SELLING PRODUCTS</h2>
-        </div>
-        <ul class="product-filter-menu">
-            <li><a href="/sortBySubCategory/tops">TOPS</a></li>
-            <li><a href="/sortBySubCategory/jeans">JEANS</a></li>
-            <li><a href="/sortBySubCategory/dresses">DRESSES</a></li>
-            <li><a href="/sortBySubCategory/coats">COATS</a></li>
-            <li><a href="/sortBySubCategory/jumpers">JUMPERS</a></li>
-            <li><a href="/sortBySubCategory/leggings">LEGGINGS</a></li>
-        </ul>
         <div class="row">
-            <c:forEach items="${productList}" var="product">
-                <div class="col-lg-3 col-sm-6">
-                    <div class="product-item">
-                        <div class="pi-pic">
-                            <a href="/productData/${product.id}"><img src="${product.productImg}" alt=""></a>
-                            <div class="pi-links">
-                                <div>
-                                    <c:if test="${currentUser != null && product.user.id != currentUser.id}">
-                                        <a href="<c:url value='/addLike/${currentUser.id}/${product.id}"'/>" class="wishlist-btn">
-                                            <i class="flaticon-heart"></i>
-                                        </a>
-                                    </c:if>
-
-                                    <c:if test="${currentUser != null && product.user.id != currentUser.id}">
-                                        <a href="<c:url value='/addDisLike/${currentUser.id}/${product.id}'/>" class="wishlist-btn">
-                                            <i class="flaticon-dislike"></i>
-                                        </a>
-                                    </c:if>
+            <div class="col-lg-8 order-2 order-lg-1">
+                <form:form modelAttribute="emptySuccessOrder" action="/successOrder/${currentUser.id}" class="checkout-form">
+                    <div class="cf-title">Billing Address</div>
+                    <div class="row">
+                        <div class="col-md-7">
+                            <p>*Billing Information</p>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="cf-radio-btns address-rb">
+                                <div class="cfr-item">
+                                    <input type="radio" name="pm" id="one">
+                                    <label for="one">Use my regular address</label>
+                                </div>
+                                <div class="cfr-item">
+                                    <input type="radio" name="pm" id="two">
+                                    <label for="two">Use a different address</label>
                                 </div>
                             </div>
                         </div>
-                        <div class="pi-text">
-                            <h6>$${product.price}</h6>
-                            <p>${product.productTitle} </p>
+                    </div>
+                    <div class="row address-inputs">
+                        <div class="col-md-12">
+                            <form:input path="address" type="text" placeholder="Address"/>
+                            <form:input path="city" type="text" placeholder="City"/>
+                            <form:input path="country" type="text" placeholder="Country"/>
+                        </div>
+                        <div class="col-md-6">
+                            <form:input path="index" type="text" placeholder="Zip code"/>
+                        </div>
+                        <div class="col-md-6">
+                            <form:input path="phone" type="text" placeholder="Phone no."/>
                         </div>
                     </div>
+                    <div class="cf-title">Payment</div>
+                    <ul class="payment-list">
+                        <li>Paypal<a href="#"><img src="../../resources/img/paypal.png" alt=""></a></li>
+                        <li>Credit / Debit card<a href="#"><img src="../../resources/img/mastercart.png" alt=""></a></li>
+                        <li>Pay when you get the package</li>
+                    </ul>
+                    <%--<a href="<c:url value='/success/${currentUser.id}"'/>" class="site-btn">Place order</a>--%>
+
+                    <input type="submit" value="Place order" class="site-btn">
+
+                </form:form>
+            </div>
+
+            <div class="col-lg-4 order-1 order-lg-2">
+                <div class="checkout-cart">
+                    <h3>Your Cart</h3>
+                    <ul class="product-list">
+                        <c:forEach items="${productListInCurt}" var="purchase">
+                            <li>
+                                <div class="pl-thumb"><img src="${purchase.product.productImg}" alt=""></div>
+                                <h6>${purchase.product.productTitle}</h6>
+                                <p>$ ${purchase.product.price} | count ${purchase.count}</p>
+                            </li>
+                        </c:forEach>
+                    </ul>
+                    <ul class="price-list">
+                        <li>Total<span>$ ${amountPrice}</span></li>
+                        <li>Shipping<span>free</span></li>
+                        <li class="total">Total<span>$ ${amountPrice}</span></li>
+                    </ul>
                 </div>
-            </c:forEach>
-        </div>
-        <div class="text-center pt-5">
-            <button class="site-btn sb-line sb-dark">LOAD MORE</button>
+            </div>
         </div>
     </div>
 </section>
-<!-- Product filter section end -->
-
-
-<!-- Banner section -->
-<section class="banner-section">
-    <div class="container">
-        <div class="banner set-bg" data-setbg="img/banner-bg.jpg">
-            <div class="tag-new">NEW</div>
-            <span>New Arrivals</span>
-            <h2>STRIPED SHIRTS</h2>
-            <a href="#" class="site-btn">SHOP NOW</a>
-        </div>
-    </div>
-</section>
-<!-- Banner section end  -->
-
+<!-- checkout section end -->
 
 <!-- Footer section -->
 <section class="footer-section">
     <div class="container">
         <div class="footer-logo text-center">
-            <a href="index.html"><img src="../../resources/img/logo-light.png" alt=""></a>
+            <a href="index.html"><img src="./img/logo-light.png" alt=""></a>
         </div>
         <div class="row">
             <div class="col-lg-3 col-sm-6">
@@ -293,4 +265,7 @@
     </div>
 </section>
 <!-- Footer section end -->
-<%@include file="tmp/footer.jsp"%>
+
+
+
+<%@include file="tmp/footer.jsp" %>

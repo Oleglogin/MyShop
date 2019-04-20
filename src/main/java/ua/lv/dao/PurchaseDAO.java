@@ -1,6 +1,7 @@
 package ua.lv.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import ua.lv.entity.Product;
@@ -21,4 +22,12 @@ public interface PurchaseDAO extends JpaRepository<Purchase, Integer>{
 
     @Query("select count (product.id) from Purchase purchase where purchase.user.id=:id")
     int countProductInBasket(@Param("id")int id);
+
+    @Modifying
+    @Query("update Purchase p set p.success=:id where p.user.id=:id")
+    void success(@Param("id")int id);
+
+    @Modifying
+    @Query("update Purchase p set p.successOrder=:number where p.user.id=:id")
+    void successOrder(@Param("id") int id,@Param("number")int number);
 }

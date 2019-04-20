@@ -10,10 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import ua.lv.entity.Product;
 import ua.lv.entity.Purchase;
 import ua.lv.entity.User;
-import ua.lv.service.PreviewService;
-import ua.lv.service.ProductService;
-import ua.lv.service.PurchaseService;
-import ua.lv.service.UserService;
+import ua.lv.service.*;
 
 import java.security.Principal;
 
@@ -30,6 +27,8 @@ public class ProductController {
     PurchaseService purchaseService;
     @Autowired
     PreviewService previewService;
+    @Autowired
+    LikesService likesService;
 
     @RequestMapping(value = "/product/add",method = RequestMethod.POST)
     public String saveProduct(@ModelAttribute("emptyProduct")Product product,
@@ -71,8 +70,8 @@ public class ProductController {
         model.addAttribute("product", productService.findProductById(id));
         model.addAttribute("productSortList",productService.productSortList());
         model.addAttribute("previewList", previewService.prewievList());
-        model.addAttribute("elsePhoto",previewService.elsePhoto(id));
-
+        model.addAttribute("countLike",likesService.countLike(id));
+        model.addAttribute("CountDisLike",likesService.disLikeCount(id));
         return "product";
     }
     @RequestMapping(value = "sortByCategory/{category}", method = RequestMethod.GET)
@@ -81,9 +80,7 @@ public class ProductController {
         String principalName = principal.getName();
         User byUserName = userService.findByUserName(principalName);
         model.addAttribute("currentUser", byUserName);
-
         model.addAttribute("countProductInBasket",purchaseService.countProductInBasket(byUserName.getId()));
-
         model.addAttribute("productList",productService.sortByCategory(category));
         return "welcome";
     }
@@ -95,7 +92,6 @@ public class ProductController {
         User byUserName = userService.findByUserName(principalName);
         model.addAttribute("currentUser", byUserName);
         model.addAttribute("countProductInBasket",purchaseService.countProductInBasket(byUserName.getId()));
-
         model.addAttribute("productList",productService.sortBySubCategory(category));
         return "welcome";
     }

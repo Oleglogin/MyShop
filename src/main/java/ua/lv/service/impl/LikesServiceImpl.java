@@ -39,12 +39,22 @@ public class LikesServiceImpl implements LikesService {
     }
 
     @Override
-    public void deleteL(int id) {
-        likeDAO.deleteLike(id);
+    public int countLike(int id) {
+        int lc = likeDAO.countLike(id);
+        if(lc==0){
+            return 0;
+        }else{
+            return likeDAO.countLike(id);
+        }
     }
 
-//    @Override
-//    public List<Likes> findLikesByProductId(int userId, int productId) {
-//        return likeDAO.findLikesByProductIdAndUserId(userId,productId);
-//    }
+    @Override
+    public int disLikeCount(int id) {
+        int lc = likeDAO.countDisLike(id);
+        if(lc==0){
+            return 0;
+        }else{
+            return likeDAO.countDisLike(id);
+        }
+    }
 }

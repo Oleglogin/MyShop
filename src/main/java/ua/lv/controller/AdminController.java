@@ -49,7 +49,6 @@ public class AdminController {
         String principalName = principal.getName();
         User byUserName = userService.findByUserName(principalName);
         model.addAttribute("currentUser", byUserName);
-//        model.addAttribute("emptyPurchase", new Purchase());
         model.addAttribute("countProductInBasket",purchaseService.countProductInBasket(byUserName.getId()));
         model.addAttribute("product", productService.findProductById(id));
         model.addAttribute("elsePhoto",previewService.elsePhoto(id));

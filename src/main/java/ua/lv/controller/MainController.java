@@ -6,10 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import ua.lv.entity.Likes;
 import ua.lv.entity.User;
-import ua.lv.service.PreviewService;
-import ua.lv.service.ProductService;
-import ua.lv.service.PurchaseService;
-import ua.lv.service.UserService;
+import ua.lv.service.*;
 
 import java.security.Principal;
 
@@ -27,6 +24,8 @@ public class MainController {
     PurchaseService purchaseService;
     @Autowired
     PreviewService previewService;
+    @Autowired
+    LikesService likesService;
 
 
 
@@ -48,7 +47,6 @@ public class MainController {
         model.addAttribute("productList", productService.productList());
         model.addAttribute("previewList",previewService.prewievList() );
         model.addAttribute("countProductInBasket", purchaseService.countProductInBasket(byUserName.getId()));
-
         model.addAttribute("emptyLike", new Likes());
         return "/welcome";
     }
