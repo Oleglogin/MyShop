@@ -67,4 +67,14 @@ public class ProductServiceImpl implements ProductService {
         });
         return sortList;
     }
+
+    @Override
+    public void toLike(int id, int cl) {
+        productDAO.toLike(id,cl);
+    }
+
+    @Override
+    public void disLike(int id, int cdl) {
+        productDAO.disLike(id,cdl);
+    }
 }

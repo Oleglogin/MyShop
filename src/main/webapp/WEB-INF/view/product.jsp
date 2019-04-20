@@ -115,9 +115,7 @@
                             <a href="<c:url value='/addLike/${currentUser.id}/${product.id}"'/>" class="wishlist-btn">
                                 <div class="shopping-card">
                                     <i class="flaticon-heart"></i>
-                                    <c:if test="${!empty countLike}">
-                                        <span>${countLike}</span>
-                                    </c:if>
+                                        <span>${product.tulike}</span>
                                 </div>
                             </a>
                         </c:if>
@@ -125,9 +123,7 @@
                             <a href="<c:url value='/addDisLike/${currentUser.id}/${product.id}'/>" class="wishlist-btn">
                                 <div class="shopping-card">
                                     <i class="flaticon-dislike"></i>
-                                    <c:if test="${!empty CountDisLike}">
-                                        <span>${CountDisLike}</span>
-                                    </c:if>
+                                        <span>${product.disLike}</span>
                                 </div>
                             </a>
                         </c:if>

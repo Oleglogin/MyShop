@@ -1,6 +1,7 @@
 package ua.lv.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import ua.lv.entity.Product;
@@ -17,4 +18,15 @@ public interface ProductDAO extends JpaRepository<Product, Integer> {
 
     @Query("from Product product where product.subCategory=:category")
     List<Product> sortBySubCategory(@Param("category")String category);
+
+    @Modifying
+    @Query("update Product p  set p.tulike=:cl where p.id=:id ")
+    void toLike(@Param("id")int id,@Param("cl")int cl);
+
+    @Modifying
+    @Query("update Product p  set p.disLike=:cdl where p.id=:id")
+    void disLike(@Param("id")int id,@Param("cdl")int cdl);
+
+
+
 }

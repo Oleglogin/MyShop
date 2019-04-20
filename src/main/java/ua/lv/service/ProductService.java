@@ -15,4 +15,7 @@ public interface ProductService {
     Product findProductById(int id);
     List<Product> sortByCategory(String category);
     List<Product> sortBySubCategory(String category);
+
+    void toLike(int id,int cl);
+    void disLike(int id,int cdl);
 }

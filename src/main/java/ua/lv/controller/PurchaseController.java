@@ -55,7 +55,7 @@ public class PurchaseController {
 
     @RequestMapping(value = "success/{id}")
     public String success(@PathVariable("id")int id){
-        purchaseService.success(id);
+        purchaseService.success(id,1);
         return "redirect:/checkout";
     }
 
@@ -63,7 +63,7 @@ public class PurchaseController {
     public String successOrder(@PathVariable("id")int id,
                                @ModelAttribute("emptySuccessOrder")SuccessOrder successOrder){
         successOrderService.addOrder(successOrder);
-        purchaseService.successorder(id,1);
+        purchaseService.successOrder(id,1);
         return "redirect:/checkout";
     }
 }

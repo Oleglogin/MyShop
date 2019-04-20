@@ -70,8 +70,6 @@ public class ProductController {
         model.addAttribute("product", productService.findProductById(id));
         model.addAttribute("productSortList",productService.productSortList());
         model.addAttribute("previewList", previewService.prewievList());
-        model.addAttribute("countLike",likesService.countLike(id));
-        model.addAttribute("CountDisLike",likesService.disLikeCount(id));
         return "product";
     }
     @RequestMapping(value = "sortByCategory/{category}", method = RequestMethod.GET)

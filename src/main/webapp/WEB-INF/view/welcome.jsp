@@ -116,7 +116,9 @@
                         </div>
                         <div class="pi-text">
                             <h6>$${product.price}</h6>
+                            <p>like-${product.tulike} disLikes-${product.disLike}</p>
                             <p>${product.productTitle}</p>
+
                         </div>
                     </div>
             </c:forEach>
@@ -151,13 +153,18 @@
                                 <div>
                                     <c:if test="${currentUser != null && product.user.id != currentUser.id}">
                                         <a href="<c:url value='/addLike/${currentUser.id}/${product.id}"'/>" class="wishlist-btn">
-                                            <i class="flaticon-heart"></i>
+                                            <div class="shopping-card">
+                                                <i class="flaticon-heart"></i>
+                                                <span>${product.tulike}</span>
+                                            </div>
                                         </a>
                                     </c:if>
-
                                     <c:if test="${currentUser != null && product.user.id != currentUser.id}">
                                         <a href="<c:url value='/addDisLike/${currentUser.id}/${product.id}'/>" class="wishlist-btn">
-                                            <i class="flaticon-dislike"></i>
+                                            <div class="shopping-card">
+                                                <i class="flaticon-dislike"></i>
+                                                <span>${product.disLike}</span>
+                                            </div>
                                         </a>
                                     </c:if>
                                 </div>

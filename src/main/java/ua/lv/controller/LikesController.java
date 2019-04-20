@@ -44,6 +44,8 @@ public class LikesController {
 
         likes.setLikeCount(likes.getLikeCount() + 1);
         likeService.addLike(likes);
+        int cl = product.getTulike();
+        productService.toLike(ProductId,cl+1);
         return "redirect:/welcome";
     }
     @RequestMapping(value ="/addDisLike/{currentUser.id}/{product.id}")
@@ -62,6 +64,8 @@ public class LikesController {
 
         likes.setDisLikeCount(likes.getDisLikeCount()+ 1);
         likeService.addLike(likes);
+        int cdl = product.getDisLike();
+        productService.disLike(ProductId,cdl+1);
         return "redirect:/welcome";
     }
 }

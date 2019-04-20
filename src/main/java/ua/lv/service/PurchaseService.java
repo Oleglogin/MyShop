@@ -15,6 +15,6 @@ public interface PurchaseService {
     List<Purchase> productListInCurt(int id);
     int amountInCart(int id);
     int countProductInBasket(int id);
-    void success(int id);
-    void successorder(int id, int number);
+    void success(int id, int number);
+    void successOrder(int id, int number);
 }
