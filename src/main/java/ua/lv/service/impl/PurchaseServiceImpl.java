@@ -61,4 +61,9 @@ public class PurchaseServiceImpl implements PurchaseService {
     public void successOrder(int id, int number) {
         purchaseDAO.successOrder(id,number);
     }
+
+    @Override
+    public void check(int id, int number) {
+        purchaseDAO.check(id,number);
+    }
 }

@@ -59,4 +59,17 @@ public class UserAddController {
         userAddService.addUserSave(userAdd);
         return "redirect:/welcome";
     }
+
+    @RequestMapping(value = "/user/{id}")
+    public String toUser(@PathVariable("id")int id,
+                         Model model,Principal principal){
+        String principalName = principal.getName();
+        User byUserName = userService.findByUserName(principalName);
+        model.addAttribute("currentUser", byUserName);
+
+        model.addAttribute("purchaseList", purchaseService.purchaseList());
+        model.addAttribute("userAdd", userAddService.findOne(id));
+        return "/adminOrder";
+
+    }
 }

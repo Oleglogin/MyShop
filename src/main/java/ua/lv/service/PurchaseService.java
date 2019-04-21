@@ -17,4 +17,5 @@ public interface PurchaseService {
     int countProductInBasket(int id, int number);
     void success(int id, int number);
     void successOrder(int id, int number);
+    void check(int id, int number);
 }

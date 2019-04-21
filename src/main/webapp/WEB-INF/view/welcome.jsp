@@ -65,6 +65,7 @@
                         <li><a href="/cart">Cart Page</a></li>
                         <li><a href="/contact">Contact Page</a></li>
                         <li><a href="/admin">Admin Page</a></li>
+                        <li><a href="/adminOrder">Admin Order</a></li>
                     </ul>
                 </li>
 

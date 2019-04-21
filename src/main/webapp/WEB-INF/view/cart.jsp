@@ -150,7 +150,7 @@
                 </form>
                 <a href="<c:url value='/success/${currentUser.id}"'/>" class="site-btn">Proceed to checkout</a>
                 <%--<a href="" class="site-btn">Proceed to checkout</a>--%>
-                <a href="" class="site-btn sb-dark">Continue shopping</a>
+                <a href="/welcome" class="site-btn sb-dark">Continue shopping</a>
             </div>
         </div>
     </div>

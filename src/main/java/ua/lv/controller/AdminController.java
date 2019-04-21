@@ -56,4 +56,16 @@ public class AdminController {
 
     }
 
+    @RequestMapping(value = "/adminOrder", method = RequestMethod.GET)
+    public String toAdminOrder(Model model, Principal principal){
+        String principalName = principal.getName();
+        User byUserName = userService.findByUserName(principalName);
+        model.addAttribute("currentUser", byUserName);
+
+        model.addAttribute("purchaseList", purchaseService.purchaseList());
+//        model.addAttribute("amountPrice", purchaseService.amountInCart(byUserName.getId(),0));
+
+        return "/adminOrder";
+    }
+
 }

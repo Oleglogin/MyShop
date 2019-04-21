@@ -31,5 +31,9 @@ public interface PurchaseDAO extends JpaRepository<Purchase, Integer>{
     @Query("update Purchase p set p.successOrder=:number where p.user.id=:id")
     void successOrder(@Param("id") int id,@Param("number")int number);
 
+    @Modifying
+    @Query("update Purchase p set p.checkOrder=:number where p.id=:id")
+    void check(@Param("id") int id,@Param("number")int number);
+
 
 }

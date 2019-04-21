@@ -16,6 +16,7 @@ public class Purchase {
     private int successOrder;
     private int size;
     private String bikeSize;
+    private int checkOrder;
 
 
 
@@ -112,6 +113,14 @@ public class Purchase {
 
     public void setBikeSize(String bikeSize) {
         this.bikeSize = bikeSize;
+    }
+
+    public int getCheckOrder() {
+        return checkOrder;
+    }
+
+    public void setCheckOrder(int checkOrder) {
+        this.checkOrder = checkOrder;
     }
 
     @Override
