@@ -18,4 +18,8 @@ public interface ProductService {
 
     void toLike(int id,int cl);
     void disLike(int id,int cdl);
+
+    List<Product>expensive();
+    List<Product>poor();
+    List<Product>popular();
 }

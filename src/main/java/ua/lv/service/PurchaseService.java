@@ -13,8 +13,8 @@ public interface PurchaseService {
     List<Purchase> purchaseList();
     Purchase findPurchaseById(int id);
     List<Purchase> productListInCurt(int id);
-    int amountInCart(int id);
-    int countProductInBasket(int id);
+    int amountInCart(int id,int number);
+    int countProductInBasket(int id, int number);
     void success(int id, int number);
     void successOrder(int id, int number);
 }

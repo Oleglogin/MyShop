@@ -13,28 +13,38 @@
             <div class="row">
                 <div class="col-lg-2 text-center text-lg-left">
                     <!-- logo -->
-                    <a href="welcome" class="site-logo">
+                    <a href="/welcome" class="site-logo">
                         <img src="../../resources/img/logo.png" alt="">
                     </a>
                 </div>
-                <div class="col-xl-6 col-lg-5">
+                <div class="col-xl-4 col-lg-4">
                     <form class="header-search-form">
                         <input type="text" placeholder="Search on divisima ....">
                         <button><i class="flaticon-search"></i></button>
                     </form>
                 </div>
-                <div class="col-xl-4 col-lg-5">
+                <div class="col-xl-6 col-lg-5">
                     <div class="user-panel">
+                        <c:if test="${countProductInBasket != 0}">
+                            <div class="up-item">
+                                <div class="shopping-card">
+                                    <i class="flaticon-bag"></i>
+                                    <span>${countProductInBasket}</span>
+                                </div>
+                                <a href="/cart">Shopping Cart</a>
+                            </div>
+                        </c:if>
                         <div class="up-item">
                             <i class="flaticon-profile"></i>
-                            <a href="#">Sign</a> In or <a href="#">Create Account</a>
+                            <a href="/registration">Create Acc</a>
                         </div>
                         <div class="up-item">
-                            <div class="shopping-card">
-                                <i class="flaticon-bag"></i>
-                                <span>0</span>
-                            </div>
-                            <a href="#">Shopping Cart</a>
+                            <i class="flaticon-profile"></i>
+                            <a href="/login">Sign In</a>
+                        </div>
+                        <div class="up-item">
+                            <i class="flaticon-profile"></i>
+                            <a href="/logout">${currentUser.username} Exit</a>
                         </div>
                     </div>
                 </div>
@@ -45,37 +55,29 @@
         <div class="container">
             <!-- menu -->
             <ul class="main-menu">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Women</a></li>
-                <li><a href="#">Men</a></li>
-                <li><a href="#">Jewelry
+                <li><a href="/welcome">Home</a></li>
+                <li><a href="/sortByCategory/men">Men's</a></li>
+                <li><a href="/sortByCategory/women">Women's</a></li>
+
+                <li><a href="/sortByCategory/kid">Kid's
                     <span class="new">New</span>
                 </a></li>
-                <li><a href="#">Shoes</a>
-                    <ul class="sub-menu">
-                        <li><a href="#">Sneakers</a></li>
-                        <li><a href="#">Sandals</a></li>
-                        <li><a href="#">Formal Shoes</a></li>
-                        <li><a href="#">Boots</a></li>
-                        <li><a href="#">Flip Flops</a></li>
-                    </ul>
+
+                <li><a href="/sortByCategory/accessories">Accessories</a>
                 </li>
                 <li><a href="#">Pages</a>
                     <ul class="sub-menu">
-                        <li><a href="./product.html">Product Page</a></li>
-                        <li><a href="./category.html">Category Page</a></li>
-                        <li><a href="./cart.html">Cart Page</a></li>
-                        <li><a href="./checkout.html">Checkout Page</a></li>
-                        <li><a href="./contact.html">Contact Page</a></li>
+                        <li><a href="/cart">Cart Page</a></li>
+                        <li><a href="/contact">Contact Page</a></li>
+                        <li><a href="/admin">Admin Page</a></li>
                     </ul>
                 </li>
-                <li><a href="#">Blog</a></li>
+                <li><a href="/blog">Blog</a></li>
             </ul>
         </div>
     </nav>
 </header>
 <!-- Header section end -->
-
 
 <!-- admin section end -->
 <section class="cart-section spad">
@@ -89,8 +91,9 @@
                             <thead>
                                 <tr>
                                     <th class="product-th">Product</th>
+                                    <th class="product-th">Model</th>
                                     <th class="size-th">Category</th>
-                                    <th class="size-th">subCategory</th>
+                                    <th class="size-th">Category-2</th>
                                     <th class="total-th">Edit</th>
                                     <th class="total-th">Delete</th>
                                 </tr>
@@ -101,13 +104,13 @@
                                         <td class="product-col">
                                             <a href="admin2/${product.id}"><img src="${product.productImg}" alt="Product"></a>
                                             <div class="pc-title">
-                                                <h4>${product.productTitle}</h4>
+                                                <h4>${product.productBrand}</h4>
                                                 <p>$ ${product.price}</p>
                                             </div>
                                         </td>
-
+                                        <td class="size-col"><h4>${product.productModel}</h4></td>
                                         <td class="size-col"><h4>${product.category}</h4></td>
-                                        <td class="total-col"><h4>${product.subCategory}</h4></td>
+                                        <td class="size-col"><h4>${product.subCategory}</h4></td>
                                         <td class="column-6"><a href="<c:url value='/productEdit/${product.id}'/> ">Edit</a></td>
                                         <td class="column-7"><a href="<c:url value='/productRemove/${product.id}'/> ">Delete</a></td>
                                     </tr>
@@ -116,7 +119,7 @@
                         </table>
                     </div>
                     <div class="total-cost">
-                        <h6>Total <span>$99.90</span></h6>
+                        <h6>Total <span></span></h6>
                     </div>
                 </div>
             </div>
@@ -124,36 +127,37 @@
                 <c:url value="/product/add" var="addProduct"/>
                 <form:form action="${addProduct}" modelAttribute="emptyProduct" enctype="multipart/form-data">
                     <div class="promo-code-form">
-                        <form:input  path="productTitle" class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="state" placeholder="Name"/>
+                        <form:input  path="productBrand" class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="state" placeholder="Brand"/>
                     </div>
                     <div class="promo-code-form">
-                        <form:input path="description" class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="postcode" placeholder="description"/>
+                        <form:input  path="productModel" class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="state" placeholder="Model"/>
+                    </div>
+                    <div class="promo-code-form">
+                        <form:textarea path="description" class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="postcode" placeholder="description"/>
                     </div>
                     <div class="promo-code-form">
                         <form:input path="price" class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="postcode" placeholder="price"/>
-                    </div>
-                    <div class="promo-code-form">
-                        <form:input path="rate" class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="postcode" placeholder="rate"/>
                     </div>
                     <div class="promo-code-form">
                         <input type="file" name="productImg" class="promo-code-form" formenctype="multipart/form-data" id="exampleformControlFile1">
                     </div>
                     <div class="promo-code-form">
                         <form:select class="js-select2" name="time" path="category">
-                            <option>preview</option>
                             <option>men</option>
                             <option>women</option>
-                            <option>shoes</option>
-                            <option>jewelry</option>
+                            <option>kid</option>
+                            <option>accessories</option>
                         </form:select>
 
                         <form:select class="js-select2" name="time" path="subCategory">
-                            <option>tops</option>
-                            <option>jeans</option>
-                            <option>coats</option>
-                            <option>dresses</option>
-                            <option>jumpers</option>
-                            <option>leggings</option>
+                            <option>hardTail</option>
+                            <option>roadBike</option>
+                            <option>CityBike</option>
+                            <option>Enduro</option>
+                        </form:select>
+                        <form:select path="available" class="s-select2" name="available">
+                            <option>true</option>
+                            <option>false</option>
                         </form:select>
                     </div>
 
@@ -203,7 +207,7 @@
                         </table>
                     </div>
                     <div class="total-cost">
-                        <h6>Total <span>$99.90</span></h6>
+                        <h6>Total <span></span></h6>
                     </div>
                 </div>
             </div>
@@ -220,12 +224,16 @@
 
 
                     <div class="promo-code-form">
+                        <form:textarea path="previewDescription" class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="postcode" placeholder="description"/>
+                    </div>
+                    <div class="promo-code-form">
                         <input type="file" name="previewImg" class="promo-code-form" formenctype="multipart/form-data" id="exampleformControlFile1">
                     </div>
                     <div class="promo-code-form">
                         <form:select class="js-select2" name="time" path="previewCategory">
                             <option>main</option>
                             <option>subMain</option>
+                            <option>baner</option>
                         </form:select>
                     </div>
 

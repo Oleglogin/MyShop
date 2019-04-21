@@ -32,8 +32,8 @@ public class CurtController {
         model.addAttribute("currentUser", byUserName);
 
         model.addAttribute("productListInCurt", purchaseService.productListInCurt(byUserName.getId()));
-        model.addAttribute("amountPrice", purchaseService.amountInCart(byUserName.getId()));
-        model.addAttribute("countProductInBasket",purchaseService.countProductInBasket(byUserName.getId()));
+        model.addAttribute("amountPrice", purchaseService.amountInCart(byUserName.getId(),0));
+        model.addAttribute("countProductInBasket",purchaseService.countProductInBasket(byUserName.getId(),0));
         model.addAttribute("productSortList",productService.productSortList());
 
         return "cart";

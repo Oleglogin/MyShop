@@ -2,11 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="tmp/header.jsp" %>
 <!-- Page Preloder -->
-<div id="preloder">
-    <div class="loader"></div>
-</div>
-
-<!-- Header section -->
+!-- Header section -->
 <header class="header-section">
     <div class="header-top">
         <div class="container">
@@ -17,24 +13,34 @@
                         <img src="../../resources/img/logo.png" alt="">
                     </a>
                 </div>
-                <div class="col-xl-6 col-lg-5">
+                <div class="col-xl-4 col-lg-4">
                     <form class="header-search-form">
                         <input type="text" placeholder="Search on divisima ....">
                         <button><i class="flaticon-search"></i></button>
                     </form>
                 </div>
-                <div class="col-xl-4 col-lg-5">
+                <div class="col-xl-6 col-lg-5">
                     <div class="user-panel">
+                        <c:if test="${countProductInBasket != 0}">
+                            <div class="up-item">
+                                <div class="shopping-card">
+                                    <i class="flaticon-bag"></i>
+                                    <span>${countProductInBasket}</span>
+                                </div>
+                                <a href="/cart">Shopping Cart</a>
+                            </div>
+                        </c:if>
                         <div class="up-item">
                             <i class="flaticon-profile"></i>
-                            <a href="#">Sign</a> In or <a href="#">Create Account</a>
+                            <a href="/registration">Create Acc</a>
                         </div>
                         <div class="up-item">
-                            <div class="shopping-card">
-                                <i class="flaticon-bag"></i>
-                                <span>0</span>
-                            </div>
-                            <a href="#">Shopping Cart</a>
+                            <i class="flaticon-profile"></i>
+                            <a href="/login">Sign In</a>
+                        </div>
+                        <div class="up-item">
+                            <i class="flaticon-profile"></i>
+                            <a href="/logout">${currentUser.username} Exit</a>
                         </div>
                     </div>
                 </div>
@@ -45,31 +51,24 @@
         <div class="container">
             <!-- menu -->
             <ul class="main-menu">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Women</a></li>
-                <li><a href="#">Men</a></li>
-                <li><a href="#">Jewelry
+                <li><a href="/welcome">Home</a></li>
+                <li><a href="/sortByCategory/men">Men's</a></li>
+                <li><a href="/sortByCategory/women">Women's</a></li>
+
+                <li><a href="/sortByCategory/kid">Kid's
                     <span class="new">New</span>
                 </a></li>
-                <li><a href="#">Shoes</a>
-                    <ul class="sub-menu">
-                        <li><a href="#">Sneakers</a></li>
-                        <li><a href="#">Sandals</a></li>
-                        <li><a href="#">Formal Shoes</a></li>
-                        <li><a href="#">Boots</a></li>
-                        <li><a href="#">Flip Flops</a></li>
-                    </ul>
+
+                <li><a href="/sortByCategory/accessories">Accessories</a>
                 </li>
                 <li><a href="#">Pages</a>
                     <ul class="sub-menu">
-                        <li><a href="./product.html">Product Page</a></li>
-                        <li><a href="./category.html">Category Page</a></li>
-                        <li><a href="./cart.html">Cart Page</a></li>
-                        <li><a href="./checkout.html">Checkout Page</a></li>
-                        <li><a href="./contact.html">Contact Page</a></li>
+                        <li><a href="/cart">Cart Page</a></li>
+                        <li><a href="/contact">Contact Page</a></li>
+                        <li><a href="/admin">Admin Page</a></li>
                     </ul>
                 </li>
-                <li><a href="#">Blog</a></li>
+                <li><a href="/blog">Blog</a></li>
             </ul>
         </div>
     </nav>
@@ -77,12 +76,13 @@
 <!-- Header section end -->
 
 
+
 <!-- Page info -->
 <div class="page-top-info">
     <div class="container">
         <h4>Category PAge</h4>
         <div class="site-pagination">
-            <a href="">Home</a> /
+            <a href="">Home</a>
             <a href="">Shop</a>
         </div>
     </div>
@@ -108,9 +108,9 @@
                 </div>
             </div>
             <div class="col-lg-6 product-details">
-                <h2 class="p-title">${product.productTitle}</h2>
+                <h2 class="p-title">${product.productBrand}</h2>
                 <h3 class="p-price">$${product.price}</h3>
-                <h4 class="p-stock">Available: <span>In Stock</span></h4>
+                <h4 class="p-stock">Available: <span>${product.available}</span></h4>
                 <div class="p-rating">
                     <i class="fa fa-star-o"></i>
                     <i class="fa fa-star-o"></i>
@@ -140,10 +140,7 @@
                         </div>
                         <div id="collapse1" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                             <div class="panel-body">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra tempor so dales. Phasellus sagittis auctor gravida. Integer bibendum sodales arcu id te mpus. Ut consectetur lacus leo, non scelerisque nulla euismod nec.</p>
-                                <p>Approx length 66cm/26" (Based on a UK size 8 sample)</p>
-                                <p>Mixed fibres</p>
-                                <p>The Model wears a UK size 8/ EU size 36/ US size 4 and her height is 5'8"</p>
+                                <p>${product.description}</p>
                             </div>
                         </div>
                     </div>
@@ -153,8 +150,7 @@
                         </div>
                         <div id="collapse2" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                             <div class="panel-body">
-                                <img src="./img/cards.png" alt="">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra tempor so dales. Phasellus sagittis auctor gravida. Integer bibendum sodales arcu id te mpus. Ut consectetur lacus leo, non scelerisque nulla euismod nec.</p>
+                                <img src="../../resources/img/cards.png" alt="">
                             </div>
                         </div>
                     </div>
@@ -187,19 +183,18 @@
 
 
 
-
 <!-- Footer section -->
 <section class="footer-section">
     <div class="container">
         <div class="footer-logo text-center">
-            <a href="index.html"><img src="./img/logo-light.png" alt=""></a>
+            <a href="/welcome"><img src="../../resources/img/logo-light.png" alt=""></a>
         </div>
         <div class="row">
             <div class="col-lg-3 col-sm-6">
                 <div class="footer-widget about-widget">
                     <h2>About</h2>
                     <p>Donec vitae purus nunc. Morbi faucibus erat sit amet congue mattis. Nullam frin-gilla faucibus urna, id dapibus erat iaculis ut. Integer ac sem.</p>
-                    <img src="img/cards.png" alt="">
+                    <img src="../../resources/img/cards.png" alt="">
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6">
@@ -229,8 +224,8 @@
                         <div class="lp-item">
                             <div class="lp-thumb set-bg" data-setbg="img/blog-thumbs/1.jpg"></div>
                             <div class="lp-content">
-                                <h6>what shoes to wear</h6>
-                                <span>Oct 21, 2018</span>
+                                <h6>trends this year</h6>
+                                <span>march 21, 2019</span>
                                 <a href="#" class="readmore">Read More</a>
                             </div>
                         </div>
@@ -238,7 +233,7 @@
                             <div class="lp-thumb set-bg" data-setbg="img/blog-thumbs/2.jpg"></div>
                             <div class="lp-content">
                                 <h6>trends this year</h6>
-                                <span>Oct 21, 2018</span>
+                                <span>march 21, 2019</span>
                                 <a href="#" class="readmore">Read More</a>
                             </div>
                         </div>
@@ -254,15 +249,15 @@
                     </div>
                     <div class="con-info">
                         <span>B.</span>
-                        <p>1481 Creekside Lane  Avila Beach, CA 93424, P.O. BOX 68 </p>
+                        <p>1481 Login Oleg  Lviv , ua 79060, P.O. BOX 68 </p>
                     </div>
                     <div class="con-info">
                         <span>T.</span>
-                        <p>+53 345 7953 32453</p>
+                        <p>+3 8067 297 47 91</p>
                     </div>
                     <div class="con-info">
                         <span>E.</span>
-                        <p>office@youremail.com</p>
+                        <p>loginoleg123@gmail.com</p>
                     </div>
                 </div>
             </div>
@@ -274,14 +269,14 @@
                 <a href="" class="instagram"><i class="fa fa-instagram"></i><span>instagram</span></a>
                 <a href="" class="google-plus"><i class="fa fa-google-plus"></i><span>g+plus</span></a>
                 <a href="" class="pinterest"><i class="fa fa-pinterest"></i><span>pinterest</span></a>
-                <a href="" class="facebook"><i class="fa fa-facebook"></i><span>facebook</span></a>
+                <a href="https://www.facebook.com/profile.php?id=100000592606026&ref=bookmarks" class="facebook"><i class="fa fa-facebook"></i><span>facebook</span></a>
                 <a href="" class="twitter"><i class="fa fa-twitter"></i><span>twitter</span></a>
                 <a href="" class="youtube"><i class="fa fa-youtube"></i><span>youtube</span></a>
                 <a href="" class="tumblr"><i class="fa fa-tumblr-square"></i><span>tumblr</span></a>
             </div>
 
             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            <p class="text-white text-center mt-5">Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a></p>
+            <p class="text-white text-center mt-5">Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Login</a></p>
             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 
         </div>

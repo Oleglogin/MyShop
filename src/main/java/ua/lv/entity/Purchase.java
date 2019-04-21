@@ -15,7 +15,7 @@ public class Purchase {
     private int success;
     private int successOrder;
     private int size;
-    private String clotheSize;
+    private String bikeSize;
 
 
 
@@ -93,13 +93,6 @@ public class Purchase {
         this.size = size;
     }
 
-    public String getClotheSize() {
-        return clotheSize;
-    }
-
-    public void setClotheSize(String clotheSize) {
-        this.clotheSize = clotheSize;
-    }
 
     public int getSuccess() {
         return success;
@@ -111,6 +104,14 @@ public class Purchase {
 
     public void setSuccessOrder(int successOrder) {
         this.successOrder = successOrder;
+    }
+
+    public String getBikeSize() {
+        return bikeSize;
+    }
+
+    public void setBikeSize(String bikeSize) {
+        this.bikeSize = bikeSize;
     }
 
     @Override

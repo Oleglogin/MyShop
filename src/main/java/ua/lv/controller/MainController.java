@@ -42,11 +42,10 @@ public class MainController {
         String principalName = principal.getName();
         User byUserName = userService.findByUserName(principalName);
         model.addAttribute("currentUser", byUserName);
-
         model.addAttribute("productSortList",productService.productSortList());
         model.addAttribute("productList", productService.productList());
-        model.addAttribute("previewList",previewService.prewievList() );
-        model.addAttribute("countProductInBasket", purchaseService.countProductInBasket(byUserName.getId()));
+        model.addAttribute("previewList",previewService.prewievList());;
+        model.addAttribute("countProductInBasket", purchaseService.countProductInBasket(byUserName.getId(),0));
         model.addAttribute("emptyLike", new Likes());
         return "/welcome";
     }

@@ -77,4 +77,46 @@ public class ProductServiceImpl implements ProductService {
     public void disLike(int id, int cdl) {
         productDAO.disLike(id,cdl);
     }
+
+    @Override
+    public List<Product> expensive() {
+        ArrayList<Product> expensiveList = new ArrayList<>();
+        expensiveList.addAll(productDAO.findAll());
+        expensiveList.sort((o1,o2)->{
+            if(o1.getPrice() == o2.getPrice()){
+                return 0;
+            }else if(o1.getPrice() < o2.getPrice()){
+                return 1;
+            }else return -1;
+        });
+        return expensiveList;
+    }
+
+    @Override
+    public List<Product> poor() {
+        ArrayList<Product> expensiveList = new ArrayList<>();
+        expensiveList.addAll(productDAO.findAll());
+        expensiveList.sort((o1,o2)->{
+            if(o1.getPrice() == o2.getPrice()){
+                return 0;
+            }else if(o1.getPrice() > o2.getPrice()){
+                return 1;
+            }else return -1;
+        });
+        return expensiveList;
+    }
+
+    @Override
+    public List<Product> popular() {
+        ArrayList<Product> expensiveList = new ArrayList<>();
+        expensiveList.addAll(productDAO.findAll());
+        expensiveList.sort((o1,o2)->{
+            if(o1.getToLike() == o2.getToLike()){
+                return 0;
+            }else if(o1.getToLike() < o2.getToLike()){
+                return 1;
+            }else return -1;
+        });
+        return expensiveList;
+    }
 }

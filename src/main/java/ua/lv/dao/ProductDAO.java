@@ -20,13 +20,10 @@ public interface ProductDAO extends JpaRepository<Product, Integer> {
     List<Product> sortBySubCategory(@Param("category")String category);
 
     @Modifying
-    @Query("update Product p  set p.tulike=:cl where p.id=:id ")
+    @Query("update Product p  set p.toLike=:cl where p.id=:id ")
     void toLike(@Param("id")int id,@Param("cl")int cl);
 
     @Modifying
     @Query("update Product p  set p.disLike=:cdl where p.id=:id")
     void disLike(@Param("id")int id,@Param("cdl")int cdl);
-
-
-
 }

@@ -17,11 +17,11 @@ public interface PurchaseDAO extends JpaRepository<Purchase, Integer>{
     @Query("from Purchase purchase where purchase.user.id=:id")
     List<Purchase> productListInCurt(@Param("id") int id);
 
-    @Query("select sum (purchase.amount) from Purchase purchase where purchase.user.id=:id")
-    int amountInCart(@Param("id")int id);
+    @Query("select sum (purchase.amount) from Purchase purchase where purchase.user.id=:id and purchase.successOrder=:number")
+    int amountInCart(@Param("id")int id,@Param("number") int number);
 
-    @Query("select count (product.id) from Purchase purchase where purchase.user.id=:id")
-    int countProductInBasket(@Param("id")int id);
+    @Query("select count (product.id) from Purchase purchase where purchase.user.id=:id and purchase.successOrder=:number")
+    int countProductInBasket(@Param("id")int id,@Param("number")int number);
 
     @Modifying
     @Query("update Purchase p set p.success=:number where p.user.id=:id")
@@ -30,4 +30,6 @@ public interface PurchaseDAO extends JpaRepository<Purchase, Integer>{
     @Modifying
     @Query("update Purchase p set p.successOrder=:number where p.user.id=:id")
     void successOrder(@Param("id") int id,@Param("number")int number);
+
+
 }

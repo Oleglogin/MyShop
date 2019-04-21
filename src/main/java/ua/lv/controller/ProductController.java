@@ -65,11 +65,13 @@ public class ProductController {
         User byUserName = userService.findByUserName(principalName);
         model.addAttribute("currentUser", byUserName);
         model.addAttribute("emptyPurchase", new Purchase());
-        model.addAttribute("countProductInBasket",purchaseService.countProductInBasket(byUserName.getId()));
+        model.addAttribute("countProductInBasket",purchaseService.countProductInBasket(byUserName.getId(),0));
 
         model.addAttribute("product", productService.findProductById(id));
         model.addAttribute("productSortList",productService.productSortList());
         model.addAttribute("previewList", previewService.prewievList());
+        model.addAttribute("elsePhoto",previewService.elsePhoto(id));
+
         return "product";
     }
     @RequestMapping(value = "sortByCategory/{category}", method = RequestMethod.GET)
@@ -77,8 +79,9 @@ public class ProductController {
                                @PathVariable("category")String category){
         String principalName = principal.getName();
         User byUserName = userService.findByUserName(principalName);
+        model.addAttribute("productSortList",productService.productSortList());
         model.addAttribute("currentUser", byUserName);
-        model.addAttribute("countProductInBasket",purchaseService.countProductInBasket(byUserName.getId()));
+        model.addAttribute("countProductInBasket",purchaseService.countProductInBasket(byUserName.getId(),0));
         model.addAttribute("productList",productService.sortByCategory(category));
         return "welcome";
     }
@@ -88,9 +91,43 @@ public class ProductController {
                                @PathVariable("category")String category){
         String principalName = principal.getName();
         User byUserName = userService.findByUserName(principalName);
+        model.addAttribute("productSortList",productService.productSortList());
         model.addAttribute("currentUser", byUserName);
-        model.addAttribute("countProductInBasket",purchaseService.countProductInBasket(byUserName.getId()));
+        model.addAttribute("countProductInBasket",purchaseService.countProductInBasket(byUserName.getId(),0));
         model.addAttribute("productList",productService.sortBySubCategory(category));
         return "welcome";
     }
+    @RequestMapping(value = "/expensive", method = RequestMethod.GET)
+    public String expensive(Model model,Principal principal){
+        String principalName = principal.getName();
+        User byUserName = userService.findByUserName(principalName);
+        model.addAttribute("productSortList",productService.productSortList());
+        model.addAttribute("currentUser", byUserName);
+        model.addAttribute("countProductInBasket",purchaseService.countProductInBasket(byUserName.getId(),0));
+        model.addAttribute("productList",productService.expensive());
+        return "welcome";
+    }
+
+    @RequestMapping(value = "/poor", method = RequestMethod.GET)
+    public String poor(Model model,Principal principal){
+        String principalName = principal.getName();
+        User byUserName = userService.findByUserName(principalName);
+        model.addAttribute("currentUser", byUserName);
+        model.addAttribute("countProductInBasket",purchaseService.countProductInBasket(byUserName.getId(),0));
+        model.addAttribute("productSortList",productService.productSortList());
+        model.addAttribute("productList",productService.poor());
+        return "welcome";
+    }
+
+    @RequestMapping(value = "/popular", method = RequestMethod.GET)
+    public String popular(Model model,Principal principal){
+        String principalName = principal.getName();
+        User byUserName = userService.findByUserName(principalName);
+        model.addAttribute("currentUser", byUserName);
+        model.addAttribute("countProductInBasket",purchaseService.countProductInBasket(byUserName.getId(),0));
+        model.addAttribute("productSortList",productService.productSortList());
+        model.addAttribute("productList",productService.popular());
+        return "welcome";
+    }
+
 }

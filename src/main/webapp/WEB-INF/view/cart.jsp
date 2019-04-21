@@ -109,6 +109,7 @@
                             <thead>
                                 <tr>
                                     <th class="product-th">Product</th>
+                                    <th class="product-th">Model</th>
                                     <th class="quy-th">Quantity</th>
                                     <th class="size-th">SizeSize</th>
                                     <th class="total-th">Price</th>
@@ -116,26 +117,24 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            <c:if test="${countProductInBasket != 0}">
                                 <c:forEach items="${productListInCurt}" var="purchase">
-                                    <tr>
-                                        <td class="product-col">
-                                            <img src="${purchase.product.productImg}" alt="">
-                                            <div class="pc-title">
-                                                <h4>${purchase.product.productTitle}</h4>
-                                                <p>$${purchase.product.price}</p>
-                                            </div>
-                                        </td>
-                                        <td class="size-col"><h4>${purchase.count}</h4></td>
-                                        <td class="size-col"><h4>${purchase.clotheSize}</h4></td>
-                                        <td class="total-col"><h4>$${purchase.amount}</h4></td>
-                                            <%--<td class="total-col"><h4>$${purchase.product.price}</h4></td>--%>
-                                        <td class="total-col"><h4><a href="<c:url value='/purchaseRemove/${purchase.id}'/> ">Delete</a></h4></td>
-                                    </tr>
+                                    <c:if test="${purchase.successOrder == 0}">
+                                        <tr>
+                                            <td class="product-col">
+                                                <img src="${purchase.product.productImg}" alt="">
+                                                <div class="pc-title">
+                                                    <h4>${purchase.product.productBrand}</h4>
+                                                    <p>$${purchase.product.price}</p>
+                                                </div>
+                                            </td>
+                                            <td class="size-col"><h4>${purchase.product.productModel}</h4></td>
+                                            <td class="size-col"><h4>${purchase.count}</h4></td>
+                                            <td class="size-col"><h4>${purchase.bikeSize}</h4></td>
+                                            <td class="total-col"><h4>$${purchase.amount}</h4></td>
+                                            <td class="total-col"><h4><a href="<c:url value='/purchaseRemove/${purchase.id}'/> ">Delete</a></h4></td>
+                                        </tr>
+                                    </c:if>
                                 </c:forEach>
-                            </c:if>
-
-
                             </tbody>
                         </table>
                     </div>
@@ -176,7 +175,7 @@
                     </div>
                     <div class="pi-text">
                         <h6>$${product.price}</h6>
-                        <p>${product.productTitle}</p>
+                        <p>${product.productBrand}</p>
                     </div>
                 </div>
             </c:forEach>
@@ -191,14 +190,14 @@
 <section class="footer-section">
     <div class="container">
         <div class="footer-logo text-center">
-            <a href="index.html"><img src="./img/logo-light.png" alt=""></a>
+            <a href="/welcome"><img src="../../resources/img/logo-light.png" alt=""></a>
         </div>
         <div class="row">
             <div class="col-lg-3 col-sm-6">
                 <div class="footer-widget about-widget">
                     <h2>About</h2>
                     <p>Donec vitae purus nunc. Morbi faucibus erat sit amet congue mattis. Nullam frin-gilla faucibus urna, id dapibus erat iaculis ut. Integer ac sem.</p>
-                    <img src="img/cards.png" alt="">
+                    <img src="../../resources/img/cards.png" alt="">
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6">
@@ -228,8 +227,8 @@
                         <div class="lp-item">
                             <div class="lp-thumb set-bg" data-setbg="img/blog-thumbs/1.jpg"></div>
                             <div class="lp-content">
-                                <h6>what shoes to wear</h6>
-                                <span>Oct 21, 2018</span>
+                                <h6>trends this year</h6>
+                                <span>march 21, 2019</span>
                                 <a href="#" class="readmore">Read More</a>
                             </div>
                         </div>
@@ -237,7 +236,7 @@
                             <div class="lp-thumb set-bg" data-setbg="img/blog-thumbs/2.jpg"></div>
                             <div class="lp-content">
                                 <h6>trends this year</h6>
-                                <span>Oct 21, 2018</span>
+                                <span>march 21, 2019</span>
                                 <a href="#" class="readmore">Read More</a>
                             </div>
                         </div>
@@ -253,15 +252,15 @@
                     </div>
                     <div class="con-info">
                         <span>B.</span>
-                        <p>1481 Creekside Lane  Avila Beach, CA 93424, P.O. BOX 68 </p>
+                        <p>1481 Login Oleg  Lviv , ua 79060, P.O. BOX 68 </p>
                     </div>
                     <div class="con-info">
                         <span>T.</span>
-                        <p>+53 345 7953 32453</p>
+                        <p>+3 8067 297 47 91</p>
                     </div>
                     <div class="con-info">
                         <span>E.</span>
-                        <p>office@youremail.com</p>
+                        <p>loginoleg123@gmail.com</p>
                     </div>
                 </div>
             </div>
@@ -273,14 +272,14 @@
                 <a href="" class="instagram"><i class="fa fa-instagram"></i><span>instagram</span></a>
                 <a href="" class="google-plus"><i class="fa fa-google-plus"></i><span>g+plus</span></a>
                 <a href="" class="pinterest"><i class="fa fa-pinterest"></i><span>pinterest</span></a>
-                <a href="" class="facebook"><i class="fa fa-facebook"></i><span>facebook</span></a>
+                <a href="https://www.facebook.com/profile.php?id=100000592606026&ref=bookmarks" class="facebook"><i class="fa fa-facebook"></i><span>facebook</span></a>
                 <a href="" class="twitter"><i class="fa fa-twitter"></i><span>twitter</span></a>
                 <a href="" class="youtube"><i class="fa fa-youtube"></i><span>youtube</span></a>
                 <a href="" class="tumblr"><i class="fa fa-tumblr-square"></i><span>tumblr</span></a>
             </div>
 
             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            <p class="text-white text-center mt-5">Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a></p>
+            <p class="text-white text-center mt-5">Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Login</a></p>
             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 
         </div>

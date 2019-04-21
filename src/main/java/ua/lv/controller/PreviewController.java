@@ -47,7 +47,7 @@ public class PreviewController {
         String principalName = principal.getName();
         User byUserName = userService.findByUserName(principalName);
         previewService.deletePrewiev(id);
-        model.addAttribute("countProductInBasket",purchaseService.countProductInBasket(byUserName.getId()));
+        model.addAttribute("countProductInBasket",purchaseService.countProductInBasket(byUserName.getId(),0));
 
         return "redirect:/admin";
     }

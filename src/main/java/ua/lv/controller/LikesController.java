@@ -44,7 +44,7 @@ public class LikesController {
 
         likes.setLikeCount(likes.getLikeCount() + 1);
         likeService.addLike(likes);
-        int cl = product.getTulike();
+        int cl = product.getToLike();
         productService.toLike(ProductId,cl+1);
         return "redirect:/welcome";
     }

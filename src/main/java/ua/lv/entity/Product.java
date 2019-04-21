@@ -16,7 +16,8 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String productTitle;
+    private String productBrand;
+    private String productModel;
     private String category;
     private String subCategory;
     private String productImg;
@@ -26,8 +27,8 @@ public class Product {
     private int size;
     @Column(columnDefinition = "text")
     private String description;
-    private Date dateOfsave = new Date();
-    private int tulike;
+    private Date dateOfSave = new Date();
+    private int toLike;
     private int disLike;
 
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
@@ -46,14 +47,12 @@ public class Product {
     }
 
     public Product(String productTitle, String category, int price, boolean available, int rate, int size, String description, Date dateOfsave, User user) {
-        this.productTitle = productTitle;
         this.category = category;
         this.price = price;
         this.available = available;
         this.rate = rate;
         this.size = size;
         this.description = description;
-        this.dateOfsave = dateOfsave;
         this.user = user;
     }
 
@@ -63,14 +62,6 @@ public class Product {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getProductTitle() {
-        return productTitle;
-    }
-
-    public void setProductTitle(String productTitle) {
-        this.productTitle = productTitle;
     }
 
     public String getCategory() {
@@ -121,14 +112,6 @@ public class Product {
         this.description = description;
     }
 
-    public Date getDateOfsave() {
-        return dateOfsave;
-    }
-
-    public void setDateOfsave(Date dateOfsave) {
-        this.dateOfsave = dateOfsave;
-    }
-
     public User getUser() {
         return user;
     }
@@ -159,13 +142,6 @@ public class Product {
         this.productImg = "\\workImg\\" + multipartFile.getOriginalFilename();
     }
 
-    public int getTulike() {
-        return tulike;
-    }
-
-    public void setTulike(int tulike) {
-        this.tulike = tulike;
-    }
 
     public int getDisLike() {
         return disLike;
@@ -175,19 +151,59 @@ public class Product {
         this.disLike = disLike;
     }
 
-    @Override
-    public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", productTitle='" + productTitle + '\'' +
-                ", category='" + category + '\'' +
-                ", price=" + price +
-                ", available=" + available +
-                ", rate=" + rate +
-                ", size=" + size +
-                ", description='" + description + '\'' +
-                ", dateOfsave=" + dateOfsave +
-                ", user=" + user +
-                '}';
+    public String getProductBrand() {
+        return productBrand;
+    }
+
+    public void setProductBrand(String productBrand) {
+        this.productBrand = productBrand;
+    }
+
+    public String getProductModel() {
+        return productModel;
+    }
+
+    public void setProductModel(String productModel) {
+        this.productModel = productModel;
+    }
+
+    public Date getDateOfSave() {
+        return dateOfSave;
+    }
+
+    public void setDateOfSave(Date dateOfSave) {
+        this.dateOfSave = dateOfSave;
+    }
+
+    public int getToLike() {
+        return toLike;
+    }
+
+    public void setToLike(int toLike) {
+        this.toLike = toLike;
+    }
+
+    public List<Purchase> getPurchases() {
+        return purchases;
+    }
+
+    public void setPurchases(List<Purchase> purchases) {
+        this.purchases = purchases;
+    }
+
+    public List<Preview> getPreviews() {
+        return previews;
+    }
+
+    public void setPreviews(List<Preview> previews) {
+        this.previews = previews;
+    }
+
+    public List<Likes> getLikes() {
+        return likes;
+    }
+
+    public void setLikes(List<Likes> likes) {
+        this.likes = likes;
     }
 }

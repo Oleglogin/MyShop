@@ -1,36 +1,35 @@
 package ua.lv.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
- * Created by User on 19.04.2019.
+ * Created by User on 21.04.2019.
  */
 @Entity
-public class SuccessOrder {
+public class UserAdd {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
-    private String address;
+    private String street;
     private String city;
     private String country;
-    private String index;
+    private String postIndex;
     private String phone;
 
     private Date dateOrder = new Date();
 
-    public SuccessOrder() {
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    private User user;
+
+    public UserAdd() {
     }
 
-    public SuccessOrder(String address, String city, String country, String index, String phone, Date dateOrder) {
-        this.address = address;
+    public UserAdd(String address, String city, String country, String index, String phone, Date dateOrder) {
+        this.street = address;
         this.city = city;
         this.country = country;
-        this.index = index;
+        this.postIndex = postIndex;
         this.phone = phone;
         this.dateOrder = dateOrder;
     }
@@ -44,11 +43,11 @@ public class SuccessOrder {
     }
 
     public String getAddress() {
-        return address;
+        return street;
     }
 
     public void setAddress(String address) {
-        this.address = address;
+        this.street = address;
     }
 
     public String getCity() {
@@ -67,12 +66,12 @@ public class SuccessOrder {
         this.country = country;
     }
 
-    public String getIndex() {
-        return index;
+    public String getPostIndex() {
+        return postIndex;
     }
 
-    public void setIndex(String index) {
-        this.index = index;
+    public void setPostIndex(String index) {
+        this.postIndex = index;
     }
 
     public String getPhone() {
@@ -91,5 +90,19 @@ public class SuccessOrder {
         this.dateOrder = dateOrder;
     }
 
+    public String getStreet() {
+        return street;
+    }
 
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

@@ -8,11 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import ua.lv.entity.Product;
 import ua.lv.entity.Purchase;
-import ua.lv.entity.SuccessOrder;
 import ua.lv.entity.User;
 import ua.lv.service.ProductService;
 import ua.lv.service.PurchaseService;
-import ua.lv.service.SuccessOrderService;
 import ua.lv.service.UserService;
 
 /**
@@ -26,8 +24,7 @@ public class PurchaseController {
     ProductService productService;
     @Autowired
     PurchaseService purchaseService;
-    @Autowired
-    SuccessOrderService successOrderService;
+
 
     @RequestMapping(value = "/purchaseAdd/{product.id}/{currentUser.id}", method = RequestMethod.POST)
     public String addPurchase(@ModelAttribute("emptyPurchase")Purchase purchase,
@@ -59,11 +56,7 @@ public class PurchaseController {
         return "redirect:/checkout";
     }
 
-    @RequestMapping(value = "/successOrder/{id}")
-    public String successOrder(@PathVariable("id")int id,
-                               @ModelAttribute("emptySuccessOrder")SuccessOrder successOrder){
-        successOrderService.addOrder(successOrder);
-        purchaseService.successOrder(id,1);
-        return "redirect:/checkout";
-    }
+
+
+
 }

@@ -39,7 +39,7 @@ public class AdminController {
         model.addAttribute("currentUser",byUserName);
         model.addAttribute("productList", productService.productList());
         model.addAttribute("previewList", previewService.prewievList());
-        model.addAttribute("countProductInBasket",purchaseService.countProductInBasket(byUserName.getId()));
+        model.addAttribute("countProductInBasket",purchaseService.countProductInBasket(byUserName.getId(),0));
         return "admin";
     }
     @RequestMapping(value = "/admin2/{id}", method = RequestMethod.GET)
@@ -49,7 +49,7 @@ public class AdminController {
         String principalName = principal.getName();
         User byUserName = userService.findByUserName(principalName);
         model.addAttribute("currentUser", byUserName);
-        model.addAttribute("countProductInBasket",purchaseService.countProductInBasket(byUserName.getId()));
+        model.addAttribute("countProductInBasket",purchaseService.countProductInBasket(byUserName.getId(),0));
         model.addAttribute("product", productService.findProductById(id));
         model.addAttribute("elsePhoto",previewService.elsePhoto(id));
         return "admin2";
