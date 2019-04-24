@@ -14,12 +14,16 @@
                         <img src="../../resources/img/logo.png" alt="">
                     </a>
                 </div>
+
+
                 <div class="col-xl-4 col-lg-4">
-                    <form class="header-search-form">
-                        <input type="text" placeholder="Search on divisima ....">
-                        <button><i class="flaticon-search"></i></button>
+                    <form method="get" action="/search" class="header-search-form">
+                        <input type="text" placeholder="Search on divisima ...."  name="searchString" >
+                        <button type="submit"><i  class="flaticon-search"></i></button>
+                        <%--${player.superTeam}--%>
                     </form>
                 </div>
+
                 <div class="col-xl-6 col-lg-5">
                     <div class="user-panel">
                         <c:if test="${countProductInBasket != 0}">
@@ -33,11 +37,7 @@
                         </c:if>
                         <div class="up-item">
                             <i class="flaticon-profile"></i>
-                            <a href="/registration">Create Acc</a>
-                        </div>
-                        <div class="up-item">
-                            <i class="flaticon-profile"></i>
-                            <a href="/login">Sign In</a>
+                            <a href="/login">Sign In/Up</a>
                         </div>
                         <div class="up-item">
                             <i class="flaticon-profile"></i>
@@ -59,18 +59,16 @@
                 <li><a href="/sortByCategory/kid">Kid's
                     <span class="new">New</span>
                 </a></li>
-
+                <li><a href="/sortByCategory/accessories">Accessories</a>
                 <li><a href="#">Pages</a>
                     <ul class="sub-menu">
-                        <li><a href="/cart">Cart Page</a></li>
                         <li><a href="/contact">Contact Page</a></li>
-                        <li><a href="/admin">Admin Page</a></li>
-                        <li><a href="/adminOrder">Admin Order</a></li>
+                        <c:if test="${currentUser.authority == 'ROLE_ADMIN'}">
+                            <li><a href="/admin">Admin Page</a></li>
+                            <li><a href="/adminOrder">Admin Order</a></li>
+                        </c:if>
                     </ul>
                 </li>
-
-                <li><a href="/sortByCategory/accessories">Accessories</a>
-                <li><a href="/blog">Blog</a></li>
             </ul>
         </div>
     </nav>
@@ -138,7 +136,7 @@
                         <div class="pi-text">
                             <h6>$${product.price}</h6>
                             <p>like-${product.toLike} disLikes-${product.disLike}</p>
-                            <p>${product.productBrand} ${product.productModel}</p>
+                            <p><a href="/sortByName/${product.productBrand}">${product.productBrand}</a> ${product.productModel}</p>
 
                         </div>
                     </div>
@@ -196,7 +194,7 @@
                         </div>
                         <div class="pi-text">
                             <h6>$${product.price}</h6>
-                            <p>${product.productBrand} ${product.productModel}</p>
+                            <p><a href="sortByName/${product.productBrand}">${product.productBrand}</a> ${product.productModel}</p>
                         </div>
                     </div>
                 </div>

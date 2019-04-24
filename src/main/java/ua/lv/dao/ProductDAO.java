@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.access.method.P;
 import ua.lv.entity.Product;
 
 import java.util.List;
@@ -26,4 +27,10 @@ public interface ProductDAO extends JpaRepository<Product, Integer> {
     @Modifying
     @Query("update Product p  set p.disLike=:cdl where p.id=:id")
     void disLike(@Param("id")int id,@Param("cdl")int cdl);
+
+    @Query("from Product product where product.productBrand=:name")
+    List<Product>sortByName(@Param("name")String productBrand);
+
+    @Query("from Product product where product.productModel=:search or product.productBrand=:search")
+    List<Product>search(@Param("search")String search);
 }

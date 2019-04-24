@@ -1,8 +1,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="tmp/header.jsp" %>
-<!-- Page Preloder -->
-!-- Header section -->
+<!-- Header section -->
 <header class="header-section">
     <div class="header-top">
         <div class="container">
@@ -32,15 +31,11 @@
                         </c:if>
                         <div class="up-item">
                             <i class="flaticon-profile"></i>
-                            <a href="/registration">Create Acc</a>
+                            <a href="/login">Sign In/Up</a>
                         </div>
                         <div class="up-item">
                             <i class="flaticon-profile"></i>
-                            <a href="/login">Sign In</a>
-                        </div>
-                        <div class="up-item">
-                            <i class="flaticon-profile"></i>
-                            <a href="/logout">${currentUser.username} Exit</a>
+                            <a href="/logout">${currentUser.username}Exit</a>
                         </div>
                     </div>
                 </div>
@@ -58,22 +53,19 @@
                 <li><a href="/sortByCategory/kid">Kid's
                     <span class="new">New</span>
                 </a></li>
-
                 <li><a href="/sortByCategory/accessories">Accessories</a>
-                </li>
                 <li><a href="#">Pages</a>
                     <ul class="sub-menu">
                         <li><a href="/cart">Cart Page</a></li>
                         <li><a href="/contact">Contact Page</a></li>
                         <li><a href="/admin">Admin Page</a></li>
+                        <li><a href="/adminOrder">Admin Order</a></li>
                     </ul>
                 </li>
-                <li><a href="/blog">Blog</a></li>
             </ul>
         </div>
     </nav>
 </header>
-<!-- Header section end -->
 
 
 

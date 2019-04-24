@@ -19,26 +19,22 @@
                 </div>
                 <div class="col-xl-6 col-lg-5">
                     <div class="user-panel">
-                        <div class="up-item">
-                            <div class="shopping-card">
-                                <i class="flaticon-bag"></i>
-                                <%--<c:if test="${countProductInBasket != 0}">--%>
-                                <span>${countProductInBasket}</span>
-                                <%--</c:if>--%>
+                        <c:if test="${countProductInBasket != 0}">
+                            <div class="up-item">
+                                <div class="shopping-card">
+                                    <i class="flaticon-bag"></i>
+                                    <span>${countProductInBasket}</span>
+                                </div>
+                                <a href="/cart">Shopping Cart</a>
                             </div>
-                            <a href="/cart">Shopping Cart</a>
+                        </c:if>
+                        <div class="up-item">
+                            <i class="flaticon-profile"></i>
+                            <a href="/login">Sign In/Up</a>
                         </div>
                         <div class="up-item">
                             <i class="flaticon-profile"></i>
-                            <a href="/registration">Create Acc</a>
-                        </div>
-                        <div class="up-item">
-                            <i class="flaticon-profile"></i>
-                            <a href="/login">Sign In</a>
-                        </div>
-                        <div class="up-item">
-                            <i class="flaticon-profile"></i>
-                            <a href="/logout">${currentUser.username} Exit</a>
+                            <a href="/logout">${currentUser.username}Exit</a>
                         </div>
                     </div>
                 </div>
@@ -50,87 +46,182 @@
             <!-- menu -->
             <ul class="main-menu">
                 <li><a href="/welcome">Home</a></li>
-                <li><a href="/sortByCategory/women">Women</a></li>
-                <li><a href="/sortByCategory/men">Men</a></li>
-                <li><a href="/sortByCategory/jewelry">Jewelry
+                <li><a href="/sortByCategory/men">Men's</a></li>
+                <li><a href="/sortByCategory/women">Women's</a></li>
+
+                <li><a href="/sortByCategory/kid">Kid's
                     <span class="new">New</span>
                 </a></li>
-                <li><a href="/sortByCategory/shoes">Shoes</a>
-                </li>
+                <li><a href="/sortByCategory/accessories">Accessories</a>
                 <li><a href="#">Pages</a>
                     <ul class="sub-menu">
                         <li><a href="/cart">Cart Page</a></li>
                         <li><a href="/contact">Contact Page</a></li>
+                        <li><a href="/admin">Admin Page</a></li>
+                        <li><a href="/adminOrder">Admin Order</a></li>
                     </ul>
                 </li>
-                <li><a href="/blog">Blog</a></li>
             </ul>
         </div>
     </nav>
 </header>
 <!-- Header section end -->
-
 <!-- Page info -->
 <div class="page-top-info">
     <div class="container">
-        <h4>Sign-In</h4>
-        <div class="site-pagination">
-            <a href="/welcome">Home</a>
-        </div>
+        <p><a href="/registration">Create Acc</a></p>
     </div>
 </div>
 <!-- Page info end -->
-<div class="container-fluid">
 
-    <div class="bg0 p-t-23 p-b-140">
-        <div class="container">
-            <div class="row">
-                <h4 class="mtext-105 cl2 js-name-detail p-b-14">
-                    Registration
-                </h4>
-                <!--  -->
-                <div class="p-t-33">
-                    <form method="POST" action="${contextPath}/login">
-                        <div class="container">
-                            <div class="flex-w flex-r-m p-b-10">
-                                <div class="size-203 flex-c-m respon6">
-                                    Username
-                                </div>
 
-                                <div class="size-204 respon6-next">
-                                    <div class="rs1-select2 bor8 bg0">
-                                        <input name="username" type="text" placeholder="Enter login"/>
-                                        <div class="dropDownSelect2"></div>
-                                    </div>
-                                </div>
+<!-- Contact section -->
+<section class="contact-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 contact-info">
+                <div class="contact-social">
+                    <a href="#"><i class="fa fa-pinterest"></i></a>
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                    <a href="#"><i class="fa fa-twitter"></i></a>
+                    <a href="#"><i class="fa fa-dribbble"></i></a>
+                    <a href="#"><i class="fa fa-behance"></i></a>
+                </div>
+                <form method="POST" action="${contextPath}/login" class="contact-form">
+                    <input name="username" type="text" placeholder="Enter login"/>
+                    <input name="password" type="password"  placeholder="Password"/>
+                    <button class="site-btn">ENTER</button>
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" >
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- letest product section -->
+<section class="top-letest-product-section">
+    <div class="container">
+
+        <div class="section-title">
+            <h2>LATEST PRODUCTS</h2>
+        </div>
+        <div class="product-slider owl-carousel">
+            <c:forEach items="${productSortList}" var="product">
+                <div class="product-item">
+                    <div class="pi-pic">
+                        <a href="productData/${product.id}"><img src="${product.productImg}" alt=""></a>
+                    </div>
+                    <div class="pi-text">
+                        <h6>$${product.price}</h6>
+                        <p>like-${product.toLike} disLikes-${product.disLike}</p>
+                        <p>${product.productBrand} ${product.productModel}</p>
+
+                    </div>
+                </div>
+            </c:forEach>
+        </div>
+    </div>
+</section>
+<!-- letest product section end -->
+
+<!-- Footer section -->
+<section class="footer-section">
+    <div class="container">
+        <div class="footer-logo text-center">
+            <a href="/welcome"><img src="../../resources/img/logo-light.png" alt=""></a>
+        </div>
+        <div class="row">
+            <div class="col-lg-3 col-sm-6">
+                <div class="footer-widget about-widget">
+                    <h2>About</h2>
+                    <p>Donec vitae purus nunc. Morbi faucibus erat sit amet congue mattis. Nullam frin-gilla faucibus urna, id dapibus erat iaculis ut. Integer ac sem.</p>
+                    <img src="../../resources/img/cards.png" alt="">
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="footer-widget about-widget">
+                    <h2>Questions</h2>
+                    <ul>
+                        <li><a href="">About Us</a></li>
+                        <li><a href="">Track Orders</a></li>
+                        <li><a href="">Returns</a></li>
+                        <li><a href="">Jobs</a></li>
+                        <li><a href="">Shipping</a></li>
+                        <li><a href="">Blog</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href="">Partners</a></li>
+                        <li><a href="">Bloggers</a></li>
+                        <li><a href="">Support</a></li>
+                        <li><a href="">Terms of Use</a></li>
+                        <li><a href="">Press</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="footer-widget about-widget">
+                    <h2>Questions</h2>
+                    <div class="fw-latest-post-widget">
+                        <div class="lp-item">
+                            <div class="lp-thumb set-bg" data-setbg="img/blog-thumbs/1.jpg"></div>
+                            <div class="lp-content">
+                                <h6>trends this year</h6>
+                                <span>march 21, 2019</span>
+                                <a href="#" class="readmore">Read More</a>
                             </div>
-
-                            <div class="flex-w flex-r-m p-b-10">
-                                <div class="size-203 flex-c-m respon6">
-                                    Password
-                                </div>
-
-                                <div class="size-204 respon6-next">
-                                    <div class="rs1-select2 bor8 bg0">
-                                        <input name="password" type="password"  placeholder="Password"/>
-                                        <div class="dropDownSelect2"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <input type="submit" cclass="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
-                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" >
                         </div>
-                    </form>
+                        <div class="lp-item">
+                            <div class="lp-thumb set-bg" data-setbg="img/blog-thumbs/2.jpg"></div>
+                            <div class="lp-content">
+                                <h6>trends this year</h6>
+                                <span>march 21, 2019</span>
+                                <a href="#" class="readmore">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+                <div class="footer-widget contact-widget">
+                    <h2>Questions</h2>
+                    <div class="con-info">
+                        <span>C.</span>
+                        <p>Your Company Ltd </p>
+                    </div>
+                    <div class="con-info">
+                        <span>B.</span>
+                        <p>1481 Login Oleg  Lviv , ua 79060, P.O. BOX 68 </p>
+                    </div>
+                    <div class="con-info">
+                        <span>T.</span>
+                        <p>+3 8067 297 47 91</p>
+                    </div>
+                    <div class="con-info">
+                        <span>E.</span>
+                        <p>loginoleg123@gmail.com</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <div class="social-links-warp">
+        <div class="container">
+            <div class="social-links">
+                <a href="" class="instagram"><i class="fa fa-instagram"></i><span>instagram</span></a>
+                <a href="" class="google-plus"><i class="fa fa-google-plus"></i><span>g+plus</span></a>
+                <a href="" class="pinterest"><i class="fa fa-pinterest"></i><span>pinterest</span></a>
+                <a href="https://www.facebook.com/profile.php?id=100000592606026&ref=bookmarks" class="facebook"><i class="fa fa-facebook"></i><span>facebook</span></a>
+                <a href="" class="twitter"><i class="fa fa-twitter"></i><span>twitter</span></a>
+                <a href="" class="youtube"><i class="fa fa-youtube"></i><span>youtube</span></a>
+                <a href="" class="tumblr"><i class="fa fa-tumblr-square"></i><span>tumblr</span></a>
+            </div>
 
-</div>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            <p class="text-white text-center mt-5">Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Login</a></p>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 
-
-
-
-
-
+        </div>
+    </div>
+</section>
+<!-- Footer section end -->
 <%@include file="tmp/footer.jsp" %>

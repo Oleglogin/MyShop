@@ -3,15 +3,15 @@ package ua.lv.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import ua.lv.entity.Product;
 import ua.lv.entity.Purchase;
 import ua.lv.entity.User;
 import ua.lv.service.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.security.Principal;
 
 /**
@@ -85,7 +85,33 @@ public class ProductController {
         model.addAttribute("productList",productService.sortByCategory(category));
         return "welcome";
     }
+    @RequestMapping(value = "sortByName/{name}", method = RequestMethod.GET)
+    public String sortByName(Model model,Principal principal,
+                             @PathVariable("name")String productBrand){
+        String principalName = principal.getName();
+        User byUserName = userService.findByUserName(principalName);
+        model.addAttribute("productSortList",productService.productSortList());
+        model.addAttribute("currentUser", byUserName);
+        model.addAttribute("countProductInBasket",purchaseService.countProductInBasket(byUserName.getId(),0));
+        model.addAttribute("productList",productService.sortByName(productBrand));
+        return "welcome";
+    }
 
+    @RequestMapping(value = "/search")
+    public String Search(@RequestParam("searchString") String searchString,
+                         Model model,Principal principal) {
+
+        String principalName = principal.getName();
+        User byUserName = userService.findByUserName(principalName);
+        model.addAttribute("productSortList",productService.productSortList());
+        model.addAttribute("currentUser", byUserName);
+        model.addAttribute("countProductInBasket",purchaseService.countProductInBasket(byUserName.getId(),0));
+        if(searchString != null){
+           model.addAttribute("productList",productService.search(searchString));
+        }
+
+        return "welcome";
+    }
     @RequestMapping(value = "sortBySubCategory/{category}", method = RequestMethod.GET)
     public String sortSubCategory(Model model, Principal principal,
                                @PathVariable("category")String category){

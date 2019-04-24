@@ -22,4 +22,6 @@ public interface ProductService {
     List<Product>expensive();
     List<Product>poor();
     List<Product>popular();
+    List<Product>sortByName(String name);
+    List<Product>search(String search);
 }

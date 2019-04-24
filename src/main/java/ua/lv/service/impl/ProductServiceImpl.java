@@ -119,4 +119,14 @@ public class ProductServiceImpl implements ProductService {
         });
         return expensiveList;
     }
+
+    @Override
+    public List<Product> sortByName(String name) {
+        return productDAO.sortByName(name);
+    }
+
+    @Override
+    public List<Product> search(String search) {
+        return productDAO.search(search);
+    }
 }
