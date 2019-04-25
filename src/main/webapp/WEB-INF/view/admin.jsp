@@ -12,30 +12,33 @@
                         <img src="../../resources/img/logo.png" alt="">
                     </a>
                 </div>
+
+
                 <div class="col-xl-4 col-lg-4">
-                    <form class="header-search-form">
-                        <input type="text" placeholder="Search on divisima ....">
-                        <button><i class="flaticon-search"></i></button>
+                    <form method="get" action="/search" class="header-search-form">
+                        <input type="text" placeholder="Search on divisima ...."  name="searchString" >
+                        <button type="submit"><i  class="flaticon-search"></i></button>
                     </form>
                 </div>
+
                 <div class="col-xl-6 col-lg-5">
                     <div class="user-panel">
-                        <c:if test="${countProductInBasket != 0}">
-                            <div class="up-item">
-                                <div class="shopping-card">
-                                    <i class="flaticon-bag"></i>
-                                    <span>${countProductInBasket}</span>
-                                </div>
-                                <a href="/cart">Shopping Cart</a>
+                        <%--<c:if test="${countProductInBasket != 0}">--%>
+                        <div class="up-item">
+                            <div class="shopping-card">
+                                <i class="flaticon-bag"></i>
+                                <span>${countProductInBasket}</span>
                             </div>
-                        </c:if>
+                            <a href="/cart">Shopping Cart</a>
+                        </div>
+                        <%--</c:if>--%>
                         <div class="up-item">
                             <i class="flaticon-profile"></i>
                             <a href="/login">Sign In/Up</a>
                         </div>
                         <div class="up-item">
                             <i class="flaticon-profile"></i>
-                            <a href="/logout">${currentUser.username}Exit</a>
+                            <a href="/logout">${currentUser.username} Exit</a>
                         </div>
                     </div>
                 </div>
@@ -56,16 +59,19 @@
                 <li><a href="/sortByCategory/accessories">Accessories</a>
                 <li><a href="#">Pages</a>
                     <ul class="sub-menu">
-                        <li><a href="/cart">Cart Page</a></li>
                         <li><a href="/contact">Contact Page</a></li>
-                        <li><a href="/admin">Admin Page</a></li>
-                        <li><a href="/adminOrder">Admin Order</a></li>
+                        <c:if test="${currentUser.authority == 'ROLE_ADMIN'}">
+                            <li><a href="/admin">Admin Page</a></li>
+                            <li><a href="/adminOrder">Admin Order</a></li>
+                        </c:if>
                     </ul>
                 </li>
             </ul>
         </div>
     </nav>
 </header>
+<!-- Header section end -->
+
 
 <!-- admin section end -->
 <section class="cart-section spad">
@@ -113,7 +119,7 @@
             </div>
             <div class="col-lg-4 card-right">
                 <c:url value="/product/add" var="addProduct"/>
-                <form:form action="${addProduct}" modelAttribute="emptyProduct" enctype="multipart/form-data">
+                <form:form action="${addProduct}" modelAttribute="emptyProduct" enctype="multipart/form-data" class="contact-form">
                     <div class="promo-code-form">
                         <form:input  path="productBrand" class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="state" placeholder="Brand"/>
                     </div>
@@ -201,7 +207,7 @@
             </div>
             <div class="col-lg-4 card-right">
                 <c:url value="/add/preview" var="addPreview"/>
-                <form:form action="${addPreview}" modelAttribute="emptyPreview" enctype="multipart/form-data">
+                <form:form action="${addPreview}" modelAttribute="emptyPreview" enctype="multipart/form-data" class="contact-form">
                     <div class="promo-code-form">
                         <form:input  path="previewTitle" class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="state" placeholder="Name"/>
                     </div>
@@ -234,5 +240,39 @@
 <!-- admin section end -->
 
 
+<!-- Footer section -->
+<section class="footer-section">
+    <div class="container">
+        <div class="footer-logo text-center">
+            <a href="/welcome"><img src="../../resources/img/logo.png" alt=""></a>
+        </div>
+        <div class="row mt40">
+            <div class="col-md-12 text-center">
+                <p>
+                    <small>&copy; 2019 <a href="https://google.com/" target="_blank">ProLogin:Format</a>. All Rights Reserved. <br> Designed &amp; Developed by <a href="https://www.facebook.com/profile.php?id=100000592606026&ref=bookmarks" target="_blank">ProLogin.com</a> Demo Images: Unsplash</small><br>
+                    <a href="#" class="js-backtotop">Back to top</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="social-links-warp">
+        <div class="container">
+            <div class="social-links">
+                <a href="" class="instagram"><i class="fa fa-instagram"></i><span>instagram</span></a>
+                <a href="" class="google-plus"><i class="fa fa-google-plus"></i><span>g+plus</span></a>
+                <a href="" class="pinterest"><i class="fa fa-pinterest"></i><span>pinterest</span></a>
+                <a href="https://www.facebook.com/profile.php?id=100000592606026&ref=bookmarks" class="facebook"><i class="fa fa-facebook"></i><span>facebook</span></a>
+                <a href="" class="twitter"><i class="fa fa-twitter"></i><span>twitter</span></a>
+                <a href="" class="youtube"><i class="fa fa-youtube"></i><span>youtube</span></a>
+                <a href="" class="tumblr"><i class="fa fa-tumblr-square"></i><span>tumblr</span></a>
+            </div>
 
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            <p class="text-white text-center mt-5">Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Login</a></p>
+            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+
+        </div>
+    </div>
+</section>
+<!-- Footer section end -->
 <%@include file="tmp/footer.jsp" %>

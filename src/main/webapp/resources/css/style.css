@@ -845,35 +845,35 @@ ol {
 	width: 100%;
 	position: absolute;
 	right: 0;
-	bottom: 18px;
-	z-index: 9;
+	/*bottom: 18px;*/
+	/*z-index: 2;*/
 	padding-right: 15px;
-	text-align: right;
+	text-align: left;
 }
 
 .product-item .pi-links a {
 	display: inline-table;
-	width: 36px;
-	height: 36px;
-	background: #fff;
-	border-radius: 60px;
+	width: 16px;
+	height: 16px;
+	/*background: #fff;*/
+	border-radius: 30px;
 	font-size: 18px;
-	line-height: 18px;
+	line-height: 28px;
 	padding-top: 9px;
 	overflow: hidden;
 	color: #000;
 	position: relative;
-	-webkit-box-shadow: 1px 0 32px rgba(0, 0, 0, 0.2);
-	box-shadow: 1px 0 32px rgba(0, 0, 0, 0.2);
-	-webkit-transition: all 0.4s ease;
-	-o-transition: all 0.4s ease;
-	transition: all 0.4s ease;
+	/*-webkit-box-shadow: 1px 0 32px rgba(0, 0, 0, 0.2);*/
+	/*box-shadow: 1px 0 32px rgba(0, 0, 0, 0.2);*/
+	-webkit-transition: all 1s ease;
+	-o-transition: all 1s ease;
+	transition: all 1s ease;
 	text-align: center;
 }
 
 .product-item .pi-links a i {
 	display: inline-block;
-	color: #000;
+	color: #545454;
 }
 
 .product-item .pi-links a.add-card {
@@ -1004,7 +1004,7 @@ ol {
 ---------------------*/
 
 .footer-section {
-	background: #282828;
+	background: #f8f7f7;
 	padding-top: 60px;
 }
 

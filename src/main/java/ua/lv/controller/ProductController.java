@@ -72,6 +72,9 @@ public class ProductController {
         model.addAttribute("previewList", previewService.prewievList());
         model.addAttribute("elsePhoto",previewService.elsePhoto(id));
 
+
+        model.addAttribute("userLikeProduct",likesService.likesList(byUserName.getId()));
+
         return "product";
     }
     @RequestMapping(value = "sortByCategory/{category}", method = RequestMethod.GET)
@@ -100,11 +103,10 @@ public class ProductController {
     @RequestMapping(value = "/search")
     public String Search(@RequestParam("searchString") String searchString,
                          Model model,Principal principal) {
-
         String principalName = principal.getName();
         User byUserName = userService.findByUserName(principalName);
-        model.addAttribute("productSortList",productService.productSortList());
         model.addAttribute("currentUser", byUserName);
+        model.addAttribute("productSortList",productService.productSortList());
         model.addAttribute("countProductInBasket",purchaseService.countProductInBasket(byUserName.getId(),0));
         if(searchString != null){
            model.addAttribute("productList",productService.search(searchString));

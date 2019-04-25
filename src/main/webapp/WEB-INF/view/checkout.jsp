@@ -1,8 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@include file="tmp/header.jsp" %>
-
-!-- Header section -->
+<!-- Header section -->
 <header class="header-section">
     <div class="header-top">
         <div class="container">
@@ -13,30 +12,29 @@
                         <img src="../../resources/img/logo.png" alt="">
                     </a>
                 </div>
+
+
                 <div class="col-xl-4 col-lg-4">
-                    <form class="header-search-form">
-                        <input type="text" placeholder="Search on divisima ....">
-                        <button><i class="flaticon-search"></i></button>
+                    <form method="get" action="/search" class="header-search-form">
+                        <input type="text" placeholder="Search on divisima ...."  name="searchString" >
+                        <button type="submit"><i  class="flaticon-search"></i></button>
                     </form>
                 </div>
+
                 <div class="col-xl-6 col-lg-5">
                     <div class="user-panel">
-                        <c:if test="${countProductInBasket != 0}">
-                            <div class="up-item">
-                                <div class="shopping-card">
-                                    <i class="flaticon-bag"></i>
-                                    <span>${countProductInBasket}</span>
-                                </div>
-                                <a href="/cart">Shopping Cart</a>
+                        <%--<c:if test="${countProductInBasket != 0}">--%>
+                        <div class="up-item">
+                            <div class="shopping-card">
+                                <i class="flaticon-bag"></i>
+                                <span>${countProductInBasket}</span>
                             </div>
-                        </c:if>
-                        <div class="up-item">
-                            <i class="flaticon-profile"></i>
-                            <a href="/registration">Create Acc</a>
+                            <a href="/cart">Shopping Cart</a>
                         </div>
+                        <%--</c:if>--%>
                         <div class="up-item">
                             <i class="flaticon-profile"></i>
-                            <a href="/login">Sign In</a>
+                            <a href="/login">Sign In/Up</a>
                         </div>
                         <div class="up-item">
                             <i class="flaticon-profile"></i>
@@ -58,31 +56,28 @@
                 <li><a href="/sortByCategory/kid">Kid's
                     <span class="new">New</span>
                 </a></li>
-
                 <li><a href="/sortByCategory/accessories">Accessories</a>
-                </li>
                 <li><a href="#">Pages</a>
                     <ul class="sub-menu">
-                        <li><a href="/cart">Cart Page</a></li>
                         <li><a href="/contact">Contact Page</a></li>
-                        <li><a href="/admin">Admin Page</a></li>
+                        <c:if test="${currentUser.authority == 'ROLE_ADMIN'}">
+                            <li><a href="/admin">Admin Page</a></li>
+                            <li><a href="/adminOrder">Admin Order</a></li>
+                        </c:if>
                     </ul>
                 </li>
-                <li><a href="/blog">Blog</a></li>
             </ul>
         </div>
     </nav>
 </header>
 <!-- Header section end -->
-
-
 <!-- Page info -->
 <div class="page-top-info">
     <div class="container">
-        <h4>Your cart</h4>
+        <h4>CheckOut</h4>
         <div class="site-pagination">
-            <a href="">Home</a> /
-            <a href="">Your cart</a>
+            <a href="/welcome">Home</a> /
+            <a href="">CheckOut</a>
         </div>
     </div>
 </div>
@@ -149,8 +144,8 @@
                                 <li>
                                     <div class="pl-thumb"><img src="${purchase.product.productImg}" alt=""></div>
                                     <h6>${purchase.product.productBrand}</h6>
-                                    <h6>${purchase.product.productModel}</h6>
-                                    <p>$ ${purchase.product.price} | count ${purchase.count}</p>
+                                    <h6>${purchase.product.productModel} - ${purchase.product.price} $ * ${purchase.count}</h6>
+                                    <%--<p>$ ${purchase.product.price} | count ${purchase.count}</p>--%>
                                 </li>
                             </c:if>
 
@@ -168,84 +163,18 @@
 </section>
 <!-- checkout section end -->
 
-
 <!-- Footer section -->
 <section class="footer-section">
     <div class="container">
         <div class="footer-logo text-center">
-            <a href="/welcome"><img src="../../resources/img/logo-light.png" alt=""></a>
+            <a href="/welcome"><img src="../../resources/img/logo.png" alt=""></a>
         </div>
-        <div class="row">
-            <div class="col-lg-3 col-sm-6">
-                <div class="footer-widget about-widget">
-                    <h2>About</h2>
-                    <p>Donec vitae purus nunc. Morbi faucibus erat sit amet congue mattis. Nullam frin-gilla faucibus urna, id dapibus erat iaculis ut. Integer ac sem.</p>
-                    <img src="../../resources/img/cards.png" alt="">
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="footer-widget about-widget">
-                    <h2>Questions</h2>
-                    <ul>
-                        <li><a href="">About Us</a></li>
-                        <li><a href="">Track Orders</a></li>
-                        <li><a href="">Returns</a></li>
-                        <li><a href="">Jobs</a></li>
-                        <li><a href="">Shipping</a></li>
-                        <li><a href="">Blog</a></li>
-                    </ul>
-                    <ul>
-                        <li><a href="">Partners</a></li>
-                        <li><a href="">Bloggers</a></li>
-                        <li><a href="">Support</a></li>
-                        <li><a href="">Terms of Use</a></li>
-                        <li><a href="">Press</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="footer-widget about-widget">
-                    <h2>Questions</h2>
-                    <div class="fw-latest-post-widget">
-                        <div class="lp-item">
-                            <div class="lp-thumb set-bg" data-setbg="img/blog-thumbs/1.jpg"></div>
-                            <div class="lp-content">
-                                <h6>trends this year</h6>
-                                <span>march 21, 2019</span>
-                                <a href="#" class="readmore">Read More</a>
-                            </div>
-                        </div>
-                        <div class="lp-item">
-                            <div class="lp-thumb set-bg" data-setbg="img/blog-thumbs/2.jpg"></div>
-                            <div class="lp-content">
-                                <h6>trends this year</h6>
-                                <span>march 21, 2019</span>
-                                <a href="#" class="readmore">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="footer-widget contact-widget">
-                    <h2>Questions</h2>
-                    <div class="con-info">
-                        <span>C.</span>
-                        <p>Your Company Ltd </p>
-                    </div>
-                    <div class="con-info">
-                        <span>B.</span>
-                        <p>1481 Login Oleg  Lviv , ua 79060, P.O. BOX 68 </p>
-                    </div>
-                    <div class="con-info">
-                        <span>T.</span>
-                        <p>+3 8067 297 47 91</p>
-                    </div>
-                    <div class="con-info">
-                        <span>E.</span>
-                        <p>loginoleg123@gmail.com</p>
-                    </div>
-                </div>
+        <div class="row mt40">
+            <div class="col-md-12 text-center">
+                <p>
+                    <small>&copy; 2019 <a href="https://google.com/" target="_blank">ProLogin:Format</a>. All Rights Reserved. <br> Designed &amp; Developed by <a href="https://www.facebook.com/profile.php?id=100000592606026&ref=bookmarks" target="_blank">ProLogin.com</a> Demo Images: Unsplash</small><br>
+                    <a href="#" class="js-backtotop">Back to top</a>
+                </p>
             </div>
         </div>
     </div>
@@ -269,7 +198,4 @@
     </div>
 </section>
 <!-- Footer section end -->
-
-
-
 <%@include file="tmp/footer.jsp" %>

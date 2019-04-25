@@ -43,8 +43,16 @@ public class PurchaseServiceImpl implements PurchaseService {
     }
 
     @Override
+
     public int amountInCart(int id, int number) {
-        return purchaseDAO.amountInCart(id, number);
+        int aIc = purchaseDAO.amountInCart(id,number);
+        if(aIc == 0){
+            return 0;
+        }
+        else{
+            return purchaseDAO.amountInCart(id, number);
+        }
+
     }
 
     @Override

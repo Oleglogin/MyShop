@@ -57,4 +57,9 @@ public class LikesServiceImpl implements LikesService {
             return likeDAO.countDisLike(id);
         }
     }
+
+    @Override
+    public List<Likes> likesList(int id) {
+        return likeDAO.likesList(id);
+    }
 }
