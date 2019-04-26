@@ -37,4 +37,14 @@ public class UserAddServiceImpl implements UserAddService {
     public UserAdd findOne(int id) {
         return userAddDAO.findOne(id);
     }
+
+    @Override
+    public UserAdd findOneByUserId(int id) {
+        return userAddDAO.findOneByUserId(id);
+    }
+
+    @Override
+    public List<UserAdd> finddAllByUserId(int id) {
+        return userAddDAO.finddAllByUserId(id);
+    }
 }

@@ -48,24 +48,5 @@ public class LikesController {
         productService.toLike(ProductId,cl+1);
         return "redirect:/welcome";
     }
-    @RequestMapping(value ="/addDisLike/{currentUser.id}/{product.id}")
-    public String addDisLike(Model model, Principal principal,
-                          @PathVariable("currentUser.id")int UserId,
-                          @PathVariable("product.id")int ProductId,
-                          @ModelAttribute("emptyLike")Likes likes){
-        String principalName = principal.getName();
-        User byUserName = userService.findByUserName(principalName);
-        model.addAttribute("currentUser", byUserName);
 
-        User user = userService.getUserById(UserId);
-        Product product = productService.findProductById(ProductId);
-        likes.setUser(user);
-        likes.setProduct(product);
-
-        likes.setDisLikeCount(likes.getDisLikeCount()+ 1);
-        likeService.addLike(likes);
-        int cdl = product.getDisLike();
-        productService.disLike(ProductId,cdl+1);
-        return "redirect:/welcome";
-    }
 }

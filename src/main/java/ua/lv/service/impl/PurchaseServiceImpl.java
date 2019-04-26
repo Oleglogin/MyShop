@@ -42,17 +42,14 @@ public class PurchaseServiceImpl implements PurchaseService {
         return purchaseDAO.productListInCurt(id);
     }
 
-    @Override
 
+    @Override
     public int amountInCart(int id, int number) {
-        int aIc = purchaseDAO.amountInCart(id,number);
-        if(aIc == 0){
+        Integer amountCart = purchaseDAO.amountInCart(id,number);
+        if(amountCart == null){
             return 0;
         }
-        else{
-            return purchaseDAO.amountInCart(id, number);
-        }
-
+        return amountCart;
     }
 
     @Override

@@ -18,7 +18,6 @@ public class Likes {
     private Product product;
 
     private int likeCount;
-    private int disLikeCount;
 
     public Likes() {
     }
@@ -61,11 +60,4 @@ public class Likes {
         this.likeCount = likeCount;
     }
 
-    public int getDisLikeCount() {
-        return disLikeCount;
-    }
-
-    public void setDisLikeCount(int disLikeCount) {
-        this.disLikeCount = disLikeCount;
-    }
 }

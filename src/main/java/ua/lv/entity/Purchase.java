@@ -1,6 +1,7 @@
 package ua.lv.entity;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by User on 12.03.2019.
@@ -17,6 +18,7 @@ public class Purchase {
     private int size;
     private String bikeSize;
     private int checkOrder;
+    private Date dateOrder = new Date();
 
 
 
@@ -122,6 +124,7 @@ public class Purchase {
     public void setCheckOrder(int checkOrder) {
         this.checkOrder = checkOrder;
     }
+
 
     @Override
     public String toString() {

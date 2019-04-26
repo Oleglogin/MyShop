@@ -47,6 +47,7 @@ public class MainController {
         model.addAttribute("previewList",previewService.prewievList());;
         model.addAttribute("countProductInBasket", purchaseService.countProductInBasket(byUserName.getId(),0));
         model.addAttribute("emptyLike", new Likes());
+        model.addAttribute("likesList",likesService.likeList());
         return "/welcome";
     }
 

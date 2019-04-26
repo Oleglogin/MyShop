@@ -23,15 +23,13 @@
 
                 <div class="col-xl-6 col-lg-5">
                     <div class="user-panel">
-                        <%--<c:if test="${countProductInBasket != 0}">--%>
-                            <div class="up-item">
-                                <div class="shopping-card">
-                                    <i class="flaticon-bag"></i>
-                                    <span>${countProductInBasket}</span>
-                                </div>
-                                <a href="/cart">Shopping Cart</a>
+                        <div class="up-item">
+                            <div class="shopping-card">
+                                <i class="flaticon-bag"></i>
+                                <span>${countProductInBasket}</span>
                             </div>
-                        <%--</c:if>--%>
+                            <a href="/cart">Shopping Cart</a>
+                        </div>
                         <div class="up-item">
                             <i class="flaticon-profile"></i>
                             <a href="/login">Sign In/Up</a>
@@ -71,23 +69,13 @@
     </nav>
 </header>
 <!-- Header section end -->
-    <div class="container-fluid">
-            <c:forEach items="${previewList}" var="preview">
-                <c:if test="${preview.previewCategory == 'main'}">
-                    <div class="product-item ">
-                        <div class="pi-pic">
-                            <img src="${preview.previewImg}"/>
-                            <div class="pi-links">
-                                <div>
-                                    <h2>${preview.previewTitle}</h2>
-                                    <p>${preview.previewDescription}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </c:if>
-            </c:forEach>
-    </div>
+<div class="container-fluid p-0">
+    <c:forEach items="${previewList}" var="preview">
+        <c:if test="${preview.previewCategory == 'main'}">
+            <img src="${preview.previewImg}"/>
+        </c:if>
+    </c:forEach>
+</div>
 
 
 <!-- Page info -->
@@ -111,31 +99,29 @@
         </div>
         <div class="product-slider owl-carousel">
             <c:forEach items="${productSortList}" var="product">
-                    <div class="product-item">
-                        <div class="pi-pic">
-                            <a href="productData/${product.id}"><img src="${product.productImg}" alt=""></a>
-                                    <%--<c:if test="${currentUser != null && product.user.id != currentUser.id}">--%>
-                                        <%--<a href="<c:url value='/addLike/${currentUser.id}/${product.id}"'/>">--%>
-                                            <%--<i class="flaticon-heart">${product.toLike} </i>--%>
-                                        <%--</a>--%>
-                                    <%--</c:if>--%>
-                        </div>
-                        <div class="pi-text">
-                            <h6>$ ${product.price}</h6>
-                            <p>
-                                <a href="/sortByName/${product.productBrand}">${product.productBrand}</a> ${product.productModel}
-                                    <c:if test="${currentUser != null && product.user.id != currentUser.id}">
+                <div class="product-item">
+                    <div class="pi-pic">
+                        <a href="productData/${product.id}"><img src="${product.productImg}" alt=""></a>
+                    </div>
+                    <div class="pi-text">
+                        <h6>$ ${product.price}</h6>
+                        <p>
+                            <a href="/sortByName/${product.productBrand}">${product.productBrand}</a> ${product.productModel}
+                            <c:if test="${currentUser != null && product.user.id != currentUser.id}">
+                                <c:forEach items="${likesList}" var="like">
+                                    <c:if test="${like.user.id == currentUser.id}">
                                         <a href="<c:url value='/addLike/${currentUser.id}/${product.id}"'/>">
                                             <i class="flaticon-heart">${product.toLike} </i>
                                         </a>
                                     </c:if>
-                                    <c:if test="${currentUser.id == product.user.id}">
-                                        <i class="flaticon-heart">${product.toLike} </i>
-                                    </c:if>
-                            </p>
-
-                        </div>
+                                </c:forEach>
+                            </c:if>
+                            <c:if test="${currentUser.id == product.user.id}">
+                                <i class="flaticon-heart">${product.toLike} </i>
+                            </c:if>
+                        </p>
                     </div>
+                </div>
             </c:forEach>
         </div>
     </div>
@@ -146,20 +132,20 @@
 
 <!-- Product filter section -->
 <section class="product-filter-section">
-        <div class="container">
-            <div class="section-title">
-                <h2>BROWSE TOP SELLING PRODUCTS</h2>
-            </div>
-                <ul class="product-filter-menu">
-                    <li><a href="/sortBySubCategory/hardTail">Hard Tail</a></li>
-                    <li><a href="/sortBySubCategory/roadBike">Road Bike</a></li>
-                    <li><a href="/sortBySubCategory/cityBike">City Bike & Urban</a></li>
-                    <li><a href="/sortBySubCategory/enduro">Enduro</a></li>
-                            <li><a href="/expensive">Expensive</a></li>
-                            <li><a href="/poor">Poor</a></li>
-                            <li><a href="/popular">Popular</a></li>
-                </ul>
+    <div class="container">
+        <div class="section-title">
+            <h2>BROWSE TOP SELLING PRODUCTS</h2>
         </div>
+        <ul class="product-filter-menu">
+            <li><a href="/sortBySubCategory/hardTail">Hard Tail</a></li>
+            <li><a href="/sortBySubCategory/roadBike">Road Bike</a></li>
+            <li><a href="/sortBySubCategory/cityBike">City Bike & Urban</a></li>
+            <li><a href="/sortBySubCategory/enduro">Enduro</a></li>
+            <li><a href="/expensive">Expensive</a></li>
+            <li><a href="/poor">Poor</a></li>
+            <li><a href="/popular">Popular</a></li>
+        </ul>
+    </div>
     <div class="container">
         <div class="row">
             <c:forEach items="${productList}" var="product">
@@ -187,9 +173,9 @@
                 </div>
             </c:forEach>
         </div>
-        <div class="text-center pt-5">
-            <button class="site-btn sb-line sb-dark">LOAD MORE</button>
-        </div>
+        <%--<div class="text-center pt-5">--%>
+            <%--<button class="site-btn sb-line sb-dark">LOAD MORE</button>--%>
+        <%--</div>--%>
     </div>
 </section>
 <!-- Product filter section end -->
@@ -213,7 +199,6 @@
                 </div>
             </c:if>
         </c:forEach>
-
     </div>
 </section>
 <!-- Banner section end  -->

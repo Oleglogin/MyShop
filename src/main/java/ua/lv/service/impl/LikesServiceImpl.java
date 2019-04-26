@@ -29,7 +29,7 @@ public class LikesServiceImpl implements LikesService {
     }
 
     @Override
-    public List<Likes> likeList() {
+    public List<Likes> likeList()  {
         return likeDAO.findAll();
     }
 
@@ -40,23 +40,10 @@ public class LikesServiceImpl implements LikesService {
 
     @Override
     public int countLike(int id) {
-        int lc = likeDAO.countLike(id);
-        if(lc==0){
-            return 0;
-        }else{
-            return likeDAO.countLike(id);
-        }
+        return likeDAO.countLike(id);
     }
 
-    @Override
-    public int disLikeCount(int id) {
-        int lc = likeDAO.countDisLike(id);
-        if(lc==0){
-            return 0;
-        }else{
-            return likeDAO.countDisLike(id);
-        }
-    }
+
 
     @Override
     public List<Likes> likesList(int id) {

@@ -38,7 +38,7 @@ public class UserAddController {
         String principalName = principal.getName();
         User byUserName = userService.findByUserName(principalName);
         model.addAttribute("currentUser", byUserName);
-
+        model.addAttribute("userAdd",userAddService.findOneByUserId(byUserName.getId()));
         model.addAttribute("emptyUserAdd", new UserAdd());
         model.addAttribute("productListInCurt", purchaseService.productListInCurt(byUserName.getId()));
         model.addAttribute("amountPrice", purchaseService.amountInCart(byUserName.getId(),0));
@@ -46,15 +46,27 @@ public class UserAddController {
         model.addAttribute("productSortList",productService.productSortList());
         return "checkout";
     }
-
-    @RequestMapping(value = "successOrder/{id}")
-    public String successOrder(@PathVariable("id")int id,
-                               @ModelAttribute("emptyUserAdd")UserAdd userAdd,
-                               Principal principal, Model model){
-        purchaseService.successOrder(id,1);
+    @GetMapping(value = "regularAddress")
+    public String regularAddress(Model model, Principal principal){
         String principalName = principal.getName();
         User byUserName = userService.findByUserName(principalName);
         model.addAttribute("currentUser", byUserName);
+        model.addAttribute("emptyUserAdd",userAddService.findOneByUserId(byUserName.getId()));
+        model.addAttribute("productListInCurt", purchaseService.productListInCurt(byUserName.getId()));
+        model.addAttribute("amountPrice", purchaseService.amountInCart(byUserName.getId(),0));
+        model.addAttribute("countProductInBasket",purchaseService.countProductInBasket(byUserName.getId(),0));
+        model.addAttribute("productSortList",productService.productSortList());
+        return "checkout";
+    }
+
+    @RequestMapping(value = "successOrder")
+    public String successOrder(@ModelAttribute("emptyUserAdd")UserAdd userAdd,
+                               Principal principal, Model model){
+
+        String principalName = principal.getName();
+        User byUserName = userService.findByUserName(principalName);
+        model.addAttribute("currentUser", byUserName);
+        purchaseService.successOrder(byUserName.getId(),1);
         userAdd.setUser(byUserName);
         userAddService.addUserSave(userAdd);
         return "redirect:/welcome";
@@ -66,10 +78,9 @@ public class UserAddController {
         String principalName = principal.getName();
         User byUserName = userService.findByUserName(principalName);
         model.addAttribute("currentUser", byUserName);
-
         model.addAttribute("purchaseList", purchaseService.purchaseList());
-        model.addAttribute("userAdd", userAddService.findOne(id));
-        return "/adminOrder";
+        model.addAttribute("userAddList", userAddService.finddAllByUserId(id));
+        return "adminOrder";
 
     }
 }

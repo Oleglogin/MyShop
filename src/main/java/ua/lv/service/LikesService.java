@@ -14,6 +14,6 @@ public interface LikesService {
     Likes findLikeById(int id);
 
     int countLike(int id);
-    int disLikeCount(int id);
+
     List<Likes> likesList(int id);
 }

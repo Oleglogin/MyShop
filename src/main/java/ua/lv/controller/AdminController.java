@@ -61,10 +61,7 @@ public class AdminController {
         String principalName = principal.getName();
         User byUserName = userService.findByUserName(principalName);
         model.addAttribute("currentUser", byUserName);
-
         model.addAttribute("purchaseList", purchaseService.purchaseList());
-//        model.addAttribute("amountPrice", purchaseService.amountInCart(byUserName.getId(),0));
-
         return "/adminOrder";
     }
 

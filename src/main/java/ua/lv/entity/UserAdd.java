@@ -16,6 +16,7 @@ public class UserAdd {
     private String country;
     private String postIndex;
     private String phone;
+    private boolean regular;
 
     private Date dateOrder = new Date();
 

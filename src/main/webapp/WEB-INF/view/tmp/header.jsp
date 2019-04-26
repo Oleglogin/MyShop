@@ -12,6 +12,9 @@
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,300i,400,400i,700,700i" rel="stylesheet">
 
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
 
     <!-- Stylesheets -->
     <link rel="stylesheet" href="../../resources/css/bootstrap.min.css"/>
@@ -22,6 +25,7 @@
     <link rel="stylesheet" href="../../resources/css/owl.carousel.min.css"/>
     <link rel="stylesheet" href="../../resources/css/animate.css"/>
     <link rel="stylesheet" href="../../resources/css/style.css"/>
+    <link rel="stylesheet" href="../../resources/css/main.css" >
 
 
     <!--[if lt IE 9]>

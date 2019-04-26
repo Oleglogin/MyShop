@@ -127,9 +127,6 @@
                     <i class="fa fa-star-o"></i>
                 </div>
                 <form:form action="/purchaseAdd/${product.id}/${currentUser.id}" modelAttribute="emptyPurchase">
-                    <%--<div class="p-review">--%>
-                        <%--<a href="">3 reviews</a>|<a href="">Add your review</a>--%>
-                    <%--</div>--%>
                     <div class="fw-size-choose">
                         <p>Size</p>
                         <div class="promo-qty">

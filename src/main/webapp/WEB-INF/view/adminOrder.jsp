@@ -118,7 +118,7 @@
                     </div>
                 </div>
             </div>
-            <c:if test="${userAdd != null}">
+            <c:if test="${userAddList != null}">
                 <div class="col-lg-5">
                     <div class="cart-table">
                         <h3>User and Order info</h3>
@@ -136,17 +136,17 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    <%--<c:forEach items="${userAddList}" var="userAdd">--%>
-                                <tr>
-                                    <td class="size-col"><h4>${userAdd.user.id}</h4></td>
-                                    <td class="size-col"><h4>${userAdd.dateOrder}</h4></td>
-                                    <td class="size-col"><h4>${userAdd.street}</h4></td>
-                                    <td class="size-col"><h4>${userAdd.city}</h4></td>
-                                    <td class="size-col"><h4>${userAdd.country}</h4></td>
-                                    <td class="size-col"><h4>${userAdd.postIndex}</h4></td>
-                                    <td class="total-col"><h4>${userAdd.phone}</h4></td>
-                                </tr>
-                                    <%--</c:forEach>--%>
+                                <c:forEach items="${userAddList}" var="userAdd">
+                                    <tr>
+                                        <td class="size-col"><h4>${userAdd.user.id}</h4></td>
+                                        <td class="size-col"><h4>${userAdd.dateOrder}</h4></td>
+                                        <td class="size-col"><h4>${userAdd.street}</h4></td>
+                                        <td class="size-col"><h4>${userAdd.city}</h4></td>
+                                        <td class="size-col"><h4>${userAdd.country}</h4></td>
+                                        <td class="size-col"><h4>${userAdd.postIndex}</h4></td>
+                                        <td class="total-col"><h4>${userAdd.phone}</h4></td>
+                                    </tr>
+                                </c:forEach>
                                 </tbody>
                             </table>
                         </div>

@@ -12,4 +12,6 @@ public interface UserAddService {
     void deleteUserAdd(int id);
     List<UserAdd> findAll();
     UserAdd findOne(int id);
+    UserAdd findOneByUserId(int id);
+    List<UserAdd>finddAllByUserId(int id);
 }

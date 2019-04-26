@@ -23,7 +23,6 @@
 
                 <div class="col-xl-6 col-lg-5">
                     <div class="user-panel">
-                        <%--<c:if test="${countProductInBasket != 0}">--%>
                         <div class="up-item">
                             <div class="shopping-card">
                                 <i class="flaticon-bag"></i>
@@ -31,7 +30,6 @@
                             </div>
                             <a href="/cart">Shopping Cart</a>
                         </div>
-                        <%--</c:if>--%>
                         <div class="up-item">
                             <i class="flaticon-profile"></i>
                             <a href="/login">Sign In/Up</a>
@@ -89,26 +87,23 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 order-2 order-lg-1">
-                <c:url value="/successOrder/${currentUser.id}" var="addUserAdd"/>
-                <form:form action="${addUserAdd}" modelAttribute="emptyUserAdd" class="checkout-form">
-                    <div class="cf-title">Billing Address</div>
-                    <div class="row">
+                <div class="cf-title">Billing Address</div>
+                <div class="row">
+
+                    <c:if test="${!empty userAdd}">
                         <div class="col-md-7">
                             <p>*Billing Information</p>
                         </div>
                         <div class="col-md-5">
-                            <div class="cf-radio-btns address-rb">
-                                <div class="cfr-item">
-                                    <input type="radio" name="pm" id="one">
-                                    <label for="one">Use my regular address</label>
-                                </div>
-                                <div class="cfr-item">
-                                    <input type="radio" name="pm" id="two">
-                                    <label for="two">Use a different address</label>
-                                </div>
-                            </div>
+                            <a href="<c:url value='/regularAddress'/>">
+                                <p>Use my regular address</p>
+                            </a>
                         </div>
-                    </div>
+                    </c:if>
+                </div>
+                <c:url value="/successOrder" var="addUserAdd"/>
+                <form:form action="${addUserAdd}" modelAttribute="emptyUserAdd" class="checkout-form">
+
                     <div class="row address-inputs">
                         <div class="col-md-12">
                             <form:input path="street" type="text" placeholder="Street"/>
@@ -153,7 +148,14 @@
                     </ul>
                     <ul class="price-list">
                         <li>Total<span>$ ${amountPrice}</span></li>
-                        <li>Shipping<span>free</span></li>
+                        <li>Shipping<span>
+                            <c:if test="${amountPrice > 1000}">
+                                free
+                            </c:if>
+                            <c:if test="${amountPrice < 1000}">
+                                50$
+                            </c:if>
+                        </span></li>
                         <li class="total">Total<span>$ ${amountPrice}</span></li>
                     </ul>
                 </div>

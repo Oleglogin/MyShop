@@ -22,7 +22,6 @@
 
                 <div class="col-xl-6 col-lg-5">
                     <div class="user-panel">
-                        <%--<c:if test="${countProductInBasket != 0}">--%>
                         <div class="up-item">
                             <div class="shopping-card">
                                 <i class="flaticon-bag"></i>
@@ -30,7 +29,6 @@
                             </div>
                             <a href="/cart">Shopping Cart</a>
                         </div>
-                        <%--</c:if>--%>
                         <div class="up-item">
                             <i class="flaticon-profile"></i>
                             <a href="/login">Sign In/Up</a>
@@ -136,7 +134,6 @@
                     <button>Submit</button>
                 </form>
                 <a href="<c:url value='/success/${currentUser.id}"'/>" class="site-btn">Proceed to checkout</a>
-                <%--<a href="" class="site-btn">Proceed to checkout</a>--%>
                 <a href="/welcome" class="site-btn sb-dark">Continue shopping</a>
             </div>
         </div>
