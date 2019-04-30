@@ -45,13 +45,14 @@ public class AccountController {
         model.addAttribute("productSortList",productService.productSortList());
         return "checkout";
     }
-    @GetMapping(value = "/regularAddress")
-    public String regularAddress(Model model, Principal principal){
+    @GetMapping(value = "/regularAddress/{id}")
+    public String regularAddress(Model model, Principal principal,
+                                 @PathVariable("id")int id){
         String principalName = principal.getName();
         User byUserName = userService.findByUserName(principalName);
         model.addAttribute("currentUser", byUserName);
 
-        model.addAttribute("emptyAccount", accountService.findOneByUserId(byUserName.getId(),true));
+        model.addAttribute("emptyAccount", accountService.findOneByAccId(id,true));
 
         model.addAttribute("productListInCurt", purchaseService.productListInCurt(byUserName.getId()));
         model.addAttribute("amountPrice", purchaseService.amountInCart(byUserName.getId(),false));
@@ -71,6 +72,7 @@ public class AccountController {
         purchaseService.successOrder(byUserName.getId(),true);
 
         account.setUser(byUserName);
+        accountService.findAndChangeRegularAddress(true,false,byUserName.getId());
         accountService.addUserSave(account);
         return "redirect:/welcome";
     }

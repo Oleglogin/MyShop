@@ -92,7 +92,7 @@
 
                     <c:if test="${!empty account}">
                         <div class="col-md-5">
-                            <a href="<c:url value='/regularAddress'/>">
+                            <a href="<c:url value='/regularAddress/${account.id}'/>">
                                 <p>Use my regular address</p>
                             </a>
                         </div>
@@ -107,6 +107,8 @@
                             <form:input path="street" type="text" placeholder="Street"/>
                             <form:input path="city" type="text" placeholder="City"/>
                             <form:input path="country" type="text" placeholder="Country"/>
+                            <form:input path="building" type="text" placeholder="Building"/>
+                            <form:input path="flat" type="text" placeholder="Flat"/>
                         </div>
                         <div class="col-md-4">
                             <form:input path="postIndex" type="text" placeholder="Zip code"/>
@@ -135,6 +137,7 @@
                     </ul>
                     <%--<a href="<c:url value='/success/${currentUser.id}"'/>" class="site-btn">Place order</a>--%>
 
+                    <form:input type="hidden" path="id" readonly="true"/>
                     <input type="submit" value="Place order" class="site-btn">
 
                 </form:form>

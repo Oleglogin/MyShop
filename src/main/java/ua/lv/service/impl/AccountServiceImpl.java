@@ -47,4 +47,14 @@ public class AccountServiceImpl implements AccountService {
     public List<Account> findAllByUserId(int id) {
         return accountDAO.findAllByUserId(id);
     }
+
+    @Override
+    public Account findOneByAccId(int id, boolean regular) {
+        return accountDAO.findOneByAccId(id,regular);
+    }
+
+    @Override
+    public void findAndChangeRegularAddress(boolean regular, boolean change, int id) {
+        accountDAO.findAndChangeRegularAddress(regular,change,id);
+    }
 }
