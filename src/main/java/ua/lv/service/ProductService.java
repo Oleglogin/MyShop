@@ -17,7 +17,6 @@ public interface ProductService {
     List<Product> sortBySubCategory(String category);
 
     void toLike(int id,int cl);
-    void disLike(int id,int cdl);
 
     List<Product>expensive();
     List<Product>poor();

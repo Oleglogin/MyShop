@@ -7,7 +7,7 @@ import java.util.Date;
  * Created by User on 21.04.2019.
  */
 @Entity
-public class UserAdd {
+public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -15,24 +15,23 @@ public class UserAdd {
     private String city;
     private String country;
     private String postIndex;
+    private String building;
+    private String flat;
     private String phone;
     private boolean regular;
-
-    private Date dateOrder = new Date();
 
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private User user;
 
-    public UserAdd() {
+    public Account() {
     }
 
-    public UserAdd(String address, String city, String country, String index, String phone, Date dateOrder) {
+    public Account(String address, String city, String country, String index, String phone, Date dateOrder) {
         this.street = address;
         this.city = city;
         this.country = country;
         this.postIndex = postIndex;
         this.phone = phone;
-        this.dateOrder = dateOrder;
     }
 
     public int getId() {
@@ -83,14 +82,6 @@ public class UserAdd {
         this.phone = phone;
     }
 
-    public Date getDateOrder() {
-        return dateOrder;
-    }
-
-    public void setDateOrder(Date dateOrder) {
-        this.dateOrder = dateOrder;
-    }
-
     public String getStreet() {
         return street;
     }
@@ -105,5 +96,29 @@ public class UserAdd {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public boolean isRegular() {
+        return regular;
+    }
+
+    public void setRegular(boolean regular) {
+        this.regular = regular;
+    }
+
+    public String getBuilding() {
+        return building;
+    }
+
+    public void setBuilding(String building) {
+        this.building = building;
+    }
+
+    public String getFlat() {
+        return flat;
+    }
+
+    public void setFlat(String flat) {
+        this.flat = flat;
     }
 }

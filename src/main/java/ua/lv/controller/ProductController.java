@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import ua.lv.entity.Preview;
 import ua.lv.entity.Product;
 import ua.lv.entity.Purchase;
 import ua.lv.entity.User;
@@ -48,7 +49,9 @@ public class ProductController {
 
     @RequestMapping(value = "productEdit/{id}", method = RequestMethod.GET)
     public String productEdit(@PathVariable("id") int id, Model model,
-                              Principal principal) {
+                              Principal principal,
+                              @ModelAttribute("emptyProduct")Product product,
+                              @ModelAttribute("emptyPreview")Preview preview) {
         String principalName = principal.getName();
         User byUserName = userService.findByUserName(principalName);
         model.addAttribute("currentUser",byUserName);
@@ -65,7 +68,7 @@ public class ProductController {
         User byUserName = userService.findByUserName(principalName);
         model.addAttribute("currentUser", byUserName);
         model.addAttribute("emptyPurchase", new Purchase());
-        model.addAttribute("countProductInBasket",purchaseService.countProductInBasket(byUserName.getId(),0));
+        model.addAttribute("countProductInBasket",purchaseService.countProductInBasket(byUserName.getId(),false));
 
         model.addAttribute("product", productService.findProductById(id));
         model.addAttribute("productSortList",productService.productSortList());
@@ -84,7 +87,7 @@ public class ProductController {
         User byUserName = userService.findByUserName(principalName);
         model.addAttribute("productSortList",productService.productSortList());
         model.addAttribute("currentUser", byUserName);
-        model.addAttribute("countProductInBasket",purchaseService.countProductInBasket(byUserName.getId(),0));
+        model.addAttribute("countProductInBasket",purchaseService.countProductInBasket(byUserName.getId(),false));
         model.addAttribute("productList",productService.sortByCategory(category));
         return "welcome";
     }
@@ -95,7 +98,7 @@ public class ProductController {
         User byUserName = userService.findByUserName(principalName);
         model.addAttribute("productSortList",productService.productSortList());
         model.addAttribute("currentUser", byUserName);
-        model.addAttribute("countProductInBasket",purchaseService.countProductInBasket(byUserName.getId(),0));
+        model.addAttribute("countProductInBasket",purchaseService.countProductInBasket(byUserName.getId(),false));
         model.addAttribute("productList",productService.sortByName(productBrand));
         return "welcome";
     }
@@ -107,7 +110,7 @@ public class ProductController {
         User byUserName = userService.findByUserName(principalName);
         model.addAttribute("currentUser", byUserName);
         model.addAttribute("productSortList",productService.productSortList());
-        model.addAttribute("countProductInBasket",purchaseService.countProductInBasket(byUserName.getId(),0));
+        model.addAttribute("countProductInBasket",purchaseService.countProductInBasket(byUserName.getId(),false));
         if(searchString != null){
            model.addAttribute("productList",productService.search(searchString));
         }
@@ -121,7 +124,7 @@ public class ProductController {
         User byUserName = userService.findByUserName(principalName);
         model.addAttribute("productSortList",productService.productSortList());
         model.addAttribute("currentUser", byUserName);
-        model.addAttribute("countProductInBasket",purchaseService.countProductInBasket(byUserName.getId(),0));
+        model.addAttribute("countProductInBasket",purchaseService.countProductInBasket(byUserName.getId(),false));
         model.addAttribute("productList",productService.sortBySubCategory(category));
         return "welcome";
     }
@@ -131,7 +134,7 @@ public class ProductController {
         User byUserName = userService.findByUserName(principalName);
         model.addAttribute("productSortList",productService.productSortList());
         model.addAttribute("currentUser", byUserName);
-        model.addAttribute("countProductInBasket",purchaseService.countProductInBasket(byUserName.getId(),0));
+        model.addAttribute("countProductInBasket",purchaseService.countProductInBasket(byUserName.getId(),false));
         model.addAttribute("productList",productService.expensive());
         return "welcome";
     }
@@ -141,7 +144,7 @@ public class ProductController {
         String principalName = principal.getName();
         User byUserName = userService.findByUserName(principalName);
         model.addAttribute("currentUser", byUserName);
-        model.addAttribute("countProductInBasket",purchaseService.countProductInBasket(byUserName.getId(),0));
+        model.addAttribute("countProductInBasket",purchaseService.countProductInBasket(byUserName.getId(),false));
         model.addAttribute("productSortList",productService.productSortList());
         model.addAttribute("productList",productService.poor());
         return "welcome";
@@ -152,7 +155,7 @@ public class ProductController {
         String principalName = principal.getName();
         User byUserName = userService.findByUserName(principalName);
         model.addAttribute("currentUser", byUserName);
-        model.addAttribute("countProductInBasket",purchaseService.countProductInBasket(byUserName.getId(),0));
+        model.addAttribute("countProductInBasket",purchaseService.countProductInBasket(byUserName.getId(),false));
         model.addAttribute("productSortList",productService.productSortList());
         model.addAttribute("productList",productService.popular());
         return "welcome";

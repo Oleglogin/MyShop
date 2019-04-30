@@ -74,11 +74,6 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void disLike(int id, int cdl) {
-        productDAO.disLike(id,cdl);
-    }
-
-    @Override
     public List<Product> expensive() {
         ArrayList<Product> expensiveList = new ArrayList<>();
         expensiveList.addAll(productDAO.findAll());

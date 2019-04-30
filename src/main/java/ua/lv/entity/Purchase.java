@@ -13,11 +13,10 @@ public class Purchase {
     private int id;
     private int count;
     private int amount;
-    private int success;
-    private int successOrder;
-    private int size;
+    private boolean success;
+    private boolean successOrder;
     private String bikeSize;
-    private int checkOrder;
+    private boolean checkOrder;
     private Date dateOrder = new Date();
 
 
@@ -78,34 +77,19 @@ public class Purchase {
     }
 
 
-
-    public int isSuccess() {
+    public boolean isSuccess() {
         return success;
     }
 
-    public void setSuccess(int success) {
+    public void setSuccess(boolean success) {
         this.success = success;
     }
 
-
-    public int getSize() {
-        return size;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
-    }
-
-
-    public int getSuccess() {
-        return success;
-    }
-
-    public int getSuccessOrder() {
+    public boolean isSuccessOrder() {
         return successOrder;
     }
 
-    public void setSuccessOrder(int successOrder) {
+    public void setSuccessOrder(boolean successOrder) {
         this.successOrder = successOrder;
     }
 
@@ -117,14 +101,21 @@ public class Purchase {
         this.bikeSize = bikeSize;
     }
 
-    public int getCheckOrder() {
+    public boolean isCheckOrder() {
         return checkOrder;
     }
 
-    public void setCheckOrder(int checkOrder) {
+    public void setCheckOrder(boolean checkOrder) {
         this.checkOrder = checkOrder;
     }
 
+    public Date getDateOrder() {
+        return dateOrder;
+    }
+
+    public void setDateOrder(Date dateOrder) {
+        this.dateOrder = dateOrder;
+    }
 
     @Override
     public String toString() {

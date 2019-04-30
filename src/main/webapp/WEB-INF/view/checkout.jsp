@@ -90,10 +90,7 @@
                 <div class="cf-title">Billing Address</div>
                 <div class="row">
 
-                    <c:if test="${!empty userAdd}">
-                        <div class="col-md-7">
-                            <p>*Billing Information</p>
-                        </div>
+                    <c:if test="${!empty account}">
                         <div class="col-md-5">
                             <a href="<c:url value='/regularAddress'/>">
                                 <p>Use my regular address</p>
@@ -101,8 +98,9 @@
                         </div>
                     </c:if>
                 </div>
+
                 <c:url value="/successOrder" var="addUserAdd"/>
-                <form:form action="${addUserAdd}" modelAttribute="emptyUserAdd" class="checkout-form">
+                <form:form action="${addUserAdd}" modelAttribute="emptyAccount" class="checkout-form">
 
                     <div class="row address-inputs">
                         <div class="col-md-12">
@@ -110,11 +108,23 @@
                             <form:input path="city" type="text" placeholder="City"/>
                             <form:input path="country" type="text" placeholder="Country"/>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <form:input path="postIndex" type="text" placeholder="Zip code"/>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <form:input path="phone" type="text" placeholder="Phone no."/>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="cf-radio-btns address-rb">
+                                <div class="cfr-item">
+                                    <form:radiobutton  path="regular"  value="1" id="one" active="true"/>
+                                    <label for="one">Make my regular address</label>
+                                </div>
+                                <div class="cfr-item">
+                                    <form:radiobutton  path="regular"  value="0" id="two"/>
+                                    <label for="two">Different address</label>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="cf-title">Payment</div>
@@ -135,7 +145,7 @@
                     <h3>Your Cart</h3>
                     <ul class="product-list">
                         <c:forEach items="${productListInCurt}" var="purchase">
-                            <c:if test="${purchase.successOrder == 0}">
+                            <c:if test="${purchase.successOrder == false}">
                                 <li>
                                     <div class="pl-thumb"><img src="${purchase.product.productImg}" alt=""></div>
                                     <h6>${purchase.product.productBrand}</h6>

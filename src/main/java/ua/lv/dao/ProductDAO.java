@@ -24,10 +24,6 @@ public interface ProductDAO extends JpaRepository<Product, Integer> {
     @Query("update Product p  set p.toLike=:cl where p.id=:id ")
     void toLike(@Param("id")int id,@Param("cl")int cl);
 
-    @Modifying
-    @Query("update Product p  set p.disLike=:cdl where p.id=:id")
-    void disLike(@Param("id")int id,@Param("cdl")int cdl);
-
     @Query("from Product product where product.productBrand=:name")
     List<Product>sortByName(@Param("name")String productBrand);
 

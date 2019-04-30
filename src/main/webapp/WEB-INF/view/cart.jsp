@@ -103,7 +103,7 @@
                             </thead>
                             <tbody>
                                 <c:forEach items="${productListInCurt}" var="purchase">
-                                    <c:if test="${purchase.successOrder == 0}">
+                                    <c:if test="${purchase.successOrder == false}">
                                         <tr>
                                             <td class="product-col">
                                                 <img src="${purchase.product.productImg}" alt="">

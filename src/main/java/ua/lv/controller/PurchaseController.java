@@ -52,12 +52,12 @@ public class PurchaseController {
 
     @RequestMapping(value = "success/{id}")
     public String success(@PathVariable("id")int id){
-        purchaseService.success(id,1);
+        purchaseService.success(id,true);
         return "redirect:/checkout";
     }
     @RequestMapping(value = "/purchaseCheck/{id}")
     public String check(@PathVariable("id")int id){
-        purchaseService.check(id,1);
+        purchaseService.check(id,true);
         return "redirect:/adminOrder";
     }
 

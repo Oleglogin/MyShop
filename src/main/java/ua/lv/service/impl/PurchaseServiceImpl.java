@@ -44,8 +44,8 @@ public class PurchaseServiceImpl implements PurchaseService {
 
 
     @Override
-    public int amountInCart(int id, int number) {
-        Integer amountCart = purchaseDAO.amountInCart(id,number);
+    public int amountInCart(int id, boolean successOrder) {
+        Integer amountCart = purchaseDAO.amountInCart(id,successOrder);
         if(amountCart == null){
             return 0;
         }
@@ -53,22 +53,22 @@ public class PurchaseServiceImpl implements PurchaseService {
     }
 
     @Override
-    public int countProductInBasket(int id,int number) {
-        return purchaseDAO.countProductInBasket(id, number);
+    public int countProductInBasket(int id,boolean successOrder) {
+        return purchaseDAO.countProductInBasket(id, successOrder);
     }
 
     @Override
-    public void success(int id, int number) {
-        purchaseDAO.success(id, number);
+    public void success(int id, boolean success) {
+        purchaseDAO.success(id, success);
     }
 
     @Override
-    public void successOrder(int id, int number) {
-        purchaseDAO.successOrder(id,number);
+    public void successOrder(int id, boolean successOrder) {
+        purchaseDAO.successOrder(id,successOrder);
     }
 
     @Override
-    public void check(int id, int number) {
-        purchaseDAO.check(id,number);
+    public void check(int id, boolean checkOrder) {
+        purchaseDAO.check(id,checkOrder);
     }
 }

@@ -23,13 +23,10 @@ public class Product {
     private String productImg;
     private int price;
     private boolean available;
-    private int rate;
-    private int size;
     @Column(columnDefinition = "text")
     private String description;
     private Date dateOfSave = new Date();
     private int toLike;
-    private int disLike;
 
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     private User user;
@@ -50,8 +47,6 @@ public class Product {
         this.category = category;
         this.price = price;
         this.available = available;
-        this.rate = rate;
-        this.size = size;
         this.description = description;
         this.user = user;
     }
@@ -86,22 +81,6 @@ public class Product {
 
     public void setAvailable(boolean available) {
         this.available = available;
-    }
-
-    public int getRate() {
-        return rate;
-    }
-
-    public void setRate(int rate) {
-        this.rate = rate;
-    }
-
-    public int getSize() {
-        return size;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
     }
 
     public String getDescription() {
@@ -140,15 +119,6 @@ public class Product {
             e.printStackTrace();
         }
         this.productImg = "\\workImg\\" + multipartFile.getOriginalFilename();
-    }
-
-
-    public int getDisLike() {
-        return disLike;
-    }
-
-    public void setDisLike(int disLike) {
-        this.disLike = disLike;
     }
 
     public String getProductBrand() {

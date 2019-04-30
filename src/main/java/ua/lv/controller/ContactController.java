@@ -30,7 +30,7 @@ public class ContactController {
         User ByUser = userService.findByUserName(principalName);
         model.addAttribute("currentUser",ByUser);
         model.addAttribute("productSortList",productService.productSortList());
-        model.addAttribute("countProductInBasket", purchaseService.countProductInBasket(ByUser.getId(),0));
+        model.addAttribute("countProductInBasket", purchaseService.countProductInBasket(ByUser.getId(),false));
         return "/contact";
 
     }

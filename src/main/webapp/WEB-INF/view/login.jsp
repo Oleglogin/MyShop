@@ -116,10 +116,22 @@
                         <a href="productData/${product.id}"><img src="${product.productImg}" alt=""></a>
                     </div>
                     <div class="pi-text">
-                        <h6>$${product.price}</h6>
-                        <p>like-${product.toLike} disLikes-${product.disLike}</p>
-                        <p>${product.productBrand} ${product.productModel}</p>
-
+                        <h6>$ ${product.price}</h6>
+                        <p>
+                            <a href="/sortByName/${product.productBrand}">${product.productBrand}</a> ${product.productModel}
+                            <c:if test="${currentUser != null && product.user.id != currentUser.id}">
+                                <c:forEach items="${likesList}" var="like">
+                                    <c:if test="${like.user.id == currentUser.id}">
+                                        <a href="<c:url value='/addLike/${currentUser.id}/${product.id}"'/>">
+                                            <i class="flaticon-heart">${product.toLike} </i>
+                                        </a>
+                                    </c:if>
+                                </c:forEach>
+                            </c:if>
+                            <c:if test="${currentUser.id == product.user.id}">
+                                <i class="flaticon-heart">${product.toLike} </i>
+                            </c:if>
+                        </p>
                     </div>
                 </div>
             </c:forEach>

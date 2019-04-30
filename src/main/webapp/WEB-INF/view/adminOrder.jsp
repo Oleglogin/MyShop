@@ -95,7 +95,7 @@
                             </thead>
                             <tbody>
                             <c:forEach items="${purchaseList}" var="purchase">
-                                <c:if test="${purchase.successOrder == 1 and purchase.checkOrder == 0}">
+                                <c:if test="${purchase.successOrder == true and purchase.checkOrder == false}">
                                     <tr>
                                         <td class="product-col">
                                             <img src="${purchase.product.productImg}" alt="">
@@ -136,15 +136,15 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${userAddList}" var="userAdd">
+                                <c:forEach items="${userAddList}" var="account">
                                     <tr>
-                                        <td class="size-col"><h4>${userAdd.user.id}</h4></td>
-                                        <td class="size-col"><h4>${userAdd.dateOrder}</h4></td>
-                                        <td class="size-col"><h4>${userAdd.street}</h4></td>
-                                        <td class="size-col"><h4>${userAdd.city}</h4></td>
-                                        <td class="size-col"><h4>${userAdd.country}</h4></td>
-                                        <td class="size-col"><h4>${userAdd.postIndex}</h4></td>
-                                        <td class="total-col"><h4>${userAdd.phone}</h4></td>
+                                        <td class="size-col"><h4>${account.user.id}</h4></td>
+                                        <td class="size-col"><h4>${account.dateOrder}</h4></td>
+                                        <td class="size-col"><h4>${account.street}</h4></td>
+                                        <td class="size-col"><h4>${account.city}</h4></td>
+                                        <td class="size-col"><h4>${account.country}</h4></td>
+                                        <td class="size-col"><h4>${account.postIndex}</h4></td>
+                                        <td class="total-col"><h4>${account.phone}</h4></td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
@@ -183,7 +183,7 @@
                             </thead>
                             <tbody>
                             <c:forEach items="${purchaseList}" var="purchase">
-                                <c:if test="${purchase.successOrder == 1 and purchase.checkOrder == 1}">
+                                <c:if test="${purchase.successOrder == true and purchase.checkOrder == true}">
                                     <tr>
                                         <td class="product-col">
                                             <img src="${purchase.product.productImg}" alt="">

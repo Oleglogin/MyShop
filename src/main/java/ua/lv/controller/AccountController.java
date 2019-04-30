@@ -1,18 +1,17 @@
 package ua.lv.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import ua.lv.entity.Account;
 import ua.lv.entity.User;
-import ua.lv.entity.UserAdd;
 import ua.lv.service.ProductService;
 import ua.lv.service.PurchaseService;
-import ua.lv.service.UserAddService;
+import ua.lv.service.AccountService;
 import ua.lv.service.UserService;
 
 import java.security.Principal;
@@ -21,7 +20,7 @@ import java.security.Principal;
  * Created by User on 20.04.2019.
  */
 @Controller
-public class UserAddController {
+public class AccountController {
     @Autowired
     UserService userService;
     @Autowired
@@ -29,7 +28,7 @@ public class UserAddController {
     @Autowired
     ProductService productService;
     @Autowired
-    UserAddService userAddService;
+    AccountService accountService;
 
 
 
@@ -38,37 +37,41 @@ public class UserAddController {
         String principalName = principal.getName();
         User byUserName = userService.findByUserName(principalName);
         model.addAttribute("currentUser", byUserName);
-        model.addAttribute("userAdd",userAddService.findOneByUserId(byUserName.getId()));
-        model.addAttribute("emptyUserAdd", new UserAdd());
+        model.addAttribute("account",accountService.findOneByUserId(byUserName.getId(),true));
+        model.addAttribute("emptyAccount", new Account());
         model.addAttribute("productListInCurt", purchaseService.productListInCurt(byUserName.getId()));
-        model.addAttribute("amountPrice", purchaseService.amountInCart(byUserName.getId(),0));
-        model.addAttribute("countProductInBasket",purchaseService.countProductInBasket(byUserName.getId(),0));
+        model.addAttribute("amountPrice", purchaseService.amountInCart(byUserName.getId(),false));
+        model.addAttribute("countProductInBasket",purchaseService.countProductInBasket(byUserName.getId(),false));
         model.addAttribute("productSortList",productService.productSortList());
         return "checkout";
     }
-    @GetMapping(value = "regularAddress")
+    @GetMapping(value = "/regularAddress")
     public String regularAddress(Model model, Principal principal){
         String principalName = principal.getName();
         User byUserName = userService.findByUserName(principalName);
         model.addAttribute("currentUser", byUserName);
-        model.addAttribute("emptyUserAdd",userAddService.findOneByUserId(byUserName.getId()));
+
+        model.addAttribute("emptyAccount", accountService.findOneByUserId(byUserName.getId(),true));
+
         model.addAttribute("productListInCurt", purchaseService.productListInCurt(byUserName.getId()));
-        model.addAttribute("amountPrice", purchaseService.amountInCart(byUserName.getId(),0));
-        model.addAttribute("countProductInBasket",purchaseService.countProductInBasket(byUserName.getId(),0));
+        model.addAttribute("amountPrice", purchaseService.amountInCart(byUserName.getId(),false));
+        model.addAttribute("countProductInBasket",purchaseService.countProductInBasket(byUserName.getId(),false));
         model.addAttribute("productSortList",productService.productSortList());
         return "checkout";
     }
 
-    @RequestMapping(value = "successOrder")
-    public String successOrder(@ModelAttribute("emptyUserAdd")UserAdd userAdd,
+    @RequestMapping(value = "/successOrder")
+    public String successOrder(@ModelAttribute("emptyUserAdd")Account account,
                                Principal principal, Model model){
 
         String principalName = principal.getName();
         User byUserName = userService.findByUserName(principalName);
         model.addAttribute("currentUser", byUserName);
-        purchaseService.successOrder(byUserName.getId(),1);
-        userAdd.setUser(byUserName);
-        userAddService.addUserSave(userAdd);
+
+        purchaseService.successOrder(byUserName.getId(),true);
+
+        account.setUser(byUserName);
+        accountService.addUserSave(account);
         return "redirect:/welcome";
     }
 
@@ -79,7 +82,7 @@ public class UserAddController {
         User byUserName = userService.findByUserName(principalName);
         model.addAttribute("currentUser", byUserName);
         model.addAttribute("purchaseList", purchaseService.purchaseList());
-        model.addAttribute("userAddList", userAddService.finddAllByUserId(id));
+        model.addAttribute("userAddList", accountService.findAllByUserId(id));
         return "adminOrder";
 
     }
