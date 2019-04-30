@@ -77,7 +77,7 @@
     <div class="container-fluid">
         <div class="row">
 
-            <div class="col-lg-7">
+            <div class="col-lg-6">
                 <div class="cart-table">
                     <h3>success User</h3>
                     <div class="cart-table-warp">
@@ -91,6 +91,7 @@
                                 <th class="total-th">Price</th>
                                 <th class="total-th">User</th>
                                 <th class="total-th">Check</th>
+                                <th class="total-th">Delete</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -110,6 +111,7 @@
                                         <td class="total-col"><h4>$${purchase.amount}</h4></td>
                                         <td class="total-col"><h4><a href="<c:url value='/user/${purchase.user.id}'/> ">${purchase.user.id}</a></h4></td>
                                         <td class="total-col"><h4><a href="<c:url value='/purchaseCheck/${purchase.id}'/> ">Check</a></h4></td>
+                                        <td class="total-col"><h4><a href="<c:url value='/purchaseRemoveFromAdmin/${purchase.id}'/> ">Delete</a></h4></td>
                                     </tr>
                                 </c:if>
                             </c:forEach>
@@ -118,8 +120,8 @@
                     </div>
                 </div>
             </div>
-            <c:if test="${userAddList != null}">
-                <div class="col-lg-5">
+            <c:if test="${accounts != null}">
+                <div class="col-lg-6">
                     <div class="cart-table">
                         <h3>User and Order info</h3>
                         <div class="cart-table-warp">
@@ -127,7 +129,8 @@
                                 <thead>
                                 <tr>
                                     <th class="product-th">User Id</th>
-                                        <th class="product-th">Date Order</th>
+                                    <th class="product-th">Building</th>
+                                    <th class="product-th">Flat</th>
                                     <th class="quy-th">street</th>
                                     <th class="quy-th">city</th>
                                     <th class="size-th">country</th>
@@ -136,10 +139,11 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${userAddList}" var="account">
+                                <c:forEach items="${accounts}" var="account">
                                     <tr>
                                         <td class="size-col"><h4>${account.user.id}</h4></td>
-                                        <td class="size-col"><h4>${account.dateOrder}</h4></td>
+                                        <td class="size-col"><h4>${account.building}</h4></td>
+                                        <td class="size-col"><h4>${account.flat}</h4></td>
                                         <td class="size-col"><h4>${account.street}</h4></td>
                                         <td class="size-col"><h4>${account.city}</h4></td>
                                         <td class="size-col"><h4>${account.country}</h4></td>

@@ -161,14 +161,7 @@
                     </ul>
                     <ul class="price-list">
                         <li>Total<span>$ ${amountPrice}</span></li>
-                        <li>Shipping<span>
-                            <c:if test="${amountPrice > 1000}">
-                                free
-                            </c:if>
-                            <c:if test="${amountPrice < 1000}">
-                                50$
-                            </c:if>
-                        </span></li>
+                        <li>Shipping<span>free</span></li>
                         <li class="total">Total<span>$ ${amountPrice}</span></li>
                     </ul>
                 </div>

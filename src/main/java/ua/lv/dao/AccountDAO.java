@@ -14,6 +14,8 @@ import java.util.List;
 public interface AccountDAO extends JpaRepository<Account,Integer> {
     @Query("from Account account where account.id=:id and account.regular=:regular")
     Account findOneByAccId(@Param("id")int id,@Param("regular")boolean regular);
+    @Query("from Account account where account.id=:id")
+    Account findOneByAccId(@Param("id")int id);
 
     @Query("from Account account where account.user.id=:id and account.regular=:regular")
     Account findOneByUserId(@Param("id")int id,@Param("regular")boolean regular);

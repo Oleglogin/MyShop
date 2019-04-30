@@ -8,10 +8,7 @@ import ua.lv.entity.Preview;
 import ua.lv.entity.Product;
 import ua.lv.entity.Purchase;
 import ua.lv.entity.User;
-import ua.lv.service.PreviewService;
-import ua.lv.service.ProductService;
-import ua.lv.service.PurchaseService;
-import ua.lv.service.UserService;
+import ua.lv.service.*;
 
 import java.security.Principal;
 
@@ -28,6 +25,8 @@ public class AdminController {
     PreviewService previewService;
     @Autowired
     PurchaseService purchaseService;
+    @Autowired
+    AccountService accountService;
 
     @GetMapping("/admin")
     public String toAdminPAge(Model model,
@@ -63,6 +62,18 @@ public class AdminController {
         model.addAttribute("currentUser", byUserName);
         model.addAttribute("purchaseList", purchaseService.purchaseList());
         return "/adminOrder";
+    }
+
+
+    @RequestMapping(value = "/user/{id}")
+    public String toUser(@PathVariable("id")int id,
+                         Model model,Principal principal){
+        String principalName = principal.getName();
+        User byUserName = userService.findByUserName(principalName);
+        model.addAttribute("currentUser", byUserName);
+        model.addAttribute("purchaseList", purchaseService.purchaseList());
+        model.addAttribute("accounts", accountService.findAllByUserId(id));
+        return "adminOrder";
     }
 
 }

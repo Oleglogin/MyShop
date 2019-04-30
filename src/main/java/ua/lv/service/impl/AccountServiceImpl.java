@@ -49,6 +49,11 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public Account findOneByAccId(int id) {
+        return accountDAO.findOneByAccId(id);
+    }
+
+    @Override
     public Account findOneByAccId(int id, boolean regular) {
         return accountDAO.findOneByAccId(id,regular);
     }

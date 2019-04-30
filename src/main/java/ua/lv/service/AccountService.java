@@ -14,6 +14,7 @@ public interface AccountService {
     Account findOne(int id);
     Account findOneByUserId(int id,boolean regular);
     Account findOneByAccId(int id,boolean regular);
+    Account findOneByAccId(int id);
     List<Account>findAllByUserId(int id);
     void findAndChangeRegularAddress(boolean regular,boolean change, int id);
 }
