@@ -72,14 +72,11 @@ public class ProductController {
 
         model.addAttribute("product", productService.findProductById(id));
         model.addAttribute("productSortList",productService.productSortList());
-        model.addAttribute("previewList", previewService.prewievList());
         model.addAttribute("elsePhoto",previewService.elsePhoto(id));
-
-
-        model.addAttribute("userLikeProduct",likesService.likesList(byUserName.getId()));
-
         return "product";
     }
+
+
     @RequestMapping(value = "sortByCategory/{category}", method = RequestMethod.GET)
     public String sortCategory(Model model, Principal principal,
                                @PathVariable("category")String category){

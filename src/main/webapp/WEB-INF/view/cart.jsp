@@ -153,13 +153,13 @@
                 <div class="product-item">
                     <div class="pi-pic">
                         <a href="productData/${product.id}"><img src="${product.productImg}" alt=""></a>
-                        <div class="pi-links">
-
-                        </div>
                     </div>
                     <div class="pi-text">
                         <h6>$${product.price}</h6>
-                        <p>${product.productBrand}</p>
+                        <p>
+                            <a href="/sortByName/${product.productBrand}">${product.productBrand}</a> ${product.productModel}
+                            <i class="flaticon-heart">${product.toLike} </i>
+                        </p>
                     </div>
                 </div>
             </c:forEach>

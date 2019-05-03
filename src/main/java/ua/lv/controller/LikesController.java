@@ -8,10 +8,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ua.lv.entity.Likes;
 import ua.lv.entity.Product;
+import ua.lv.entity.Purchase;
 import ua.lv.entity.User;
-import ua.lv.service.LikesService;
-import ua.lv.service.ProductService;
-import ua.lv.service.UserService;
+import ua.lv.service.*;
 
 import java.security.Principal;
 import java.util.List;
@@ -27,6 +26,10 @@ public class LikesController {
     ProductService productService;
     @Autowired
     LikesService likeService;
+    @Autowired
+    PurchaseService purchaseService;
+    @Autowired
+    PreviewService previewService;
 
     @RequestMapping(value = "/addLike/{currentUser.id}/{product.id}")
     public String addLike(Model model, Principal principal,
