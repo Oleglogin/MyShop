@@ -119,7 +119,7 @@
                         <div class="col-md-4">
                             <div class="cf-radio-btns address-rb">
                                 <div class="cfr-item">
-                                    <form:radiobutton  path="regular"  value="1" id="one" active="true"/>
+                                    <form:radiobutton  path="regular"  value="1" id="one"/>
                                     <label for="one">Make my regular address</label>
                                 </div>
                                 <div class="cfr-item">

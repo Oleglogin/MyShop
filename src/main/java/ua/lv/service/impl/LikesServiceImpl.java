@@ -5,7 +5,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.lv.dao.LikesDAO;
 import ua.lv.entity.Likes;
+import ua.lv.entity.Product;
+import ua.lv.entity.User;
 import ua.lv.service.LikesService;
+import ua.lv.service.ProductService;
+import ua.lv.service.UserService;
 
 import java.util.List;
 
@@ -17,11 +21,33 @@ import java.util.List;
 public class LikesServiceImpl implements LikesService {
     @Autowired
     LikesDAO likeDAO;
+    @Autowired
+    UserService userService;
+    @Autowired
+    ProductService productService;
+
+
+
 
     @Override
-    public void addLike(Likes likes) {
-        likeDAO.save(likes);
+    public void addLike(Likes likes, int uId, int pId) {
+        Likes likesByUserIdAndProductId = likeDAO.likesByUserIdAndProducrId(pId, uId);
+        if(likesByUserIdAndProductId == null){
+            int cl = productService.findProductById(pId).getToLike();
+            productService.toLike(pId, cl + 1);
+            likeDAO.save(likes);
+        }
+        else if(likesByUserIdAndProductId.getUser().getId() == uId && likesByUserIdAndProductId.getProduct().getId() == pId){
+            int cl = productService.findProductById(pId).getToLike();
+            productService.toLike(pId, cl - 1);
+            likeDAO.deleteLike(pId,uId);
+        }else {
+            int cl = productService.findProductById(pId).getToLike();
+            productService.toLike(pId, cl + 1);
+            likeDAO.save(likes);
+        }
     }
+
 
     @Override
     public void deleteLike(int id) {
@@ -49,4 +75,6 @@ public class LikesServiceImpl implements LikesService {
     public List<Likes> likesList(int id) {
         return likeDAO.likesList(id);
     }
+
+
 }

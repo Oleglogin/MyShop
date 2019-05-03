@@ -39,13 +39,12 @@ public class LikesController {
 
         User user = userService.getUserById(UserId);
         Product product = productService.findProductById(ProductId);
+
         likes.setUser(user);
         likes.setProduct(product);
 
-        likes.setLikeCount(likes.getLikeCount() + 1);
-        likeService.addLike(likes);
-        int cl = product.getToLike();
-        productService.toLike(ProductId,cl+1);
+        likes.setLikeCount(1);
+        likeService.addLike(likes,UserId,ProductId);
         return "redirect:/welcome";
     }
 
