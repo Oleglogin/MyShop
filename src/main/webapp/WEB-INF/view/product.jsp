@@ -206,10 +206,7 @@
                     </div>
                     <div class="pi-text">
                         <h6>$${product.price}</h6>
-                        <p>
-                            <a href="/sortByName/${product.productBrand}">${product.productBrand}</a> ${product.productModel}
-                            <i class="flaticon-heart">${product.toLike} </i>
-                        </p>
+
                     </div>
                 </div>
             </c:forEach>

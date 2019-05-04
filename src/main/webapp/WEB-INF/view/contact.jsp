@@ -130,26 +130,13 @@
                 <div class="product-item">
                     <div class="pi-pic">
                         <a href="productData/${product.id}"><img src="${product.productImg}" alt=""></a>
-                            <%--<c:if test="${currentUser != null && product.user.id != currentUser.id}">--%>
-                            <%--<a href="<c:url value='/addLike/${currentUser.id}/${product.id}"'/>">--%>
-                            <%--<i class="flaticon-heart">${product.toLike} </i>--%>
-                            <%--</a>--%>
-                            <%--</c:if>--%>
                     </div>
                     <div class="pi-text">
-                        <h6>$ ${product.price}</h6>
+                        <h6>$${product.price}</h6>
                         <p>
                             <a href="/sortByName/${product.productBrand}">${product.productBrand}</a> ${product.productModel}
-                            <c:if test="${currentUser != null && product.user.id != currentUser.id}">
-                                <a href="<c:url value='/addLike/${currentUser.id}/${product.id}"'/>">
-                                    <i class="flaticon-heart">${product.toLike} </i>
-                                </a>
-                            </c:if>
-                            <c:if test="${currentUser.id == product.user.id}">
-                                ${product.toLike}
-                            </c:if>
+                            <i class="flaticon-heart">${product.toLike} </i>
                         </p>
-
                     </div>
                 </div>
             </c:forEach>

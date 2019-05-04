@@ -170,9 +170,9 @@
     <div class="container-fluid">
         <div class="row">
 
-            <div class="col-lg-7">
+            <div class="col-lg-6">
                 <div class="cart-table">
-                    <h3>send product</h3>
+                    <h3>success User</h3>
                     <div class="cart-table-warp">
                         <table>
                             <thead>
@@ -183,6 +183,8 @@
                                 <th class="size-th">SizeSize</th>
                                 <th class="total-th">Price</th>
                                 <th class="total-th">User</th>
+                                <th class="total-th">Check</th>
+                                <th class="total-th">Delete</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -200,14 +202,14 @@
                                         <td class="size-col"><h4>${purchase.count}</h4></td>
                                         <td class="size-col"><h4>${purchase.bikeSize}</h4></td>
                                         <td class="total-col"><h4>$${purchase.amount}</h4></td>
-                                        <td class="total-col"><h4><a href="<c:url value='/user/${purchase.user.id}'/> ">${purchase.user.id}</a></h4></td></tr>
+                                        <td class="total-col"><h4><a href="<c:url value='/user/${purchase.user.id}'/> ">${purchase.user.id}</a></h4></td>
+                                        <td class="total-col"><h4><a href="<c:url value='/purchaseCheck/${purchase.id}'/> ">Check</a></h4></td>
+                                        <td class="total-col"><h4><a href="<c:url value='/purchaseRemoveFromAdmin/${purchase.id}'/> ">Delete</a></h4></td>
+                                    </tr>
                                 </c:if>
                             </c:forEach>
                             </tbody>
                         </table>
-                    </div>
-                    <div class="total-cost">
-                        <%--<h6>Total <span>$ ${amountPrice}</span></h6>--%>
                     </div>
                 </div>
             </div>

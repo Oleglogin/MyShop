@@ -3,9 +3,7 @@ package ua.lv.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import ua.lv.entity.Likes;
 import ua.lv.entity.Product;
 import ua.lv.entity.Purchase;
@@ -49,6 +47,14 @@ public class LikesController {
         likes.setLikeCount(1);
         likeService.addLike(likes,UserId,ProductId);
         return "redirect:/welcome";
+    }
+
+
+    @RequestMapping(value = "/ajaxLike", method = RequestMethod.GET)
+    public @ResponseBody
+    String ajaxLike(@RequestParam String likeCount){
+
+        return "";
     }
 
 }

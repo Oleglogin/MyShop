@@ -95,14 +95,15 @@
                     <a href="#"><i class="fa fa-behance"></i></a>
                 </div>
                 <form:form action="saveUserSpringForm" method="post" modelAttribute="emptyUser" class="contact-form">
-                    <form:input path="email" type="email" placeholder="Enter email"/>
+                        <form:input path="email" type="email" placeholder="Enter email"/>
                     <div class="rs1-select2 bor8 bg0 ${status.error ? 'has-error' : ''}">
                         <form:input path="username" type="text" placeholder="Enter login"/>
                         <form:errors path="username" class="cs"/>
                     </div>
                     <div class="rs1-select2 bor8 bg0 ${status.error ? 'has-error' : ''}">
-                        <form:input path="password" type="password" placeholder="Enter password"/>
+                        <form:input path="password" type="password" placeholder="Enter password" onkeyup="doAjax()"/>
                         <form:errors path="password" class="cs"/>
+                        <span style="float: right" id="strengthValue"></span>
                     </div>
                     <div class="rs1-select2 bor8 bg0 ${status.error ? 'has-error' : ''}">
                         <form:input path="confirmPassword" type="password" placeholder="Confirm password"/>

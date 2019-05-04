@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import ua.lv.entity.User;
 import ua.lv.service.ProductService;
 import ua.lv.service.UserService;
@@ -46,6 +43,21 @@ public class RegistrationController {
         userService.save(user);
 
         return "redirect:/login";
+    }
+
+    @RequestMapping(value = "/checkStrength", method = RequestMethod.GET,produces = {"text/html; charset=UTF-8"})
+    public @ResponseBody
+    String checkStrength(@RequestParam String password){
+        if (password.length() >= 1 && password.length() < 4){
+            return "easy";
+        }
+        if (password.length() >= 4 && password.length() < 6){
+            return "middle";
+        }
+        if (password.length() >=6 ){
+            return "hard";
+        }
+        return "";
     }
 
 

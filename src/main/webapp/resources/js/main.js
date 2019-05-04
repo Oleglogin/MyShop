@@ -223,3 +223,57 @@ $(window).on('load', function() {
 
 
 })(jQuery);
+
+
+/*************************************************************************************************************************/
+
+
+
+
+
+/*------------------
+ check Password
+ --------------------*/
+
+function doAjax() {
+    $.ajax({
+        url : 'checkStrength.html',
+        data: ({password : $('#password').val()}),
+        success: function (data) {
+            $('#strengthValue').html(data);
+        }
+    });
+}
+
+
+/*
+like
+ */
+
+function doLike() {
+    $.ajax({
+    	url : 'ajaxLike',
+
+	})
+}
+
+
+
+$(document).ready(function() {
+    $("#save_data").click(function() {
+        alert("success");
+        $.ajax({
+            url: "ajaxLike",
+            type: "post",
+            data: {
+                fname:$('#fname').val(),
+                lname:$('#lname').val(),
+                city_name:$('#city_name').val(),
+                email:$('#email').val(),
+                success : function(data){
+                    alert(data);
+                }
+            }
+        });
+    });
+});
