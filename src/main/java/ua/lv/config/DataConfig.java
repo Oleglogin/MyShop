@@ -13,6 +13,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Properties;
 
 /**
@@ -30,14 +32,30 @@ public class DataConfig {
 
 
     @Bean
-    public DataSource dataSource(){
+    public DataSource dataSource() throws URISyntaxException {
+        URI dbUri = new URI(System.getenv("CLEARDB_DATABASE_URL"));
+
+        String username = dbUri.getUserInfo().split(":")[0];
+        String password = dbUri.getUserInfo().split(":")[1];
+        String dbUrl = "jdbc:mysql://" + dbUri.getHost() + dbUri.getPath();
+
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName(driver);
-        dataSource.setUrl(url);
+        dataSource.setUrl(dbUrl);
         dataSource.setUsername(username);
         dataSource.setPassword(password);
+
         return dataSource;
     }
+
+//    @Bean
+//    public DataSource dataSource(){
+//        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+//        dataSource.setDriverClassName(driver);
+//        dataSource.setUrl(url);
+//        dataSource.setUsername(username);
+//        dataSource.setPassword(password);
+//        return dataSource;
+//    }
 
     @Bean
     public JpaVendorAdapter vendorAdapter(){
