@@ -67,7 +67,7 @@ public class DataConfig {
 
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(){
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory() throws URISyntaxException {
         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
         factoryBean.setJpaVendorAdapter(vendorAdapter());
         factoryBean.setDataSource(dataSource());
